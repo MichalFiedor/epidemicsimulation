@@ -1,11 +1,16 @@
 package com.fiedormichal.epidemicsimulation.service;
 
+import com.fiedormichal.epidemicsimulation.model.InitialSimulationData;
 import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
 import com.fiedormichal.epidemicsimulation.repository.SingleDaySimulationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @RequiredArgsConstructor
-public class SingleDaySimulationServiceImpl implements SingleDaySimulationService{
+@Service
+public class SingleDaySimulationCrudServiceImpl implements SingleDaySimulationCrudService {
     private final SingleDaySimulationRepository singleDaySimulationRepository;
 
     @Override
@@ -19,6 +24,11 @@ public class SingleDaySimulationServiceImpl implements SingleDaySimulationServic
     }
 
     @Override
+    public List<SingleDaySimulation> findAll() {
+        return singleDaySimulationRepository.findAll();
+    }
+
+    @Override
     public SingleDaySimulation edit(SingleDaySimulation singleDaySimulation) {
         return singleDaySimulationRepository.save(singleDaySimulation);
     }
@@ -27,4 +37,5 @@ public class SingleDaySimulationServiceImpl implements SingleDaySimulationServic
     public void deleteById(long id) {
         singleDaySimulationRepository.deleteById(id);
     }
+
 }

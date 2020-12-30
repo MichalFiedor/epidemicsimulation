@@ -1,6 +1,8 @@
 package com.fiedormichal.epidemicsimulation.model;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -24,6 +26,4 @@ public class InitialSimulationData {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "initialdata_singledaysimulation")
     private List<SingleDaySimulation> singleDaySimulations;
-
-
 }
