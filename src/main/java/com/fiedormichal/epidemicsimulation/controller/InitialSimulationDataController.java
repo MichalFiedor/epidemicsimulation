@@ -2,6 +2,7 @@ package com.fiedormichal.epidemicsimulation.controller;
 
 import com.fiedormichal.epidemicsimulation.model.InitialSimulationData;
 import com.fiedormichal.epidemicsimulation.service.InitialSimulationDataService;
+import com.fiedormichal.epidemicsimulation.service.SingleDaySimulationCalculationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,17 +16,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class InitialSimulationDataController {
     private final InitialSimulationDataService initialSimulationDataService;
+    private final SingleDaySimulationCalculationService singleDaySimulationCalculationService;
 
     @GetMapping("/initialdata")
     public List<InitialSimulationData> allInitialSimulationData(){
         InitialSimulationData isd = new InitialSimulationData();
         isd.setSimulationName("Covid");
         isd.setHowManyPeopleWillBeInfectedByOnePerson(1.4);
-        isd.setInitialNumberOfInfected(1000);
-        isd.setMortalityRate(4);
-        isd.setNumberOfSimulationDays(100);
-        isd.setPopulationSize(20000);
+        isd.setInitialNumberOfInfected(100);
+        isd.setMortalityRate(.1);
+        isd.setNumberOfSimulationDays(50);
+        isd.setPopulationSize(2000000);
+        isd.setDaysFromInfectionToDeath(15);
+        isd.setDaysFromInfectionToRecovery(14);
         initialSimulationDataService.save(isd);
+        singleDaySimulationCalculationService.calculateEverySimulationDay(isd);
 
         return initialSimulationDataService.findAll();
     }

@@ -16,10 +16,10 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
 
 
     @Override
-    public List<SingleDaySimulation> calculateEverySimulationDay(InitialSimulationData initialSimulationData) {
+    public void calculateEverySimulationDay(InitialSimulationData initialSimulationData) {
         SingleDaySimulation firstDayOfSimulation = createFirstDayOfSimulationBasedOnTheInitialData(initialSimulationData);
         List<SingleDaySimulation> allSimulationDays = new ArrayList<>();
-
+        long population = firstDayOfSimulation.getPopulation();
         double howManyPeopleWillBeInfectedByOnePerson = initialSimulationData.getHowManyPeopleWillBeInfectedByOnePerson();
         double mortalityRate = initialSimulationData.getMortalityRate();
         int daysFromInfectionToRecovery = initialSimulationData.getDaysFromInfectionToRecovery();
@@ -28,12 +28,24 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
 
         for(long i =2; i<=numberOfSimulationDays; i++){
             SingleDaySimulation singleDaySimulation = new SingleDaySimulation();
-            countDeathPeopleAndReturnTheSameDayOfSimulation(singleDaySimulation,
-                    mortalityRate, daysFromInfectionToDeath, i);
+            singleDaySimulation.setPopulation(population);
+            if(i<daysFromInfectionToDeath){
+                singleDaySimulation.setNumberOfDeathPeople(0);
+            } else {
+                countDeathPeopleWhenDaysIteratorIsGreaterThanDaysFromInfectionToDeath(
+                        singleDaySimulation, mortalityRate, daysFromInfectionToDeath, i);
+            }
+            if(i<daysFromInfectionToRecovery){
+                singleDaySimulation.setNumberOfPeopleWhoRecoveredAndGainedImmunity(0);
+            }else {
+                countRecoveredPeopleWhenDaysIteratorIsGreaterThanDaysFromInfectionToRecovery(
+                        singleDaySimulation, daysFromInfectionToRecovery, i);
+            }
+            countInfectedPeople(singleDaySimulation, howManyPeopleWillBeInfectedByOnePerson, i);
+            countHealthyPeopleWhoCanBeInfected(singleDaySimulation, i);
+
             singleDaySimulationRepository.save(singleDaySimulation);
         }
-
-        return null;
     }
 
     private SingleDaySimulation createFirstDayOfSimulationBasedOnTheInitialData(InitialSimulationData initialSimulationData) {
@@ -48,22 +60,66 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
         firstDayOfSimulation.setNumberOfDeathPeople(0);
 
         firstDayOfSimulation.setNumberOfPeopleWhoRecoveredAndGainedImmunity(0);
+        firstDayOfSimulation.setPopulation(initialSimulationData.getPopulationSize());
         singleDaySimulationRepository.save(firstDayOfSimulation);
 
         return firstDayOfSimulation;
     }
 
-    private static SingleDaySimulation countDeathPeopleAndReturnTheSameDayOfSimulation(SingleDaySimulation singleDaySimulation,
-                                  double mortalityRate, int daysFromInfectionToDeath, long daysIterator){
-        if(daysIterator<daysFromInfectionToDeath){
-            singleDaySimulation.setNumberOfDeathPeople(0);
-        } else {
-            long numberOfDeathPeople = (long)Math.ceil(
-                    singleDaySimulation.getNumberOfInfectedPeople()*mortalityRate);
-            singleDaySimulation.setNumberOfDeathPeople(numberOfDeathPeople);
-            singleDaySimulation.setNumberOfInfectedPeople(
-                    singleDaySimulation.getNumberOfInfectedPeople()-numberOfDeathPeople);
+    private SingleDaySimulation countDeathPeopleWhenDaysIteratorIsGreaterThanDaysFromInfectionToDeath(
+            SingleDaySimulation currentSimulationDay,
+            double mortalityRate, int daysFromInfectionToDeath, long daysIterator){
+
+        SingleDaySimulation simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndDeath =
+                singleDaySimulationRepository.findById(daysIterator-daysFromInfectionToDeath+1).orElseThrow();
+        SingleDaySimulation previousSimulationDay = singleDaySimulationRepository.findById(daysIterator-1).orElseThrow();
+        long infectedPeople = simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndDeath.getNumberOfInfectedPeople();
+        long infectedPeopleFromPreviousSimulationDay = previousSimulationDay.getNumberOfInfectedPeople();
+
+        long numberOfDeathPeopleForCurrentSimulationDay = Math.round(infectedPeople*mortalityRate);
+            currentSimulationDay.setNumberOfDeathPeople(numberOfDeathPeopleForCurrentSimulationDay);
+            currentSimulationDay.setNumberOfInfectedPeople(
+                    infectedPeopleFromPreviousSimulationDay-numberOfDeathPeopleForCurrentSimulationDay);
+
+        return currentSimulationDay;
+    }
+
+    private SingleDaySimulation countRecoveredPeopleWhenDaysIteratorIsGreaterThanDaysFromInfectionToRecovery(
+            SingleDaySimulation currentSimulationDay,
+            long daysFromInfectionToRecovery, long daysIterator){
+
+        SingleDaySimulation simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery =
+                singleDaySimulationRepository.findById(daysIterator-daysFromInfectionToRecovery+1).orElseThrow();
+        SingleDaySimulation previousSimulationDay = singleDaySimulationRepository.findById(daysIterator-1).orElseThrow();
+
+        long numberOfRecoveredPeople = simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery.getNumberOfInfectedPeople();
+        currentSimulationDay.setNumberOfInfectedPeople(previousSimulationDay.getNumberOfInfectedPeople()-numberOfRecoveredPeople);
+        currentSimulationDay.setNumberOfPeopleWhoRecoveredAndGainedImmunity(numberOfRecoveredPeople);
+        return currentSimulationDay;
+    }
+
+    private SingleDaySimulation countInfectedPeople(SingleDaySimulation currentSimulationDay,
+                                                    double howManyPeopleWillBeInfectedByOnePerson, long daysIterator){
+        if(daysIterator<3){
+            SingleDaySimulation previousSimulationDay = singleDaySimulationRepository.findById(daysIterator-1).orElseThrow();
+            long newNumberOfInfectedPeople = Math.round(previousSimulationDay.getNumberOfInfectedPeople()*howManyPeopleWillBeInfectedByOnePerson);
+            currentSimulationDay.setNumberOfInfectedPeople(newNumberOfInfectedPeople);
+        }else{
+            SingleDaySimulation previousSimulationDay = singleDaySimulationRepository.findById(daysIterator-1).orElseThrow();
+            SingleDaySimulation twoDaysPreviousCurrentDaySimulation = singleDaySimulationRepository.findById(daysIterator-2).orElseThrow();
+            long numberOfNewInfectedPeopleBetweenTwoSimulationDays = previousSimulationDay.getNumberOfInfectedPeople()- twoDaysPreviousCurrentDaySimulation.getNumberOfInfectedPeople();
+            long newNumberOfInfectedPeople = Math.round(numberOfNewInfectedPeopleBetweenTwoSimulationDays*howManyPeopleWillBeInfectedByOnePerson);
+            currentSimulationDay.setNumberOfInfectedPeople(previousSimulationDay.getNumberOfInfectedPeople()+newNumberOfInfectedPeople);
         }
-        return singleDaySimulation;
+        return currentSimulationDay;
+    }
+
+    private SingleDaySimulation countHealthyPeopleWhoCanBeInfected(SingleDaySimulation currentSimulationDay,
+                                                                   long daysIterator){
+        SingleDaySimulation previousSimulationDay = singleDaySimulationRepository.findById(daysIterator-1).orElseThrow();
+        long healthyPeopleWhoCanBeInfected = previousSimulationDay.getNumberOfHealthyPeopleWhoCanBeInfected()- currentSimulationDay.getNumberOfInfectedPeople()
+                - currentSimulationDay.getNumberOfDeathPeople() - currentSimulationDay.getNumberOfPeopleWhoRecoveredAndGainedImmunity();
+        currentSimulationDay.setNumberOfHealthyPeopleWhoCanBeInfected(healthyPeopleWhoCanBeInfected);
+        return currentSimulationDay;
     }
 }
