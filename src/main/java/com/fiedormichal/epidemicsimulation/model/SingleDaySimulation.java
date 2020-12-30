@@ -1,5 +1,6 @@
 package com.fiedormichal.epidemicsimulation.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,4 +18,5 @@ public class SingleDaySimulation {
     private long numberOfDeathPeople;
     private long numberOfPeopleWhoRecoveredAndGainedImmunity;
     private long population;
+
 }

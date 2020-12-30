@@ -6,6 +6,6 @@ import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
 import java.util.List;
 
 public interface SingleDaySimulationCalculationService {
-    void calculateEverySimulationDay(InitialSimulationData initialSimulationData);
+    List<SingleDaySimulation> calculateEverySimulationDay(InitialSimulationData initialSimulationData);
 
 }

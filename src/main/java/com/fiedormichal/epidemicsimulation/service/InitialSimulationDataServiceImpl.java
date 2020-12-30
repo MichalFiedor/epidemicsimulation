@@ -1,6 +1,7 @@
 package com.fiedormichal.epidemicsimulation.service;
 
 import com.fiedormichal.epidemicsimulation.model.InitialSimulationData;
+import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
 import com.fiedormichal.epidemicsimulation.repository.InitialSimulationDataRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -35,5 +36,12 @@ public class InitialSimulationDataServiceImpl implements InitialSimulationDataSe
     @Override
     public void deleteById(long id) {
         initialSimulationDataRepository.deleteById(id);
+    }
+
+    @Override
+    public InitialSimulationData addSingleDaySimulations(List<SingleDaySimulation> singleDaySimulations,
+                                                         InitialSimulationData initialSimulationData) {
+        initialSimulationData.setSingleDaySimulations(singleDaySimulations);
+        return initialSimulationDataRepository.save(initialSimulationData);
     }
 }
