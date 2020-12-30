@@ -1,12 +1,11 @@
 package com.fiedormichal.epidemicsimulation.controller;
 
 import com.fiedormichal.epidemicsimulation.model.InitialSimulationData;
+import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
 import com.fiedormichal.epidemicsimulation.service.InitialSimulationDataService;
+import com.fiedormichal.epidemicsimulation.service.SingleDaySimulationCalculationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,28 +14,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class InitialSimulationDataController {
     private final InitialSimulationDataService initialSimulationDataService;
+    private final SingleDaySimulationCalculationService singleDaySimulationCalculationService;
 
     @GetMapping("/initialdata")
-    public List<InitialSimulationData> allInitialSimulationData(){
-        InitialSimulationData isd = new InitialSimulationData();
-        isd.setSimulationName("Covid");
-        isd.setHowManyPeopleWillBeInfectedByOnePerson(1.4);
-        isd.setInitialNumberOfInfected(1000);
-        isd.setMortalityRate(4);
-        isd.setNumberOfSimulationDays(100);
-        isd.setPopulationSize(20000);
-        initialSimulationDataService.save(isd);
-
+    public List<InitialSimulationData> allInitialSimulationData() {
         return initialSimulationDataService.findAll();
     }
 
     @GetMapping("/initialdata/{id}")
-    public InitialSimulationData findInitialSimulationDataById(@PathVariable long id){
+    public InitialSimulationData findInitialSimulationDataById(@PathVariable long id) {
         return initialSimulationDataService.findById(id);
     }
 
     @PostMapping("/initialdata")
-    public InitialSimulationData addInitialSimulationData(InitialSimulationData initialSimulationData){
-        return initialSimulationDataService.save(initialSimulationData);
+    public InitialSimulationData addInitialSimulationData(@RequestBody InitialSimulationData initialSimulationData) {
+        List<SingleDaySimulation> singleDaySimulations = singleDaySimulationCalculationService
+                .calculateEverySimulationDay(initialSimulationData);
+        return initialSimulationDataService.addSingleDaySimulations(singleDaySimulations, initialSimulationData);
     }
 }
