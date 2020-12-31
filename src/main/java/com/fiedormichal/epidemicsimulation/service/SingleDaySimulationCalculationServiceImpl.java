@@ -27,7 +27,7 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
         int daysFromInfectionToDeath = initialSimulationData.getDaysFromInfectionToDeath();
         int numberOfSimulationDays = initialSimulationData.getNumberOfSimulationDays();
         boolean shouldSetZeroForNumberOfHealthyPeopleWhoCanBeInfected = false;
-        int counter = 1;
+        int counter = 2;
 
         for (long i = 2; i <= numberOfSimulationDays; i++) {
             SingleDaySimulation singleDaySimulation = new SingleDaySimulation();
