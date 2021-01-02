@@ -7,4 +7,5 @@ public interface InfectedPeopleCounterService {
                                                                  double howManyPeopleWillBeInfectedByOnePerson, long previousDay, double mortalityRate,
                                                                  long daysFromInfectionToRecovery);
      void countInfectedPeopleWhenParamExceedNumberOfPopulation(SingleDaySimulation currentSimulationDay, long population);
+     void countInfectedPeopleWhenParamReachedMaxValueForSimulation(SingleDaySimulation currentSimulationDay, long population, long maxValueOfInfectedPeople);
 }
