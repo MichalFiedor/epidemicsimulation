@@ -37,5 +37,4 @@ public class SingleDaySimulationCrudServiceImpl implements SingleDaySimulationCr
     public void deleteById(long id) {
         singleDaySimulationRepository.deleteById(id);
     }
-
 }

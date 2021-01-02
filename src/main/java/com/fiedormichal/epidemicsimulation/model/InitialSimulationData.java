@@ -21,7 +21,8 @@ public class InitialSimulationData {
     private int daysFromInfectionToRecovery;
     private int daysFromInfectionToDeath;
     private int numberOfSimulationDays;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private boolean isDeleted = false;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "initialdata_singledaysimulation")
     private List<SingleDaySimulation> singleDaySimulations;
 }

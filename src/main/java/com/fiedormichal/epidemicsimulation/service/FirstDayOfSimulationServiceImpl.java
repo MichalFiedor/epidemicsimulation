@@ -24,6 +24,7 @@ public class FirstDayOfSimulationServiceImpl implements FirstDayOfSimulationServ
         firstDayOfSimulation.setNumberOfDeathPeople(0);
 
         firstDayOfSimulation.setNumberOfPeopleWhoRecoveredAndGainedImmunity(0);
+//        firstDayOfSimulation.setInitialSimulationData(initialSimulationData);
         singleDaySimulationRepository.save(firstDayOfSimulation);
 
         return firstDayOfSimulation;

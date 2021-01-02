@@ -17,4 +17,9 @@ public class SingleDaySimulation {
     private long numberOfHealthyPeopleWhoCanBeInfected;
     private long numberOfDeathPeople;
     private long numberOfPeopleWhoRecoveredAndGainedImmunity;
+    private boolean isDeleted =false;
+    @ManyToOne
+    @JoinColumn(name = "initialData_id")
+    private InitialSimulationData initialSimulationData;
+//    private long initialSimulationDataId;
 }

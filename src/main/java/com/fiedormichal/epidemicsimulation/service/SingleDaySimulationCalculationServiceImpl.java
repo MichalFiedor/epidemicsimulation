@@ -34,7 +34,6 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
         long maxValueOfInfectedPeople = firstDayOfSimulation.getNumberOfInfectedPeople();
         long minValueOfPeopleWhoCanBeInfected = firstDayOfSimulation.getNumberOfHealthyPeopleWhoCanBeInfected();
         long counterFromStartOfTheSimulationToMaxValueOfInfectedPeople = 0;
-
         int shouldChangeMethodForCountingNumberOfInfectedPeople = 0;
         boolean shouldChangeMethodForCountingNumberOfInfectedPeopleWhenMaxValueOccurs = false;
         boolean shouldSetZeroForNumberRecoveredPeople = false;
@@ -48,7 +47,7 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
             long maxNumberOfDeathPeople = Math.round(population * mortalityRate);
 
             deathsSetterService.setTotalNumberOfDeathsForSingleSimulationDay(singleDaySimulation, daysFromInfectionToDeath, numberOfDaysWhenAmountOfInfectedPeopleGrows,
-                    counterFromStartOfTheSimulationToMaxValueOfInfectedPeople, mortalityRate, maxNumberOfDeathPeople, i);
+                    counterFromStartOfTheSimulationToMaxValueOfInfectedPeople, mortalityRate, maxNumberOfDeathPeople, i, singleDaySimulationsListForInitialData);
 
             recoveredSetterService.setTotalNumberOfRecoveredForSingleSimulationDay(singleDaySimulation, daysFromInfectionToRecovery,
                     counterFromStartOfTheSimulationToMaxValueOfInfectedPeople, shouldSetZeroForNumberRecoveredPeople, mortalityRate, i);
@@ -82,7 +81,6 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
                 shouldSetZeroForNumberInfectedPeople = 1;
             }
 
-
             healthyPeopleWhoCanBeInfectedSetterService.setTotalNumberOfHealthyPeopleWhoCanBeInfectedForSingleSimulationDay(
                     singleDaySimulation, shouldSetZeroForNumberHealthPeopleWhoCanBeInfected, setConstantValueOfPeopleWhoCanBeInfected,
                     minValueOfPeopleWhoCanBeInfected, population);
@@ -100,7 +98,8 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
             }
 
             singleDaySimulationsListForInitialData.add(singleDaySimulation);
-            singleDaySimulationRepository.save(singleDaySimulation);
+            singleDaySimulation.setInitialSimulationData(initialSimulationData);
+//            singleDaySimulationRepository.save(singleDaySimulation);
         }
         return singleDaySimulationsListForInitialData;
     }
