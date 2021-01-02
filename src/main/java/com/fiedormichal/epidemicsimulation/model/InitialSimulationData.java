@@ -1,8 +1,6 @@
 package com.fiedormichal.epidemicsimulation.model;
 
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -18,7 +16,7 @@ public class InitialSimulationData {
     private String simulationName;
     private long populationSize;
     private long initialNumberOfInfected;
-    private double howManyPeopleWillBeInfectedByOnePerson;
+    private double numberOfPeopleWhoWillBeInfectedByOnePerson;
     private double mortalityRate;
     private int daysFromInfectionToRecovery;
     private int daysFromInfectionToDeath;
