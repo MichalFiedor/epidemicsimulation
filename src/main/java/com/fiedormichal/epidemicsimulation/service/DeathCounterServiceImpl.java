@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class DeathCounterServiceImpl implements DeathCounterService {
+public class DeathCounterServiceImpl implements DeathsCounterService {
     private final SingleDaySimulationRepository singleDaySimulationRepository;
 
     @Override

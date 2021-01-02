@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class InfectedPeopleCounterServiceImpl implements InfectedPeopleCounterService{
+public class InfectedPeopleCounterServiceImpl implements InfectedPeopleCounterService {
     private final SingleDaySimulationRepository singleDaySimulationRepository;
 
     @Override
@@ -50,5 +50,12 @@ public class InfectedPeopleCounterServiceImpl implements InfectedPeopleCounterSe
         long numberOfRecoveredPeople = currentSimulationDay.getNumberOfPeopleWhoRecoveredAndGainedImmunity();
         currentSimulationDay.setNumberOfInfectedPeople(population -
                 numberOfRecoveredPeople - numberOFDeathPeopleForCurrentDay);
+    }
+
+    @Override
+    public void countInfectedPeopleWhenParamReachedMaxValueForSimulation(SingleDaySimulation currentSimulationDay, long population, long maxValueOfInfectedPeople) {
+        long numberOFDeathPeopleForCurrentDay = currentSimulationDay.getNumberOfDeathPeople();
+        long numberOfRecoveredPeople = currentSimulationDay.getNumberOfPeopleWhoRecoveredAndGainedImmunity();
+        currentSimulationDay.setNumberOfInfectedPeople(maxValueOfInfectedPeople - numberOFDeathPeopleForCurrentDay - numberOfRecoveredPeople);
     }
 }
