@@ -7,14 +7,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class InfectedPeopleCounterServiceImpl implements InfectedPeopleCounterService {
+public class InfectedPeopleCounterServiceImpl implements InfectedPeopleCounterService{
     private final SingleDaySimulationRepository singleDaySimulationRepository;
 
     @Override
     public void countInfectedPeopleBeforeParamReachedNumberOfPopulation(SingleDaySimulation currentSimulationDay,
                                                                         double howManyPeopleWillBeInfectedByOnePerson,
                                                                         long previousDay, double mortalityRate, long daysFromInfectionToRecovery) {
-        SingleDaySimulation previousSimulationDay = singleDaySimulationRepository.findById(previousDay - 1).orElseThrow();
+        long lastRecordId= singleDaySimulationRepository.findFirstByOrderByIdDesc().getId()+1;
+        SingleDaySimulation previousSimulationDay = singleDaySimulationRepository.findById(lastRecordId - 1).orElseThrow();
+        ;
         long deathPeopleFromCurrentDay = currentSimulationDay.getNumberOfDeathPeople();
         long recoveredPeopleFromCurrentDay = currentSimulationDay.getNumberOfPeopleWhoRecoveredAndGainedImmunity();
         long newNumberOfInfectedPeople;
@@ -22,7 +24,7 @@ public class InfectedPeopleCounterServiceImpl implements InfectedPeopleCounterSe
             newNumberOfInfectedPeople = Math.round(previousSimulationDay.getNumberOfInfectedPeople() * howManyPeopleWillBeInfectedByOnePerson);
             currentSimulationDay.setNumberOfInfectedPeople(newNumberOfInfectedPeople + previousSimulationDay.getNumberOfInfectedPeople() - deathPeopleFromCurrentDay - recoveredPeopleFromCurrentDay);
         } else {
-            SingleDaySimulation twoDaysPreviousCurrentDaySimulation = singleDaySimulationRepository.findById(previousDay - 2).orElseThrow();
+            SingleDaySimulation twoDaysPreviousCurrentDaySimulation = singleDaySimulationRepository.findById(lastRecordId - 2).orElseThrow();
             long numberOfNewInfectedPeopleBetweenTwoSimulationDays = Math.abs(previousSimulationDay.getNumberOfInfectedPeople()
                     - twoDaysPreviousCurrentDaySimulation.getNumberOfInfectedPeople());
             newNumberOfInfectedPeople = Math.round(numberOfNewInfectedPeopleBetweenTwoSimulationDays * howManyPeopleWillBeInfectedByOnePerson) +
@@ -30,7 +32,7 @@ public class InfectedPeopleCounterServiceImpl implements InfectedPeopleCounterSe
 
             if (deathPeopleFromCurrentDay == 0 && recoveredPeopleFromCurrentDay != 0) {
                 SingleDaySimulation simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery =
-                        singleDaySimulationRepository.findById(previousDay - daysFromInfectionToRecovery + 1).orElseThrow();
+                        singleDaySimulationRepository.findById(lastRecordId - daysFromInfectionToRecovery + 1).orElseThrow();
                 long futureDeaths = Math.round(simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery.getNumberOfInfectedPeople() * mortalityRate);
                 long totalNumberOfInfectedPeopleForCurrentDay = newNumberOfInfectedPeople + previousSimulationDay.getNumberOfInfectedPeople() +
                         futureDeaths;
@@ -56,6 +58,6 @@ public class InfectedPeopleCounterServiceImpl implements InfectedPeopleCounterSe
     public void countInfectedPeopleWhenParamReachedMaxValueForSimulation(SingleDaySimulation currentSimulationDay, long population, long maxValueOfInfectedPeople) {
         long numberOFDeathPeopleForCurrentDay = currentSimulationDay.getNumberOfDeathPeople();
         long numberOfRecoveredPeople = currentSimulationDay.getNumberOfPeopleWhoRecoveredAndGainedImmunity();
-        currentSimulationDay.setNumberOfInfectedPeople(maxValueOfInfectedPeople - numberOFDeathPeopleForCurrentDay - numberOfRecoveredPeople);
+        currentSimulationDay.setNumberOfInfectedPeople(maxValueOfInfectedPeople-numberOFDeathPeopleForCurrentDay- numberOfRecoveredPeople);
     }
 }
