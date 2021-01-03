@@ -21,7 +21,11 @@ public class RecoveredSetterServiceImpl implements RecoveredSetterService {
             if (calculationData.isShouldSetZeroForNumberRecoveredPeople()) {
                 singleDaySimulation.setNumberOfPeopleWhoRecoveredAndGainedImmunity(0);
             } else {
-                recoveredCounterService.countCurrentRecovered(singleDaySimulation, calculationData);
+                try {
+                    recoveredCounterService.countCurrentRecovered(singleDaySimulation, calculationData);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
             }
         }
     }

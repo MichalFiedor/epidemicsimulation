@@ -14,10 +14,9 @@ public class InfectedPeopleCounterServiceImpl implements InfectedPeopleCounterSe
     @Override
     public void countInfectedPeopleBeforeParamReachedNumberOfPopulation(SingleDaySimulation currentSimulationDay,
                                                                         CalculationData calculationData,
-                                                                        long iterator) {
+                                                                        long iterator) throws Exception {
         long lastRecordId = singleDaySimulationRepository.findFirstByOrderByIdDesc().getId() + 1;
-        SingleDaySimulation previousSimulationDay = singleDaySimulationRepository.findById(lastRecordId - 1).orElseThrow();
-        ;
+        SingleDaySimulation previousSimulationDay = singleDaySimulationRepository.findById(lastRecordId - 1).orElseThrow(()->new Exception("Empty Simulation Day"));
         long deathPeopleFromCurrentDay = currentSimulationDay.getNumberOfDeathPeople();
         long recoveredPeopleFromCurrentDay = currentSimulationDay.getNumberOfPeopleWhoRecoveredAndGainedImmunity();
         long newNumberOfInfectedPeople;
@@ -25,7 +24,8 @@ public class InfectedPeopleCounterServiceImpl implements InfectedPeopleCounterSe
             newNumberOfInfectedPeople = Math.round(previousSimulationDay.getNumberOfInfectedPeople() * calculationData.getPeopleInfectedByOnePerson());
             currentSimulationDay.setNumberOfInfectedPeople(newNumberOfInfectedPeople + previousSimulationDay.getNumberOfInfectedPeople() - deathPeopleFromCurrentDay - recoveredPeopleFromCurrentDay);
         } else {
-            SingleDaySimulation twoDaysPreviousCurrentDaySimulation = singleDaySimulationRepository.findById(lastRecordId - 2).orElseThrow();
+            SingleDaySimulation twoDaysPreviousCurrentDaySimulation = singleDaySimulationRepository.findById(lastRecordId - 2).orElseThrow(
+                    ()->new Exception("Empty Simulation Day"));
             long numberOfNewInfectedPeopleBetweenTwoSimulationDays = Math.abs(previousSimulationDay.getNumberOfInfectedPeople()
                     - twoDaysPreviousCurrentDaySimulation.getNumberOfInfectedPeople());
             newNumberOfInfectedPeople = Math.round(numberOfNewInfectedPeopleBetweenTwoSimulationDays * calculationData.getPeopleInfectedByOnePerson()) +
@@ -33,7 +33,8 @@ public class InfectedPeopleCounterServiceImpl implements InfectedPeopleCounterSe
 
             if (deathPeopleFromCurrentDay == 0 && recoveredPeopleFromCurrentDay != 0) {
                 SingleDaySimulation simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery =
-                        singleDaySimulationRepository.findById(lastRecordId - calculationData.getDaysFromInfectionToRecovery() + 1).orElseThrow();
+                        singleDaySimulationRepository.findById(lastRecordId - calculationData.getDaysFromInfectionToRecovery() + 1).orElseThrow(
+                                ()->new Exception("Empty Simulation Day"));
                 long futureDeaths = Math.round(
                         simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery.getNumberOfInfectedPeople() * calculationData.getMortalityRate());
                 long totalNumberOfInfectedPeopleForCurrentDay = newNumberOfInfectedPeople +

@@ -38,7 +38,12 @@ public class InitialSimulationDataController {
 
     @PutMapping("/initialdata")
     public InitialSimulationData editInitialSimulationData(@RequestBody InitialSimulationData initialSimulationData){
-        return initialSimulationDataService.edit(initialSimulationData);
+        try {
+            return initialSimulationDataService.edit(initialSimulationData);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return new InitialSimulationData();
     }
 
     @DeleteMapping("/initialdata/{id}")
