@@ -12,6 +12,8 @@ import java.util.List;
 public interface SingleDaySimulationRepository extends JpaRepository<SingleDaySimulation, Long> {
 
     SingleDaySimulation findFirstByOrderByIdDesc();
-    List<SingleDaySimulation> findAllByInitialSimulationDataId(long initialDataId);
+
+    @Query(value = "SELECT * FROM single_day_simulation WHERE initial_simulation_data_id=?1", nativeQuery = true)
+    List<SingleDaySimulation> findAllSimulationsForInitialData(long initialDataId);
 
 }

@@ -35,10 +35,8 @@ public class InitialSimulationDataController {
 
     @PostMapping("/initialdata")
     public InitialSimulationData addSimulations(@RequestBody InitialSimulationData initialSimulationData) {
-        InitialSimulationData savedInitialData = initialSimulationDataService.save(initialSimulationData);
-        List<SingleDaySimulation> singleDaySimulations = singleDaySimulationCalculationService
-                .calculateEverySimulationDay(savedInitialData);
-        return initialSimulationDataService.addSimulations(singleDaySimulations, savedInitialData);
+
+        return initialSimulationDataService.addSimulations(initialSimulationData);
     }
 
     @PutMapping("/initialdata")
@@ -50,6 +48,4 @@ public class InitialSimulationDataController {
     public void deleteInitialData(@PathVariable long id){
         initialSimulationDataService.deleteById(id);
     }
-
-
 }

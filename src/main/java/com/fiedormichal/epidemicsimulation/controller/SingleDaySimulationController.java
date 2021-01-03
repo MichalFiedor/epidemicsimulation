@@ -15,6 +15,6 @@ public class SingleDaySimulationController {
     private final SingleDaySimulationRepository singleDaySimulationRepository;
     @GetMapping("/initialdata/{id}/simulations")
     public List<SingleDaySimulation> getSimulationsForInitialSimulationData(@PathVariable long id) {
-        return singleDaySimulationRepository.findAllByInitialSimulationDataId(id);
+        return singleDaySimulationRepository.findAllSimulationsForInitialData(id);
     }
 }

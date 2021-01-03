@@ -11,6 +11,5 @@ public interface InitialSimulationDataService {
     List<InitialSimulationData> findAll();
     InitialSimulationData edit(InitialSimulationData initialSimulationData);
     void deleteById(long id);
-    InitialSimulationData addSimulations(List<SingleDaySimulation> singleDaySimulations,
-                                                  InitialSimulationData initialSimulationData);
+    InitialSimulationData addSimulations(InitialSimulationData initialSimulationData);
 }

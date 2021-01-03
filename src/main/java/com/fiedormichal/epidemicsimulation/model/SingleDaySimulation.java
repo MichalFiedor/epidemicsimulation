@@ -18,5 +18,5 @@ public class SingleDaySimulation {
     private long numberOfDeathPeople;
     private long numberOfPeopleWhoRecoveredAndGainedImmunity;
     private boolean isDeleted =false;
-    private long initialSimulationDataId;
+//    private long initialSimulationDataId;
 }

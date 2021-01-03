@@ -22,7 +22,7 @@ public class InitialSimulationData {
     private int daysFromInfectionToDeath;
     private int numberOfSimulationDays;
     private boolean isDeleted = false;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "initialdata_singledaysimulation")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "initialSimulationData_id")
     private List<SingleDaySimulation> singleDaySimulations;
 }

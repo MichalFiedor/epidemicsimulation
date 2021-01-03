@@ -98,8 +98,8 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
             }
 
             singleDaySimulationsListForInitialData.add(singleDaySimulation);
-            singleDaySimulation.setInitialSimulationDataId(initialSimulationData.getId());
             singleDaySimulationRepository.save(singleDaySimulation);
+
         }
         return singleDaySimulationsListForInitialData;
     }
