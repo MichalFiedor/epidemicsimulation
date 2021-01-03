@@ -75,8 +75,6 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
                 shouldChangeMethodForCountingNumberOfInfectedPeopleWhenMaxValueOccurs = true;
             }
 
-
-
             infectedPeopleSetterService.setZero(singleDaySimulation, shouldSetZeroForNumberInfectedPeople);
 
             if (singleDaySimulation.getNumberOfInfectedPeople() == 0) {
