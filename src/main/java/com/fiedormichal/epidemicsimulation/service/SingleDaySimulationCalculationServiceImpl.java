@@ -47,7 +47,7 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
             long maxNumberOfDeathPeople = Math.round(population * mortalityRate);
 
             deathsSetterService.setTotalNumberOfDeathsForSingleSimulationDay(singleDaySimulation, daysFromInfectionToDeath, numberOfDaysWhenAmountOfInfectedPeopleGrows,
-                    counterFromStartOfTheSimulationToMaxValueOfInfectedPeople, mortalityRate, maxNumberOfDeathPeople, i, singleDaySimulationsListForInitialData);
+                    counterFromStartOfTheSimulationToMaxValueOfInfectedPeople, mortalityRate, maxNumberOfDeathPeople, i);
 
             recoveredSetterService.setTotalNumberOfRecoveredForSingleSimulationDay(singleDaySimulation, daysFromInfectionToRecovery,
                     counterFromStartOfTheSimulationToMaxValueOfInfectedPeople, shouldSetZeroForNumberRecoveredPeople, mortalityRate, i);
@@ -98,8 +98,8 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
             }
 
             singleDaySimulationsListForInitialData.add(singleDaySimulation);
-            singleDaySimulation.setInitialSimulationData(initialSimulationData);
-//            singleDaySimulationRepository.save(singleDaySimulation);
+            singleDaySimulation.setInitialSimulationDataId(initialSimulationData.getId());
+            singleDaySimulationRepository.save(singleDaySimulation);
         }
         return singleDaySimulationsListForInitialData;
     }
