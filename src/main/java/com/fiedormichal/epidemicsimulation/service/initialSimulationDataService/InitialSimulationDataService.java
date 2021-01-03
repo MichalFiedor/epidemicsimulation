@@ -9,7 +9,7 @@ public interface InitialSimulationDataService {
     InitialSimulationData findById(long id);
     InitialSimulationData save(InitialSimulationData initialSimulationData);
     List<InitialSimulationData> findAll();
-    InitialSimulationData edit(InitialSimulationData initialSimulationData);
+    InitialSimulationData edit(InitialSimulationData initialSimulationData) throws Exception;
     void deleteById(long id);
     InitialSimulationData addSimulations(InitialSimulationData initialSimulationData);
 }

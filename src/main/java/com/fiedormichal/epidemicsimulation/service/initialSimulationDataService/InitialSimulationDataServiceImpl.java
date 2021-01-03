@@ -33,9 +33,9 @@ public class InitialSimulationDataServiceImpl implements InitialSimulationDataSe
     }
 
     @Override
-    public InitialSimulationData edit(InitialSimulationData initialSimulationData) {
+    public InitialSimulationData edit(InitialSimulationData initialSimulationData) throws Exception {
         InitialSimulationData initialSimulationDataFromDataBase = initialSimulationDataRepository
-                .findById(initialSimulationData.getId()).orElseThrow();
+                .findById(initialSimulationData.getId()).orElseThrow(()->new Exception("Empty Initial Simulation Data"));
         List<SingleDaySimulation> simulations = initialSimulationDataFromDataBase.getSingleDaySimulations();
         setSimulationsAsDeleted(simulations);
         List<SingleDaySimulation> simulationsBasedOnNewData = singleDaySimulationCalculationService

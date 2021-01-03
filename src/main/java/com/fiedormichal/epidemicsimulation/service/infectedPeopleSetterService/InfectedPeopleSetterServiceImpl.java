@@ -21,7 +21,11 @@ public class InfectedPeopleSetterServiceImpl implements InfectedPeopleSetterServ
         } else if (calculationData.isShouldChangeMethodForCountingNumberOfInfectedPeople() == true) {
             infectedPeopleCounterService.countInfectedPeopleWhenParamExceedNumberOfPopulation(singleDaySimulation, calculationData);
         } else {
-            infectedPeopleCounterService.countInfectedPeopleBeforeParamReachedNumberOfPopulation(singleDaySimulation, calculationData, i);
+            try {
+                infectedPeopleCounterService.countInfectedPeopleBeforeParamReachedNumberOfPopulation(singleDaySimulation, calculationData, i);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
         }
     }
 
