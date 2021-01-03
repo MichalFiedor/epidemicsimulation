@@ -13,8 +13,8 @@ public class DeathsSetterServiceImpl implements DeathsSetterService {
     public void setTotalNumberOfDeathsForSingleSimulationDay(SingleDaySimulation singleDaySimulation, int daysFromInfectionToDeath, long numberOfDaysWhenAmountOfInfectedPeopleGrows,
                                                              long counterFromStartOfTheSimulationToMaxValueOfInfectedPeople, double mortalityRate, long maxNumberOfDeathPeople, long i) {
 
-        if (i < daysFromInfectionToDeath || (i > numberOfDaysWhenAmountOfInfectedPeopleGrows + daysFromInfectionToDeath && numberOfDaysWhenAmountOfInfectedPeopleGrows != 0) ||
-                counterFromStartOfTheSimulationToMaxValueOfInfectedPeople + daysFromInfectionToDeath < i) {
+        if (i < daysFromInfectionToDeath || (i > numberOfDaysWhenAmountOfInfectedPeopleGrows + daysFromInfectionToDeath &&
+                numberOfDaysWhenAmountOfInfectedPeopleGrows != 0) || counterFromStartOfTheSimulationToMaxValueOfInfectedPeople + daysFromInfectionToDeath < i) {
             singleDaySimulation.setNumberOfDeathPeople(0);
         } else {
             deathsCounterService.countDeathPeople(singleDaySimulation, mortalityRate, daysFromInfectionToDeath, i);
