@@ -36,7 +36,7 @@ public class InfectedPeopleCounterServiceImpl implements InfectedPeopleCounterSe
                         singleDaySimulationRepository.findById(lastRecordId - calculationData.getDaysFromInfectionToRecovery() + 1).orElseThrow();
                 long futureDeaths = Math.round(
                         simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery.getNumberOfInfectedPeople() * calculationData.getMortalityRate());
-                long totalNumberOfInfectedPeopleForCurrentDay = newNumberOfInfectedPeople + previousSimulationDay.getNumberOfInfectedPeople() +
+                long totalNumberOfInfectedPeopleForCurrentDay = newNumberOfInfectedPeople +
                         futureDeaths;
                 currentSimulationDay.setNumberOfInfectedPeople(totalNumberOfInfectedPeopleForCurrentDay);
             } else {
