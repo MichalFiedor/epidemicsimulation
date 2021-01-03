@@ -3,10 +3,9 @@ package com.fiedormichal.epidemicsimulation.controller;
 import com.fiedormichal.epidemicsimulation.dto.InitialSimulationDataDto;
 import com.fiedormichal.epidemicsimulation.dto.InitialSimulationDataDtoMapper;
 import com.fiedormichal.epidemicsimulation.model.InitialSimulationData;
-import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
 import com.fiedormichal.epidemicsimulation.service.InitialSimulationDataService;
-import com.fiedormichal.epidemicsimulation.service.SingleDaySimulationCalculationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +15,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class InitialSimulationDataController {
     private final InitialSimulationDataService initialSimulationDataService;
-    private final SingleDaySimulationCalculationService singleDaySimulationCalculationService;
 
     @GetMapping("/initialdata")
     public List<InitialSimulationDataDto> getAllInitialSimulationData() {
@@ -35,7 +33,6 @@ public class InitialSimulationDataController {
 
     @PostMapping("/initialdata")
     public InitialSimulationData addSimulations(@RequestBody InitialSimulationData initialSimulationData) {
-
         return initialSimulationDataService.addSimulations(initialSimulationData);
     }
 
@@ -45,6 +42,7 @@ public class InitialSimulationDataController {
     }
 
     @DeleteMapping("/initialdata/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteInitialData(@PathVariable long id){
         initialSimulationDataService.deleteById(id);
     }
