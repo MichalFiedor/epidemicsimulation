@@ -3,7 +3,7 @@ package com.fiedormichal.epidemicsimulation.controller;
 import com.fiedormichal.epidemicsimulation.dto.InitialSimulationDataDto;
 import com.fiedormichal.epidemicsimulation.dto.InitialSimulationDataDtoMapper;
 import com.fiedormichal.epidemicsimulation.model.InitialSimulationData;
-import com.fiedormichal.epidemicsimulation.service.InitialSimulationDataService;
+import com.fiedormichal.epidemicsimulation.service.initialSimulationDataService.InitialSimulationDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
