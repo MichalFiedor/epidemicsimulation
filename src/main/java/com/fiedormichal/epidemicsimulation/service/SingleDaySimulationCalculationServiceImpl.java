@@ -62,6 +62,12 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
                     i, counterFromStartOfTheSimulationToMaxValueOfInfectedPeople, shouldChangeMethodForCountingNumberOfInfectedPeopleWhenMaxValueOccurs,
                     shouldChangeMethodForCountingNumberOfInfectedPeople);
 
+            if (singleDaySimulation.getNumberOfInfectedPeople() > population && shouldChangeMethodForCountingNumberOfInfectedPeople == 0) {
+                numberOfDaysWhenAmountOfInfectedPeopleGrows = i - 1;
+                shouldChangeMethodForCountingNumberOfInfectedPeople = 1;
+                singleDaySimulation.setNumberOfInfectedPeople(population);
+            }
+
             if (singleDaySimulation.getNumberOfInfectedPeople() > maxValueOfInfectedPeople) {
                 maxValueOfInfectedPeople = singleDaySimulation.getNumberOfInfectedPeople();
                 counterFromStartOfTheSimulationToMaxValueOfInfectedPeople++;
@@ -69,11 +75,7 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
                 shouldChangeMethodForCountingNumberOfInfectedPeopleWhenMaxValueOccurs = true;
             }
 
-            if (singleDaySimulation.getNumberOfInfectedPeople() > population && shouldChangeMethodForCountingNumberOfInfectedPeople == 0) {
-                numberOfDaysWhenAmountOfInfectedPeopleGrows = i - 1;
-                shouldChangeMethodForCountingNumberOfInfectedPeople = 1;
-                singleDaySimulation.setNumberOfInfectedPeople(population);
-            }
+
 
             infectedPeopleSetterService.setZero(singleDaySimulation, shouldSetZeroForNumberInfectedPeople);
 
