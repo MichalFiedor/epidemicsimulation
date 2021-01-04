@@ -11,5 +11,5 @@ public interface InitialSimulationDataService {
     List<InitialSimulationData> findAll();
     InitialSimulationData edit(InitialSimulationData initialSimulationData) throws Exception;
     void deleteById(long id);
-    InitialSimulationData addSimulations(InitialSimulationData initialSimulationData);
+    InitialSimulationData addInitialDataAndGenerateSimulation(InitialSimulationData initialSimulationData);
 }

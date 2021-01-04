@@ -33,7 +33,7 @@ public class InitialSimulationDataController {
 
     @PostMapping("/initialdata")
     public InitialSimulationData addSimulations(@RequestBody InitialSimulationData initialSimulationData) {
-        return initialSimulationDataService.addSimulations(initialSimulationData);
+        return initialSimulationDataService.addInitialDataAndGenerateSimulation(initialSimulationData);
     }
 
     @PutMapping("/initialdata")

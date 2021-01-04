@@ -54,7 +54,7 @@ public class InitialSimulationDataServiceImpl implements InitialSimulationDataSe
     }
 
     @Override
-    public InitialSimulationData addSimulations(InitialSimulationData initialSimulationData) {
+    public InitialSimulationData addInitialDataAndGenerateSimulation(InitialSimulationData initialSimulationData) {
         List<SingleDaySimulation> singleDaySimulations = singleDaySimulationCalculationService
                 .calculateEverySimulationDay(initialSimulationData);
         initialSimulationData.setSingleDaySimulations(singleDaySimulations);
