@@ -25,7 +25,7 @@ class InitialSimulationDataRepositoryTest {
     private InitialSimulationDataRepository initialSimulationDataRepository;
 
     @Test
-    void shouldReturnNotDeletedInitialSimulationDataObject() {
+    public void shouldReturnNotDeletedInitialSimulationDataObject() {
         //given
         InitialSimulationData initialSimulationData = new InitialSimulationData();
         initialSimulationData.setDeleted(false);
@@ -38,7 +38,7 @@ class InitialSimulationDataRepositoryTest {
     }
 
     @Test
-    void shouldReturnListOfNotDeletedInitialSimulationDataObjects() {
+    public void shouldReturnListOfNotDeletedInitialSimulationDataObjects() {
         //given
         List<InitialSimulationData> simulationData= new ArrayList<>();
         InitialSimulationData initialSimulationData1 = new InitialSimulationData();
@@ -62,7 +62,7 @@ class InitialSimulationDataRepositoryTest {
     }
 
     @Test
-    void shouldReturnEmptyList() {
+    public void shouldReturnEmptyList() {
         //given
         InitialSimulationData initialSimulationData1 = new InitialSimulationData();
         initialSimulationData1.setDeleted(true);
