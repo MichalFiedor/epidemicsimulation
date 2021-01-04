@@ -1,5 +1,6 @@
 package com.fiedormichal.epidemicsimulation.model;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@EqualsAndHashCode
 public class InitialSimulationData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
