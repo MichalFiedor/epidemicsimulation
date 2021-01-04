@@ -44,7 +44,7 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
             recoveredSetterService.setTotalNumberOfRecoveredForSingleSimulationDay(singleDaySimulation, calculationData, i);
 
             if (singleDaySimulation.getNumberOfPeopleWhoRecoveredAndGainedImmunity() == calculationData.getMaxRecoveredPeopleForGivenData() &&
-                    !calculationData.isShouldSetZeroForNumberRecoveredPeople()) {
+                    !calculationData.isShouldSetZeroForNumberRecoveredPeople()&&calculationData.getMortalityRate()!=1.0) {
                 calculationData.setShouldSetZeroForNumberRecoveredPeople(true);
             }
 
