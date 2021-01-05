@@ -1,22 +1,17 @@
 package com.fiedormichal.epidemicsimulation.service.calculationDataService;
 
-import com.fiedormichal.epidemicsimulation.EpidemicSimulationApplication;
 import com.fiedormichal.epidemicsimulation.model.CalculationData;
 import com.fiedormichal.epidemicsimulation.model.InitialSimulationData;
-import com.fiedormichal.epidemicsimulation.repository.InitialSimulationDataRepository;
-import lombok.Data;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = EpidemicSimulationApplication.class)
+@SpringBootTest
 class CalculationDataServiceImplTest {
 
     @Autowired
@@ -31,8 +26,9 @@ class CalculationDataServiceImplTest {
         initialSimulationData.setMortalityRate(0.04);
         initialSimulationData.setPopulationSize(200000);
         initialSimulationData.setNumberOfSimulationDays(50);
-
+        //when
         CalculationData result = calculationDataService.createCalculationDataObject(initialSimulationData);
+        //then
         assertNotNull(result);
         assertEquals(14, result.getDaysFromInfectionToRecovery());
         assertEquals(18, result.getDaysFromInfectionToDeath());

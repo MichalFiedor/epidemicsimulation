@@ -13,7 +13,7 @@ public class DeathCounterServiceImpl implements DeathsCounterService {
 
     @Override
     public void countDeathPeople(SingleDaySimulation currentSimulationDay,
-                                 CalculationData calculationData)  {
+                                                CalculationData calculationData)  {
         long lastRecordId= singleDaySimulationRepository.findFirstByOrderByIdDesc().getId()+1;
         SingleDaySimulation simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndDeath =
                 null;
