@@ -49,4 +49,5 @@ class HealthyPeopleWhoCanBeInfectedCounterServiceImplTest {
         assertNotNull(currentSimulationDay);
         assertEquals(0, currentSimulationDay.getNumberOfHealthyPeopleWhoCanBeInfected());
     }
+
 }
