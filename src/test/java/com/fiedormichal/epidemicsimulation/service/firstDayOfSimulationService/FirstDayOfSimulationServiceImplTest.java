@@ -19,7 +19,7 @@ class FirstDayOfSimulationServiceImplTest {
 
 
     @Test
-    void shouldReturnFirstDaySimulationObject() {
+    void should_return_first_day_simulation_object() {
         //given
         InitialSimulationData initialSimulationData = new InitialSimulationData();
         initialSimulationData.setInitialNumberOfInfected(100);

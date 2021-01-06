@@ -18,7 +18,7 @@ class CalculationDataServiceImplTest {
     private CalculationDataService calculationDataService;
 
     @Test
-    void shouldReturnCalculationDataObject() {
+    void should_return_calculation_data_object() {
         //given
         InitialSimulationData initialSimulationData = new InitialSimulationData();
         initialSimulationData.setDaysFromInfectionToRecovery(14);
