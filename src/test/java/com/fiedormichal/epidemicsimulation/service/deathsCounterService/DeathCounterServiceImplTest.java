@@ -1,21 +1,16 @@
 package com.fiedormichal.epidemicsimulation.service.deathsCounterService;
 
-import com.fiedormichal.epidemicsimulation.EpidemicSimulationApplication;
 import com.fiedormichal.epidemicsimulation.model.CalculationData;
 import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
 import com.fiedormichal.epidemicsimulation.repository.SingleDaySimulationRepository;
-import com.fiedormichal.epidemicsimulation.service.calculationDataService.CalculationDataServiceImpl;
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
@@ -23,16 +18,19 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
 @SpringBootTest
 class DeathCounterServiceImplTest {
 
     @Autowired
     private DeathsCounterService deathsCounterService;
 
+    @MockBean
+    SingleDaySimulationRepository singleDaySimulationRepository;
+
     @Test
-    void shouldSetOneHundredDeathPeople() {
-        SingleDaySimulationRepository singleDaySimulationRepository= mock(SingleDaySimulationRepository.class);
+    public void should_set_one_hundred_death_people() {
+        //given
         SingleDaySimulation currentSimulation = new SingleDaySimulation();
         currentSimulation.setId(15);
         SingleDaySimulation singleDaySimulationById = mock(SingleDaySimulation.class);
@@ -50,6 +48,7 @@ class DeathCounterServiceImplTest {
         //when
         deathsCounterService.countDeathPeople(currentSimulation, calculationData);
         //then
-        assertEquals(5000*0.02, currentSimulation.getNumberOfInfectedPeople());
+        assertNotNull(currentSimulation);
+        assertEquals(5000*0.02, currentSimulation.getNumberOfDeathPeople());
     }
 }
