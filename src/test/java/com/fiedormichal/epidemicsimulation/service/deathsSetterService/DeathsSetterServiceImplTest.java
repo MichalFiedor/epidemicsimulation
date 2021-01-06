@@ -50,9 +50,9 @@ class DeathsSetterServiceImplTest {
                 .daysFromInfectionToDeath(14)
                 .numberOfDaysWhenAmountOfInfectedPeopleGrows(4)
                 .build();
-        long i = 19;
+        long iterator = 19;
         //when
-        deathsSetterService.setTotalNumberOfDeathsForSingleSimulationDay(currentSimulation, calculationData, i);
+        deathsSetterService.setTotalNumberOfDeathsForSingleSimulationDay(currentSimulation, calculationData, iterator);
         //then
         assertNotNull(currentSimulation);
         assertEquals(0, currentSimulation.getNumberOfDeathPeople());
@@ -66,9 +66,9 @@ class DeathsSetterServiceImplTest {
                 .daysFromInfectionToDeath(14)
                 .counterFromStartOfTheSimulationToMaxValueOfInfectedPeople(5)
                 .build();
-        long i = 11;
+        long iterator = 11;
         //when
-        deathsSetterService.setTotalNumberOfDeathsForSingleSimulationDay(currentSimulation, calculationData, i);
+        deathsSetterService.setTotalNumberOfDeathsForSingleSimulationDay(currentSimulation, calculationData, iterator);
         //then
         assertNotNull(currentSimulation);
         assertEquals(0, currentSimulation.getNumberOfDeathPeople());
@@ -93,10 +93,10 @@ class DeathsSetterServiceImplTest {
                 .mortalityRate(0.04)
                 .maxNumberOfDeathPeople(7000)
                 .build();
-        long i = 19;
+        long iterator = 19;
         when(singleDaySimulationRepository.findById(2L)).thenReturn(singleDaySimulationOpt);
         //when
-        deathsSetterService.setTotalNumberOfDeathsForSingleSimulationDay(currentSimulation, calculationData, i);
+        deathsSetterService.setTotalNumberOfDeathsForSingleSimulationDay(currentSimulation, calculationData, iterator);
         //then
         assertNotNull(currentSimulation);
         assertEquals(50000*0.04, currentSimulation.getNumberOfDeathPeople());
