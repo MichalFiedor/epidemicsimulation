@@ -25,7 +25,7 @@ class InfectedPeopleCounterServiceImplTest {
     private SingleDaySimulationRepository singleDaySimulationRepository;
 
     @Test
-    void should_set_positive_value_of_infected_people_when_days_iterator_is_two() throws Exception {
+    void should_set_correct_value_of_infected_people_when_days_iterator_is_two() throws Exception {
         //given
         SingleDaySimulation currentSimulationDay = new SingleDaySimulation();
         currentSimulationDay.setNumberOfDeathPeople(1);
@@ -50,30 +50,62 @@ class InfectedPeopleCounterServiceImplTest {
 
 
     @Test
-    void countInfectedPeopleBeforeParamReachedNumberOfPopulation() {
+    void should_set_correct_value_of_infected_people_when_death_people_from_current_day_is_greater_than_zero() throws Exception {
         //given
         SingleDaySimulation currentSimulationDay = new SingleDaySimulation();
+        currentSimulationDay.setNumberOfDeathPeople(5);
+        currentSimulationDay.setNumberOfPeopleWhoRecoveredAndGainedImmunity(35);
         CalculationData calculationData = CalculationData.builder()
+                .peopleInfectedByOnePerson(1.5)
                 .build();
-        long iterator = 0;
-        SingleDaySimulation singleDaySimulationForLastRecordId = new SingleDaySimulation();
-        singleDaySimulationForLastRecordId.setId(14L);
-        SingleDaySimulation previousSimulationDay = new SingleDaySimulation();
-        previousSimulationDay.setId(14L);
-        SingleDaySimulation twoDaysPreviousCurrentDaySimulation = new SingleDaySimulation();
-        twoDaysPreviousCurrentDaySimulation.setId(13L);
+        long iterator = 16;
+        SingleDaySimulation singleDaySimulationForLastRecordId = mock(SingleDaySimulation.class);
         when(singleDaySimulationRepository.findFirstByOrderByIdDesc()).thenReturn(singleDaySimulationForLastRecordId);
-        when(singleDaySimulationForLastRecordId.getId()).thenReturn(14L);
-        when(singleDaySimulationRepository.findById(14L)).thenReturn(java.util.Optional.of(previousSimulationDay));
-        when(singleDaySimulationRepository.findById(13L)).thenReturn(java.util.Optional.of(twoDaysPreviousCurrentDaySimulation));
-        //in progress
+        when(singleDaySimulationForLastRecordId.getId()).thenReturn(15L);
+        SingleDaySimulation previousSimulationDay = new SingleDaySimulation();
+        previousSimulationDay.setId(15L);
+        previousSimulationDay.setNumberOfInfectedPeople(1500);
+        when(singleDaySimulationRepository.findById(15L)).thenReturn(java.util.Optional.of(previousSimulationDay));
+        SingleDaySimulation twoDaysPreviousCurrentDaySimulation = new SingleDaySimulation();
+        twoDaysPreviousCurrentDaySimulation.setId(14L);
+        twoDaysPreviousCurrentDaySimulation.setNumberOfInfectedPeople(1150);
+        when(singleDaySimulationRepository.findById(14L)).thenReturn(java.util.Optional.of(twoDaysPreviousCurrentDaySimulation));
+        //when
+        infectedPeopleCounterService.countInfectedPeopleBeforeParamReachedNumberOfPopulation(currentSimulationDay, calculationData, iterator);
+        //then
+        assertEquals((1500-1150)*1.5 + 1500 - 5 - 35, currentSimulationDay.getNumberOfInfectedPeople());
     }
 
     @Test
-    void countInfectedPeopleWhenParamExceedNumberOfPopulation() {
-    }
-
-    @Test
-    void countInfectedPeopleWhenParamReachedMaxValueForSimulation() {
+    void should_set_correct_value_of_infected_people_when_death_people_from_current_day_is_zero() throws Exception {
+        //given
+        SingleDaySimulation currentSimulationDay = new SingleDaySimulation();
+        currentSimulationDay.setNumberOfDeathPeople(0);
+        currentSimulationDay.setNumberOfPeopleWhoRecoveredAndGainedImmunity(75);
+        CalculationData calculationData = CalculationData.builder()
+                .peopleInfectedByOnePerson(1.5)
+                .daysFromInfectionToRecovery(14)
+                .mortalityRate(1.8)
+                .build();
+        long iterator = 18;
+        SingleDaySimulation singleDaySimulationForLastRecordId = mock(SingleDaySimulation.class);
+        when(singleDaySimulationRepository.findFirstByOrderByIdDesc()).thenReturn(singleDaySimulationForLastRecordId);
+        when(singleDaySimulationForLastRecordId.getId()).thenReturn(17L);
+        SingleDaySimulation previousSimulationDay = new SingleDaySimulation();
+        previousSimulationDay.setId(17L);
+        previousSimulationDay.setNumberOfInfectedPeople(1500);
+        when(singleDaySimulationRepository.findById(17L)).thenReturn(java.util.Optional.of(previousSimulationDay));
+        SingleDaySimulation twoDaysPreviousCurrentDaySimulation = new SingleDaySimulation();
+        twoDaysPreviousCurrentDaySimulation.setId(16L);
+        twoDaysPreviousCurrentDaySimulation.setNumberOfInfectedPeople(1150);
+        when(singleDaySimulationRepository.findById(16L)).thenReturn(java.util.Optional.of(twoDaysPreviousCurrentDaySimulation));
+        SingleDaySimulation simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery = new SingleDaySimulation();
+        simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery.setId(5L);
+        simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery.setNumberOfInfectedPeople(50);
+        when(singleDaySimulationRepository.findById(5L)).thenReturn(java.util.Optional.of(simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery));
+        //when
+        infectedPeopleCounterService.countInfectedPeopleBeforeParamReachedNumberOfPopulation(currentSimulationDay, calculationData, iterator);
+        //then
+        assertEquals((1500-1150)*1.5 + 1500 + (50*1.8), currentSimulationDay.getNumberOfInfectedPeople());
     }
 }
