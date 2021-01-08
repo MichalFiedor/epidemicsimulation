@@ -12,17 +12,17 @@ public class RecoveredSetterServiceImpl implements RecoveredSetterService {
     private final RecoveredCounterService recoveredCounterService;
 
     @Override
-    public void setTotalNumberOfRecoveredForSingleSimulationDay(SingleDaySimulation singleDaySimulation, CalculationData calculationData, long i) {
+    public void setTotalNumberOfRecoveredForSingleSimulationDay(SingleDaySimulation currentSimulationDay, CalculationData calculationData, long i) {
 
         if (i < calculationData.getDaysFromInfectionToRecovery() || calculationData.getCounterFromStartOfTheSimulationToMaxValueOfInfectedPeople() +
                 calculationData.getDaysFromInfectionToRecovery() < i) {
-            singleDaySimulation.setNumberOfPeopleWhoRecoveredAndGainedImmunity(0);
+            currentSimulationDay.setNumberOfPeopleWhoRecoveredAndGainedImmunity(0);
         } else {
             if (calculationData.isShouldSetZeroForNumberRecoveredPeople()) {
-                singleDaySimulation.setNumberOfPeopleWhoRecoveredAndGainedImmunity(0);
+                currentSimulationDay.setNumberOfPeopleWhoRecoveredAndGainedImmunity(0);
             } else {
                 try {
-                    recoveredCounterService.countCurrentRecovered(singleDaySimulation, calculationData);
+                    recoveredCounterService.countCurrentRecovered(currentSimulationDay, calculationData);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }

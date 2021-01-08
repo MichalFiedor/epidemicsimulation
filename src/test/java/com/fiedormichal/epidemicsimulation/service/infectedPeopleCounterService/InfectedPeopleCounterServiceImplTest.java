@@ -108,4 +108,36 @@ class InfectedPeopleCounterServiceImplTest {
         //then
         assertEquals((1500-1150)*1.5 + 1500 + (50*1.8), currentSimulationDay.getNumberOfInfectedPeople());
     }
+
+    @Test
+    public void should_set_correct_value_of_infected_people_when_infected_people_exceed_number_of_population(){
+        //given
+        SingleDaySimulation currentSimulationDay = new SingleDaySimulation();
+        currentSimulationDay.setNumberOfDeathPeople(95);
+        currentSimulationDay.setNumberOfPeopleWhoRecoveredAndGainedImmunity(3450);
+        CalculationData calculationData = CalculationData.builder()
+                .population(8000)
+                .build();
+        //when
+        infectedPeopleCounterService.countInfectedPeopleWhenParamExceedNumberOfPopulation(currentSimulationDay, calculationData);
+        //then
+        assertNotNull(currentSimulationDay);
+        assertEquals(8000-95-3450, currentSimulationDay.getNumberOfInfectedPeople());
+    }
+
+    @Test
+    public void should_set_correct_value_of_infected_people_when_infected_people_reached_max_value_for_simulation(){
+        //given
+        SingleDaySimulation currentSimulationDay = new SingleDaySimulation();
+        currentSimulationDay.setNumberOfDeathPeople(115);
+        currentSimulationDay.setNumberOfPeopleWhoRecoveredAndGainedImmunity(2250);
+        CalculationData calculationData = CalculationData.builder()
+                .maxValueOfInfectedPeople(3640)
+                .build();
+        //when
+        infectedPeopleCounterService.countInfectedPeopleWhenParamReachedMaxValueForSimulation(currentSimulationDay, calculationData);
+        //then
+        assertNotNull(currentSimulationDay);
+        assertEquals(3640-115-2250, currentSimulationDay.getNumberOfInfectedPeople());
+    }
 }

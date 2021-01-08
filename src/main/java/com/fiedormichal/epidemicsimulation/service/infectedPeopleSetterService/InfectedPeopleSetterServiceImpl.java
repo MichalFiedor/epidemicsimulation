@@ -12,17 +12,17 @@ public class InfectedPeopleSetterServiceImpl implements InfectedPeopleSetterServ
     private final InfectedPeopleCounterService infectedPeopleCounterService;
 
     @Override
-    public void changeMethodForCountingAsNeededAndSetValue(SingleDaySimulation singleDaySimulation, CalculationData calculationData, long i) {
+    public void changeMethodForCountingAsNeededAndSetValue(SingleDaySimulation currentSimulationDay, CalculationData calculationData, long i) {
         if (calculationData.isShouldChangeMethodForCountingNumberOfInfectedPeopleWhenMaxValueOccurs()) {
-            infectedPeopleCounterService.countInfectedPeopleWhenParamReachedMaxValueForSimulation(singleDaySimulation, calculationData);
+            infectedPeopleCounterService.countInfectedPeopleWhenParamReachedMaxValueForSimulation(currentSimulationDay, calculationData);
             if (i > calculationData.getDaysFromInfectionToRecovery() + calculationData.getCounterFromStartOfTheSimulationToMaxValueOfInfectedPeople()) {
-                singleDaySimulation.setNumberOfInfectedPeople(0);
+                currentSimulationDay.setNumberOfInfectedPeople(0);
             }
-        } else if (calculationData.isShouldChangeMethodForCountingNumberOfInfectedPeople() == true) {
-            infectedPeopleCounterService.countInfectedPeopleWhenParamExceedNumberOfPopulation(singleDaySimulation, calculationData);
+        } else if (calculationData.isShouldChangeMethodForCountingNumberOfInfectedPeople()) {
+            infectedPeopleCounterService.countInfectedPeopleWhenParamExceedNumberOfPopulation(currentSimulationDay, calculationData);
         } else {
             try {
-                infectedPeopleCounterService.countInfectedPeopleBeforeParamReachedNumberOfPopulation(singleDaySimulation, calculationData, i);
+                infectedPeopleCounterService.countInfectedPeopleBeforeParamReachedNumberOfPopulation(currentSimulationDay, calculationData, i);
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
@@ -30,9 +30,9 @@ public class InfectedPeopleSetterServiceImpl implements InfectedPeopleSetterServ
     }
 
     @Override
-    public void setZero(SingleDaySimulation singleDaySimulation, CalculationData calculationData) {
-        if(singleDaySimulation.getNumberOfInfectedPeople() < 0 || calculationData.isShouldSetZeroForNumberInfectedPeople()==true){
-            singleDaySimulation.setNumberOfInfectedPeople(0);
+    public void setZero(SingleDaySimulation currentSimulationDay, CalculationData calculationData) {
+        if(currentSimulationDay.getNumberOfInfectedPeople() < 0 || calculationData.isShouldSetZeroForNumberInfectedPeople()){
+            currentSimulationDay.setNumberOfInfectedPeople(0);
         }
     }
 }

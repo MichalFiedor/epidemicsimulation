@@ -19,7 +19,7 @@ public class InitialSimulationDataServiceImpl implements InitialSimulationDataSe
 
     @Override
     public InitialSimulationData findById(long id) {
-        return initialSimulationDataRepository.findById(id).orElseThrow();
+        return initialSimulationDataRepository.findInitialDataById(id);
     }
 
     @Override
