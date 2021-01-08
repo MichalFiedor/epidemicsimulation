@@ -42,7 +42,7 @@ class InfectedPeopleCounterServiceImplTest {
         previousSimulationDay.setNumberOfInfectedPeople(3010);
         when(singleDaySimulationRepository.findById(1L)).thenReturn(java.util.Optional.of(previousSimulationDay));
         //when
-        infectedPeopleCounterService.countInfectedPeopleBeforeParamReachedNumberOfPopulation(currentSimulationDay, calculationData, iterator);
+        infectedPeopleCounterService.countInfectedPeopleWhenParamIsLowerThanNumberOfPopulation(currentSimulationDay, calculationData, iterator);
         //then
         assertNotNull(currentSimulationDay);
         assertEquals((3010 * 1.6) + 3010 - 1 - 9, currentSimulationDay.getNumberOfInfectedPeople());
@@ -71,8 +71,9 @@ class InfectedPeopleCounterServiceImplTest {
         twoDaysPreviousCurrentDaySimulation.setNumberOfInfectedPeople(1150);
         when(singleDaySimulationRepository.findById(14L)).thenReturn(java.util.Optional.of(twoDaysPreviousCurrentDaySimulation));
         //when
-        infectedPeopleCounterService.countInfectedPeopleBeforeParamReachedNumberOfPopulation(currentSimulationDay, calculationData, iterator);
+        infectedPeopleCounterService.countInfectedPeopleWhenParamIsLowerThanNumberOfPopulation(currentSimulationDay, calculationData, iterator);
         //then
+        assertNotNull(currentSimulationDay);
         assertEquals((1500-1150)*1.5 + 1500 - 5 - 35, currentSimulationDay.getNumberOfInfectedPeople());
     }
 
@@ -85,7 +86,7 @@ class InfectedPeopleCounterServiceImplTest {
         CalculationData calculationData = CalculationData.builder()
                 .peopleInfectedByOnePerson(1.5)
                 .daysFromInfectionToRecovery(14)
-                .mortalityRate(1.8)
+                .mortalityRate(0.06)
                 .build();
         long iterator = 18;
         SingleDaySimulation singleDaySimulationForLastRecordId = mock(SingleDaySimulation.class);
@@ -104,8 +105,41 @@ class InfectedPeopleCounterServiceImplTest {
         simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery.setNumberOfInfectedPeople(50);
         when(singleDaySimulationRepository.findById(5L)).thenReturn(java.util.Optional.of(simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery));
         //when
-        infectedPeopleCounterService.countInfectedPeopleBeforeParamReachedNumberOfPopulation(currentSimulationDay, calculationData, iterator);
+        infectedPeopleCounterService.countInfectedPeopleWhenParamIsLowerThanNumberOfPopulation(currentSimulationDay, calculationData, iterator);
         //then
-        assertEquals((1500-1150)*1.5 + 1500 + (50*1.8), currentSimulationDay.getNumberOfInfectedPeople());
+        assertNotNull(currentSimulationDay);
+        assertEquals((1500-1150)*1.5 + 1500 + (50*0.06), currentSimulationDay.getNumberOfInfectedPeople());
+    }
+
+    @Test
+    public void should_set_correct_value_of_infected_people_when_infected_people_exceed_number_of_population(){
+        //given
+        SingleDaySimulation currentSimulationDay = new SingleDaySimulation();
+        currentSimulationDay.setNumberOfDeathPeople(95);
+        currentSimulationDay.setNumberOfPeopleWhoRecoveredAndGainedImmunity(3450);
+        CalculationData calculationData = CalculationData.builder()
+                .population(8000)
+                .build();
+        //when
+        infectedPeopleCounterService.countInfectedPeopleWhenParamExceedNumberOfPopulation(currentSimulationDay, calculationData);
+        //then
+        assertNotNull(currentSimulationDay);
+        assertEquals(8000-95-3450, currentSimulationDay.getNumberOfInfectedPeople());
+    }
+
+    @Test
+    public void should_set_correct_value_of_infected_people_when_infected_people_reached_max_value_for_simulation(){
+        //given
+        SingleDaySimulation currentSimulationDay = new SingleDaySimulation();
+        currentSimulationDay.setNumberOfDeathPeople(115);
+        currentSimulationDay.setNumberOfPeopleWhoRecoveredAndGainedImmunity(2250);
+        CalculationData calculationData = CalculationData.builder()
+                .maxValueOfInfectedPeople(3640)
+                .build();
+        //when
+        infectedPeopleCounterService.countInfectedPeopleWhenParamReachedMaxValueForSimulation(currentSimulationDay, calculationData);
+        //then
+        assertNotNull(currentSimulationDay);
+        assertEquals(3640-115-2250, currentSimulationDay.getNumberOfInfectedPeople());
     }
 }

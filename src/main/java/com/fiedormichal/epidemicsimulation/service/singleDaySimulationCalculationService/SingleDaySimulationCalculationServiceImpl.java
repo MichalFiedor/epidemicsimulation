@@ -37,42 +37,42 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
         calculationData.setMinValueOfPeopleWhoCanBeInfected(firstDayOfSimulation.getNumberOfHealthyPeopleWhoCanBeInfected());
 
         for (long i = 2; i <= calculationData.getNumberOfSimulationDays(); i++) {
-            SingleDaySimulation singleDaySimulation = new SingleDaySimulation();
+            SingleDaySimulation currentSimulationDay = new SingleDaySimulation();
 
-            deathsSetterService.setTotalNumberOfDeathsForSingleSimulationDay(singleDaySimulation, calculationData, i);
+            deathsSetterService.setTotalNumberOfDeathsForSingleSimulationDay(currentSimulationDay, calculationData, i);
 
-            recoveredSetterService.setTotalNumberOfRecoveredForSingleSimulationDay(singleDaySimulation, calculationData, i);
+            recoveredSetterService.setTotalNumberOfRecoveredForSingleSimulationDay(currentSimulationDay, calculationData, i);
 
-            if (singleDaySimulation.getNumberOfPeopleWhoRecoveredAndGainedImmunity() == calculationData.getMaxRecoveredPeopleForGivenData() &&
+            if (currentSimulationDay.getNumberOfPeopleWhoRecoveredAndGainedImmunity() == calculationData.getMaxRecoveredPeopleForGivenData() &&
                     !calculationData.isShouldSetZeroForNumberRecoveredPeople()&&calculationData.getMortalityRate()!=1.0) {
                 calculationData.setShouldSetZeroForNumberRecoveredPeople(true);
             }
 
-            infectedPeopleSetterService.changeMethodForCountingAsNeededAndSetValue(singleDaySimulation, calculationData, i);
+            infectedPeopleSetterService.changeMethodForCountingAsNeededAndSetValue(currentSimulationDay, calculationData, i);
 
-            if (singleDaySimulation.getNumberOfInfectedPeople() > calculationData.getPopulation() &&
-                    calculationData.isShouldChangeMethodForCountingNumberOfInfectedPeople() == false) {
+            if (currentSimulationDay.getNumberOfInfectedPeople() > calculationData.getPopulation() &&
+                    calculationData.isShouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation() == false) {
                 calculationData.setNumberOfDaysWhenAmountOfInfectedPeopleGrows(i - 1);
-                calculationData.setShouldChangeMethodForCountingNumberOfInfectedPeople(true);
-                singleDaySimulation.setNumberOfInfectedPeople(calculationData.getPopulation());
+                calculationData.setShouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation(true);
+                currentSimulationDay.setNumberOfInfectedPeople(calculationData.getPopulation());
             }
 
-            changeCalculationMethodOfInfectedPeopleIfRequired(singleDaySimulation, calculationData);
+            changeCalculationMethodOfInfectedPeopleIfRequired(currentSimulationDay, calculationData);
 
-            infectedPeopleSetterService.setZero(singleDaySimulation, calculationData);
+            infectedPeopleSetterService.setZero(currentSimulationDay, calculationData);
 
-            if (singleDaySimulation.getNumberOfInfectedPeople() == 0) {
+            if (currentSimulationDay.getNumberOfInfectedPeople() == 0) {
                 calculationData.setShouldSetZeroForNumberInfectedPeople(true);
             }
 
             healthyPeopleWhoCanBeInfectedSetterService.setTotalNumberOfHealthyPeopleWhoCanBeInfectedForSingleSimulationDay(
-                    singleDaySimulation, calculationData);
+                    currentSimulationDay, calculationData);
 
-            if (calculationData.getMinValueOfPeopleWhoCanBeInfected() > singleDaySimulation.getNumberOfHealthyPeopleWhoCanBeInfected()) {
-                calculationData.setMinValueOfPeopleWhoCanBeInfected(singleDaySimulation.getNumberOfHealthyPeopleWhoCanBeInfected());
+            if (calculationData.getMinValueOfPeopleWhoCanBeInfected() > currentSimulationDay.getNumberOfHealthyPeopleWhoCanBeInfected()) {
+                calculationData.setMinValueOfPeopleWhoCanBeInfected(currentSimulationDay.getNumberOfHealthyPeopleWhoCanBeInfected());
             } else {
                 calculationData.setSetConstantValueOfPeopleWhoCanBeInfected(true);
-                singleDaySimulation.setNumberOfHealthyPeopleWhoCanBeInfected(calculationData.getMinValueOfPeopleWhoCanBeInfected());
+                currentSimulationDay.setNumberOfHealthyPeopleWhoCanBeInfected(calculationData.getMinValueOfPeopleWhoCanBeInfected());
             }
 
             if (calculationData.isShouldSetZeroForNumberRecoveredPeople()) {
@@ -80,16 +80,16 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
                 calculationData.setShouldSetZeroForNumberHealthyPeopleWhoCanBeInfected(true);
             }
 
-            singleDaySimulationsListForInitialData.add(singleDaySimulation);
-            singleDaySimulationRepository.save(singleDaySimulation);
+            singleDaySimulationsListForInitialData.add(currentSimulationDay);
+            singleDaySimulationRepository.save(currentSimulationDay);
 
         }
         return singleDaySimulationsListForInitialData;
     }
 
-        private void changeCalculationMethodOfInfectedPeopleIfRequired(SingleDaySimulation singleDaySimulation, CalculationData calculationData){
-        if (singleDaySimulation.getNumberOfInfectedPeople() > calculationData.getMaxValueOfInfectedPeople()) {
-            calculationData.setMaxValueOfInfectedPeople(singleDaySimulation.getNumberOfInfectedPeople());
+        private void changeCalculationMethodOfInfectedPeopleIfRequired(SingleDaySimulation currentSimulationDay, CalculationData calculationData){
+        if (currentSimulationDay.getNumberOfInfectedPeople() > calculationData.getMaxValueOfInfectedPeople()) {
+            calculationData.setMaxValueOfInfectedPeople(currentSimulationDay.getNumberOfInfectedPeople());
             long counter = calculationData.getCounterFromStartOfTheSimulationToMaxValueOfInfectedPeople();
             calculationData.setCounterFromStartOfTheSimulationToMaxValueOfInfectedPeople(counter+1);
         } else {

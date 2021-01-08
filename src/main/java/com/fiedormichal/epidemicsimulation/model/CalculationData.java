@@ -20,7 +20,7 @@ public class CalculationData {
     private long counterFromStartOfTheSimulationToMaxValueOfInfectedPeople;
     private long maxNumberOfDeathPeople;
     private long maxRecoveredPeopleForGivenData;
-    private boolean shouldChangeMethodForCountingNumberOfInfectedPeople;
+    private boolean shouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation;
     private boolean shouldChangeMethodForCountingNumberOfInfectedPeopleWhenMaxValueOccurs;
     private boolean shouldSetZeroForNumberRecoveredPeople ;
     private boolean shouldSetZeroForNumberInfectedPeople;

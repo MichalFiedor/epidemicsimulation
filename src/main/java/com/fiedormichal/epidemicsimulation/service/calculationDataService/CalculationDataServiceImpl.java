@@ -20,7 +20,7 @@ public class CalculationDataServiceImpl implements CalculationDataService{
                 .maxRecoveredPeopleForGivenData(Math.round(initialSimulationData.getPopulationSize() -
                         initialSimulationData.getPopulationSize() * initialSimulationData.getMortalityRate()))
                 .counterFromStartOfTheSimulationToMaxValueOfInfectedPeople(0)
-                .shouldChangeMethodForCountingNumberOfInfectedPeople(false)
+                .shouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation(false)
                 .shouldChangeMethodForCountingNumberOfInfectedPeopleWhenMaxValueOccurs(false)
                 .shouldSetZeroForNumberRecoveredPeople(false)
                 .shouldSetZeroForNumberInfectedPeople(false)
