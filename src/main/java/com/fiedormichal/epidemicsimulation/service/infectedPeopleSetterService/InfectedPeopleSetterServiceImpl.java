@@ -18,11 +18,11 @@ public class InfectedPeopleSetterServiceImpl implements InfectedPeopleSetterServ
             if (i > calculationData.getDaysFromInfectionToRecovery() + calculationData.getCounterFromStartOfTheSimulationToMaxValueOfInfectedPeople()) {
                 currentSimulationDay.setNumberOfInfectedPeople(0);
             }
-        } else if (calculationData.isShouldChangeMethodForCountingNumberOfInfectedPeople()) {
+        } else if (calculationData.isShouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation()) {
             infectedPeopleCounterService.countInfectedPeopleWhenParamExceedNumberOfPopulation(currentSimulationDay, calculationData);
         } else {
             try {
-                infectedPeopleCounterService.countInfectedPeopleBeforeParamReachedNumberOfPopulation(currentSimulationDay, calculationData, i);
+                infectedPeopleCounterService.countInfectedPeopleWhenParamIsLowerThanNumberOfPopulation(currentSimulationDay, calculationData, i);
             } catch (Exception exception) {
                 exception.printStackTrace();
             }

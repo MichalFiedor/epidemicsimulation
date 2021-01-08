@@ -51,9 +51,9 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
             infectedPeopleSetterService.changeMethodForCountingAsNeededAndSetValue(currentSimulationDay, calculationData, i);
 
             if (currentSimulationDay.getNumberOfInfectedPeople() > calculationData.getPopulation() &&
-                    calculationData.isShouldChangeMethodForCountingNumberOfInfectedPeople() == false) {
+                    calculationData.isShouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation() == false) {
                 calculationData.setNumberOfDaysWhenAmountOfInfectedPeopleGrows(i - 1);
-                calculationData.setShouldChangeMethodForCountingNumberOfInfectedPeople(true);
+                calculationData.setShouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation(true);
                 currentSimulationDay.setNumberOfInfectedPeople(calculationData.getPopulation());
             }
 

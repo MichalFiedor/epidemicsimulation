@@ -37,7 +37,7 @@ class CalculationDataServiceImplTest {
         assertEquals(0, result.getNumberOfDaysWhenAmountOfInfectedPeopleGrows());
         assertEquals(0, result.getCounterFromStartOfTheSimulationToMaxValueOfInfectedPeople());
         assertFalse(result.isSetConstantValueOfPeopleWhoCanBeInfected());
-        assertFalse(result.isShouldChangeMethodForCountingNumberOfInfectedPeople());
+        assertFalse(result.isShouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation());
         assertFalse(result.isShouldChangeMethodForCountingNumberOfInfectedPeopleWhenMaxValueOccurs());
         assertFalse(result.isShouldSetZeroForNumberHealthyPeopleWhoCanBeInfected());
         assertFalse(result.isShouldSetZeroForNumberInfectedPeople());

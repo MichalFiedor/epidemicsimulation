@@ -42,7 +42,7 @@ class InfectedPeopleCounterServiceImplTest {
         previousSimulationDay.setNumberOfInfectedPeople(3010);
         when(singleDaySimulationRepository.findById(1L)).thenReturn(java.util.Optional.of(previousSimulationDay));
         //when
-        infectedPeopleCounterService.countInfectedPeopleBeforeParamReachedNumberOfPopulation(currentSimulationDay, calculationData, iterator);
+        infectedPeopleCounterService.countInfectedPeopleWhenParamIsLowerThanNumberOfPopulation(currentSimulationDay, calculationData, iterator);
         //then
         assertNotNull(currentSimulationDay);
         assertEquals((3010 * 1.6) + 3010 - 1 - 9, currentSimulationDay.getNumberOfInfectedPeople());
@@ -71,8 +71,9 @@ class InfectedPeopleCounterServiceImplTest {
         twoDaysPreviousCurrentDaySimulation.setNumberOfInfectedPeople(1150);
         when(singleDaySimulationRepository.findById(14L)).thenReturn(java.util.Optional.of(twoDaysPreviousCurrentDaySimulation));
         //when
-        infectedPeopleCounterService.countInfectedPeopleBeforeParamReachedNumberOfPopulation(currentSimulationDay, calculationData, iterator);
+        infectedPeopleCounterService.countInfectedPeopleWhenParamIsLowerThanNumberOfPopulation(currentSimulationDay, calculationData, iterator);
         //then
+        assertNotNull(currentSimulationDay);
         assertEquals((1500-1150)*1.5 + 1500 - 5 - 35, currentSimulationDay.getNumberOfInfectedPeople());
     }
 
@@ -104,8 +105,9 @@ class InfectedPeopleCounterServiceImplTest {
         simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery.setNumberOfInfectedPeople(50);
         when(singleDaySimulationRepository.findById(5L)).thenReturn(java.util.Optional.of(simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery));
         //when
-        infectedPeopleCounterService.countInfectedPeopleBeforeParamReachedNumberOfPopulation(currentSimulationDay, calculationData, iterator);
+        infectedPeopleCounterService.countInfectedPeopleWhenParamIsLowerThanNumberOfPopulation(currentSimulationDay, calculationData, iterator);
         //then
+        assertNotNull(currentSimulationDay);
         assertEquals((1500-1150)*1.5 + 1500 + (50*1.8), currentSimulationDay.getNumberOfInfectedPeople());
     }
 

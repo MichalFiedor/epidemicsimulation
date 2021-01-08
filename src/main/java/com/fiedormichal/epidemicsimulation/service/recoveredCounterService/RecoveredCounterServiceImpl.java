@@ -20,6 +20,5 @@ public class RecoveredCounterServiceImpl implements RecoveredCounterService {
         long numberOfInfectedPeople = simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery.getNumberOfInfectedPeople();
         long totalRecoveredPeople = numberOfInfectedPeople - Math.round(numberOfInfectedPeople * calculationData.getMortalityRate());
         currentSimulationDay.setNumberOfPeopleWhoRecoveredAndGainedImmunity(totalRecoveredPeople);
-
     }
 }

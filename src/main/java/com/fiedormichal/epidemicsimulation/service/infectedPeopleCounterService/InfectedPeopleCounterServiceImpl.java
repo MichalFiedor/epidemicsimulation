@@ -12,9 +12,9 @@ public class InfectedPeopleCounterServiceImpl implements InfectedPeopleCounterSe
     private final SingleDaySimulationRepository singleDaySimulationRepository;
 
     @Override
-    public void countInfectedPeopleBeforeParamReachedNumberOfPopulation(SingleDaySimulation currentSimulationDay,
-                                                                        CalculationData calculationData,
-                                                                        long iterator) throws Exception {
+    public void countInfectedPeopleWhenParamIsLowerThanNumberOfPopulation(SingleDaySimulation currentSimulationDay,
+                                                                          CalculationData calculationData,
+                                                                          long iterator) throws Exception {
         long lastRecordId = singleDaySimulationRepository.findFirstByOrderByIdDesc().getId() + 1;
         SingleDaySimulation previousSimulationDay = singleDaySimulationRepository.findById(lastRecordId - 1).orElseThrow(()->new Exception("Empty Simulation Day"));
         long deathPeopleFromCurrentDay = currentSimulationDay.getNumberOfDeathPeople();
