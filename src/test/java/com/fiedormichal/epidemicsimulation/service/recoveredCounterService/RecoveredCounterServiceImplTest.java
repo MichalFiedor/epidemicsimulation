@@ -42,12 +42,12 @@ class RecoveredCounterServiceImplTest {
         SingleDaySimulation currentSimulationDay = new SingleDaySimulation();
         CalculationData calculationData = CalculationData.builder()
                 .daysFromInfectionToRecovery(14)
-                .mortalityRate(1.9)
+                .mortalityRate(0.03)
                 .build();
         //when
         recoveredCounterService.countCurrentRecovered(currentSimulationDay, calculationData);
         //then
         assertNotNull(currentSimulationDay);
-        assertEquals(5000 - (5000 * 1.9), currentSimulationDay.getNumberOfPeopleWhoRecoveredAndGainedImmunity());
+        assertEquals(5000 - (5000 * 0.03), currentSimulationDay.getNumberOfPeopleWhoRecoveredAndGainedImmunity());
     }
 }

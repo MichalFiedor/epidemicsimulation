@@ -115,7 +115,7 @@ class InfectedPeopleSetterServiceImplTest {
         CalculationData calculationData = CalculationData.builder()
                 .peopleInfectedByOnePerson(1.5)
                 .daysFromInfectionToRecovery(14)
-                .mortalityRate(1.5)
+                .mortalityRate(0.03)
                 .build();
         long iterator = 20;
         SingleDaySimulation singleDaySimulationForLastRecordId = mock(SingleDaySimulation.class);
@@ -131,12 +131,12 @@ class InfectedPeopleSetterServiceImplTest {
         when(singleDaySimulationRepository.findById(18L)).thenReturn(java.util.Optional.of(twoDaysPreviousCurrentDaySimulation));
         SingleDaySimulation simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery = new SingleDaySimulation();
         simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery.setId(7L);
-        simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery.setNumberOfInfectedPeople(50);
+        simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery.setNumberOfInfectedPeople(5000);
         when(singleDaySimulationRepository.findById(7L)).thenReturn(java.util.Optional.of(simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery));
         //when
         infectedPeopleSetterService.changeMethodForCountingAsNeededAndSetValue(currentSimulationDay, calculationData, iterator);
         //then
         assertNotNull(currentSimulationDay);
-        assertEquals((2150-1350)*1.5 + 2150 + (50*1.5), currentSimulationDay.getNumberOfInfectedPeople());
+        assertEquals((2150-1350)*1.5 + 2150 + (5000*0.03), currentSimulationDay.getNumberOfInfectedPeople());
     }
 }

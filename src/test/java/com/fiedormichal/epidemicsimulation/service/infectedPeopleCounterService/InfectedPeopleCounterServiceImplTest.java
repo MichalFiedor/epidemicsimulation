@@ -86,7 +86,7 @@ class InfectedPeopleCounterServiceImplTest {
         CalculationData calculationData = CalculationData.builder()
                 .peopleInfectedByOnePerson(1.5)
                 .daysFromInfectionToRecovery(14)
-                .mortalityRate(1.8)
+                .mortalityRate(0.06)
                 .build();
         long iterator = 18;
         SingleDaySimulation singleDaySimulationForLastRecordId = mock(SingleDaySimulation.class);
@@ -108,7 +108,7 @@ class InfectedPeopleCounterServiceImplTest {
         infectedPeopleCounterService.countInfectedPeopleWhenParamIsLowerThanNumberOfPopulation(currentSimulationDay, calculationData, iterator);
         //then
         assertNotNull(currentSimulationDay);
-        assertEquals((1500-1150)*1.5 + 1500 + (50*1.8), currentSimulationDay.getNumberOfInfectedPeople());
+        assertEquals((1500-1150)*1.5 + 1500 + (50*0.06), currentSimulationDay.getNumberOfInfectedPeople());
     }
 
     @Test
