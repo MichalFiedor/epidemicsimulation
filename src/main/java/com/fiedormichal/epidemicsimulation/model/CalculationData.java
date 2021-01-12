@@ -14,16 +14,16 @@ public class CalculationData {
     private int daysFromInfectionToRecovery;
     private int daysFromInfectionToDeath;
     private int numberOfSimulationDays;
-    private long numberOfDaysWhenAmountOfInfectedPeopleGrows;
-    private long maxValueOfInfectedPeople;
-    private long minValueOfPeopleWhoCanBeInfected;
-    private long counterFromStartOfTheSimulationToMaxValueOfInfectedPeople;
-    private long maxNumberOfDeathPeople;
-    private long maxRecoveredPeopleForGivenData;
+    private long numberOfDaysWhenAmountOfInfectedPeopleGrowsToExceedNumOfPopulation;
+    private long maxValueOfInfectedPeopleForAllSimulation;
+    private long minValueOfPeopleWhoCanBeInfectedForSimulation;
+    private long counterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation;
+    private long maxNumberOfDeathPeopleForGivenData;
+    private long maxNumberOfRecoveredPeopleForGivenData;
     private boolean shouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation;
     private boolean shouldChangeMethodForCountingNumberOfInfectedPeopleWhenMaxValueOccurs;
-    private boolean shouldSetZeroForNumberRecoveredPeople ;
-    private boolean shouldSetZeroForNumberInfectedPeople;
-    private boolean shouldSetZeroForNumberHealthyPeopleWhoCanBeInfected;
+    private boolean shouldSetZeroForNumberOfRecoveredPeople;
+    private boolean shouldSetZeroForNumberOfInfectedPeople;
+    private boolean shouldSetZeroForNumberOfHealthyPeopleWhoCanBeInfected;
     private boolean setConstantValueOfPeopleWhoCanBeInfected;
 }

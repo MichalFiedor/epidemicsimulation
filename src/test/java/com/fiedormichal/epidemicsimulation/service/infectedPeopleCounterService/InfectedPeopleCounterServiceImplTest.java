@@ -134,7 +134,7 @@ class InfectedPeopleCounterServiceImplTest {
         currentSimulationDay.setNumberOfDeathPeople(115);
         currentSimulationDay.setNumberOfPeopleWhoRecoveredAndGainedImmunity(2250);
         CalculationData calculationData = CalculationData.builder()
-                .maxValueOfInfectedPeople(3640)
+                .maxValueOfInfectedPeopleForAllSimulation(3640)
                 .build();
         //when
         infectedPeopleCounterService.countInfectedPeopleWhenParamReachedMaxValueForSimulation(currentSimulationDay, calculationData);

@@ -34,13 +34,13 @@ class CalculationDataServiceImplTest {
         assertEquals(18, result.getDaysFromInfectionToDeath());
         assertEquals(0.04, result.getMortalityRate());
         assertEquals(200000, result.getPopulation());
-        assertEquals(0, result.getNumberOfDaysWhenAmountOfInfectedPeopleGrows());
-        assertEquals(0, result.getCounterFromStartOfTheSimulationToMaxValueOfInfectedPeople());
+        assertEquals(0, result.getNumberOfDaysWhenAmountOfInfectedPeopleGrowsToExceedNumOfPopulation());
+        assertEquals(0, result.getCounterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation());
         assertFalse(result.isSetConstantValueOfPeopleWhoCanBeInfected());
         assertFalse(result.isShouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation());
         assertFalse(result.isShouldChangeMethodForCountingNumberOfInfectedPeopleWhenMaxValueOccurs());
-        assertFalse(result.isShouldSetZeroForNumberHealthyPeopleWhoCanBeInfected());
-        assertFalse(result.isShouldSetZeroForNumberInfectedPeople());
-        assertFalse(result.isShouldSetZeroForNumberRecoveredPeople());
+        assertFalse(result.isShouldSetZeroForNumberOfHealthyPeopleWhoCanBeInfected());
+        assertFalse(result.isShouldSetZeroForNumberOfInfectedPeople());
+        assertFalse(result.isShouldSetZeroForNumberOfRecoveredPeople());
     }
 }

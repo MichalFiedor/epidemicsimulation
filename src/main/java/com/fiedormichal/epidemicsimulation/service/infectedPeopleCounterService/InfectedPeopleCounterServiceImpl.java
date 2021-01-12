@@ -15,33 +15,33 @@ public class InfectedPeopleCounterServiceImpl implements InfectedPeopleCounterSe
     public void countInfectedPeopleWhenParamIsLowerThanNumberOfPopulation(SingleDaySimulation currentSimulationDay,
                                                                           CalculationData calculationData,
                                                                           long iterator) throws Exception {
-        long lastRecordId = singleDaySimulationRepository.findFirstByOrderByIdDesc().getId() + 1;
-        SingleDaySimulation previousSimulationDay = singleDaySimulationRepository.findById(lastRecordId - 1).orElseThrow(()->new Exception("Empty Simulation Day"));
+        long currentDayId = singleDaySimulationRepository.findFirstByOrderByIdDesc().getId() + 1;
+        SingleDaySimulation previousSimulationDay = singleDaySimulationRepository.findById(currentDayId - 1).orElseThrow(()->new Exception("Empty Simulation Day"));
         long deathPeopleFromCurrentDay = currentSimulationDay.getNumberOfDeathPeople();
         long recoveredPeopleFromCurrentDay = currentSimulationDay.getNumberOfPeopleWhoRecoveredAndGainedImmunity();
-        long newNumberOfInfectedPeople;
+        long numberOfInfectedPeopleForCurrentDay;
         if (iterator < 3) {
-            newNumberOfInfectedPeople = Math.round(previousSimulationDay.getNumberOfInfectedPeople() * calculationData.getPeopleInfectedByOnePerson());
-            currentSimulationDay.setNumberOfInfectedPeople(newNumberOfInfectedPeople + previousSimulationDay.getNumberOfInfectedPeople() - deathPeopleFromCurrentDay - recoveredPeopleFromCurrentDay);
+            numberOfInfectedPeopleForCurrentDay = Math.round(previousSimulationDay.getNumberOfInfectedPeople() * calculationData.getPeopleInfectedByOnePerson());
+            currentSimulationDay.setNumberOfInfectedPeople(numberOfInfectedPeopleForCurrentDay + previousSimulationDay.getNumberOfInfectedPeople() - deathPeopleFromCurrentDay - recoveredPeopleFromCurrentDay);
         } else {
-            SingleDaySimulation twoDaysPreviousCurrentDaySimulation = singleDaySimulationRepository.findById(lastRecordId - 2).orElseThrow(
+            SingleDaySimulation twoDaysPreviousCurrentDaySimulation = singleDaySimulationRepository.findById(currentDayId - 2).orElseThrow(
                     ()->new Exception("Empty Simulation Day"));
             long numberOfNewInfectedPeopleBetweenTwoSimulationDays = Math.abs(previousSimulationDay.getNumberOfInfectedPeople()
                     - twoDaysPreviousCurrentDaySimulation.getNumberOfInfectedPeople());
-            newNumberOfInfectedPeople = Math.round(numberOfNewInfectedPeopleBetweenTwoSimulationDays * calculationData.getPeopleInfectedByOnePerson()) +
+            numberOfInfectedPeopleForCurrentDay = Math.round(numberOfNewInfectedPeopleBetweenTwoSimulationDays * calculationData.getPeopleInfectedByOnePerson()) +
                     previousSimulationDay.getNumberOfInfectedPeople();
 
             if (deathPeopleFromCurrentDay == 0 && recoveredPeopleFromCurrentDay != 0) {
                 SingleDaySimulation simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery =
-                        singleDaySimulationRepository.findById(lastRecordId - calculationData.getDaysFromInfectionToRecovery() + 1).orElseThrow(
+                        singleDaySimulationRepository.findById(currentDayId - calculationData.getDaysFromInfectionToRecovery() + 1).orElseThrow(
                                 ()->new Exception("Empty Simulation Day"));
                 long futureDeaths = Math.round(
                         simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery.getNumberOfInfectedPeople() * calculationData.getMortalityRate());
-                long totalNumberOfInfectedPeopleForCurrentDay = newNumberOfInfectedPeople +
+                long numberOfInfectedPeopleWithFutureDeathsForCurrentDay = numberOfInfectedPeopleForCurrentDay +
                         futureDeaths;
-                currentSimulationDay.setNumberOfInfectedPeople(totalNumberOfInfectedPeopleForCurrentDay);
+                currentSimulationDay.setNumberOfInfectedPeople(numberOfInfectedPeopleWithFutureDeathsForCurrentDay);
             } else {
-                long totalNumberOfInfectedPeopleForCurrentDay = newNumberOfInfectedPeople -
+                long totalNumberOfInfectedPeopleForCurrentDay = numberOfInfectedPeopleForCurrentDay -
                         deathPeopleFromCurrentDay - recoveredPeopleFromCurrentDay;
                 currentSimulationDay.setNumberOfInfectedPeople(totalNumberOfInfectedPeopleForCurrentDay);
             }
@@ -50,16 +50,16 @@ public class InfectedPeopleCounterServiceImpl implements InfectedPeopleCounterSe
 
     @Override
     public void countInfectedPeopleWhenParamExceedNumberOfPopulation(SingleDaySimulation currentSimulationDay, CalculationData calculationData) {
-        long numberOFDeathPeopleForCurrentDay = currentSimulationDay.getNumberOfDeathPeople();
+        long numberOFDeathPeople = currentSimulationDay.getNumberOfDeathPeople();
         long numberOfRecoveredPeople = currentSimulationDay.getNumberOfPeopleWhoRecoveredAndGainedImmunity();
         currentSimulationDay.setNumberOfInfectedPeople(calculationData.getPopulation() -
-                numberOfRecoveredPeople - numberOFDeathPeopleForCurrentDay);
+                numberOfRecoveredPeople - numberOFDeathPeople);
     }
 
     @Override
     public void countInfectedPeopleWhenParamReachedMaxValueForSimulation(SingleDaySimulation currentSimulationDay, CalculationData calculationData) {
         long numberOFDeathPeopleForCurrentDay = currentSimulationDay.getNumberOfDeathPeople();
         long numberOfRecoveredPeople = currentSimulationDay.getNumberOfPeopleWhoRecoveredAndGainedImmunity();
-        currentSimulationDay.setNumberOfInfectedPeople(calculationData.getMaxValueOfInfectedPeople() - numberOFDeathPeopleForCurrentDay - numberOfRecoveredPeople);
+        currentSimulationDay.setNumberOfInfectedPeople(calculationData.getMaxValueOfInfectedPeopleForAllSimulation() - numberOFDeathPeopleForCurrentDay - numberOfRecoveredPeople);
     }
 }

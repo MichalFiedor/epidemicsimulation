@@ -14,13 +14,13 @@ public class HealthyPeopleWhoCanBeInfectedSetterServiceImpl implements HealthyPe
     @Override
     public void setTotalNumberOfHealthyPeopleWhoCanBeInfectedForSingleSimulationDay(SingleDaySimulation currentSimulationDay,
                                                                                     CalculationData calculationData) {
-        if (calculationData.isShouldSetZeroForNumberHealthyPeopleWhoCanBeInfected()) {
+        if (calculationData.isShouldSetZeroForNumberOfHealthyPeopleWhoCanBeInfected()) {
             currentSimulationDay.setNumberOfHealthyPeopleWhoCanBeInfected(0);
         } else {
             healthyPeopleWhoCanBeInfectedCounterService.countHealthyPeopleWhoCanBeInfected(currentSimulationDay, calculationData);
         }
         if (calculationData.isSetConstantValueOfPeopleWhoCanBeInfected()) {
-            currentSimulationDay.setNumberOfHealthyPeopleWhoCanBeInfected(calculationData.getMinValueOfPeopleWhoCanBeInfected());
+            currentSimulationDay.setNumberOfHealthyPeopleWhoCanBeInfected(calculationData.getMinValueOfPeopleWhoCanBeInfectedForSimulation());
         }
     }
 }

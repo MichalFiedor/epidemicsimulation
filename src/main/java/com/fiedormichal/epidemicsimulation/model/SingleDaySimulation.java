@@ -17,5 +17,5 @@ public class SingleDaySimulation {
     private long numberOfHealthyPeopleWhoCanBeInfected;
     private long numberOfDeathPeople;
     private long numberOfPeopleWhoRecoveredAndGainedImmunity;
-    private boolean isDeleted =false;
+    private boolean isDeleted = false;
 }

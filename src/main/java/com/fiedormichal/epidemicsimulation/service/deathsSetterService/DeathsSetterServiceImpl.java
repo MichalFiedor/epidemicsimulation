@@ -14,13 +14,13 @@ public class DeathsSetterServiceImpl implements DeathsSetterService {
     @Override
     public void setTotalNumberOfDeathsForSingleSimulationDay(SingleDaySimulation currentSimulationDay, CalculationData calculationData, long i) {
 
-        if (i < calculationData.getDaysFromInfectionToDeath() || (i > calculationData.getNumberOfDaysWhenAmountOfInfectedPeopleGrows() +
-                calculationData.getDaysFromInfectionToDeath() && calculationData.getNumberOfDaysWhenAmountOfInfectedPeopleGrows() != 0) ||
-                calculationData.getCounterFromStartOfTheSimulationToMaxValueOfInfectedPeople() + calculationData.getDaysFromInfectionToDeath() < i) {
+        if (i < calculationData.getDaysFromInfectionToDeath() || (i > calculationData.getNumberOfDaysWhenAmountOfInfectedPeopleGrowsToExceedNumOfPopulation() +
+                calculationData.getDaysFromInfectionToDeath() && calculationData.getNumberOfDaysWhenAmountOfInfectedPeopleGrowsToExceedNumOfPopulation() != 0) ||
+                calculationData.getCounterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation() + calculationData.getDaysFromInfectionToDeath() < i) {
             currentSimulationDay.setNumberOfDeathPeople(0);
         } else {
             deathsCounterService.countDeathPeople(currentSimulationDay, calculationData);
-            if (calculationData.getMaxNumberOfDeathPeople() < currentSimulationDay.getNumberOfDeathPeople()) {
+            if (calculationData.getMaxNumberOfDeathPeopleForGivenData() < currentSimulationDay.getNumberOfDeathPeople()) {
                 currentSimulationDay.setNumberOfDeathPeople(0);
             }
         }

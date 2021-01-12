@@ -15,16 +15,16 @@ public class CalculationDataServiceImpl implements CalculationDataService{
                 .daysFromInfectionToRecovery(initialSimulationData.getDaysFromInfectionToRecovery())
                 .daysFromInfectionToDeath(initialSimulationData.getDaysFromInfectionToDeath())
                 .numberOfSimulationDays(initialSimulationData.getNumberOfSimulationDays())
-                .numberOfDaysWhenAmountOfInfectedPeopleGrows(0)
-                .maxNumberOfDeathPeople(Math.round(initialSimulationData.getPopulationSize() * initialSimulationData.getMortalityRate()))
-                .maxRecoveredPeopleForGivenData(Math.round(initialSimulationData.getPopulationSize() -
+                .numberOfDaysWhenAmountOfInfectedPeopleGrowsToExceedNumOfPopulation(0)
+                .maxNumberOfDeathPeopleForGivenData(Math.round(initialSimulationData.getPopulationSize() * initialSimulationData.getMortalityRate()))
+                .maxNumberOfRecoveredPeopleForGivenData(Math.round(initialSimulationData.getPopulationSize() -
                         initialSimulationData.getPopulationSize() * initialSimulationData.getMortalityRate()))
-                .counterFromStartOfTheSimulationToMaxValueOfInfectedPeople(0)
+                .counterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation(0)
                 .shouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation(false)
                 .shouldChangeMethodForCountingNumberOfInfectedPeopleWhenMaxValueOccurs(false)
-                .shouldSetZeroForNumberRecoveredPeople(false)
-                .shouldSetZeroForNumberInfectedPeople(false)
-                .shouldSetZeroForNumberHealthyPeopleWhoCanBeInfected(false)
+                .shouldSetZeroForNumberOfRecoveredPeople(false)
+                .shouldSetZeroForNumberOfInfectedPeople(false)
+                .shouldSetZeroForNumberOfHealthyPeopleWhoCanBeInfected(false)
                 .setConstantValueOfPeopleWhoCanBeInfected(false)
                 .build();
     }

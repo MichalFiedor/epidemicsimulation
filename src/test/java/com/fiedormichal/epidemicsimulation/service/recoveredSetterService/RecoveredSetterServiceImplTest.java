@@ -3,7 +3,6 @@ package com.fiedormichal.epidemicsimulation.service.recoveredSetterService;
 import com.fiedormichal.epidemicsimulation.model.CalculationData;
 import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
 import com.fiedormichal.epidemicsimulation.repository.SingleDaySimulationRepository;
-import com.fiedormichal.epidemicsimulation.service.recoveredCounterService.RecoveredCounterService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +47,7 @@ class RecoveredSetterServiceImplTest {
         SingleDaySimulation currentSimulationDay = new SingleDaySimulation();
         CalculationData calculationData= CalculationData.builder()
                 .daysFromInfectionToRecovery(14)
-                .counterFromStartOfTheSimulationToMaxValueOfInfectedPeople(5)
+                .counterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation(5)
                 .build();
         long iterator= 20;
         //when
@@ -64,8 +63,8 @@ class RecoveredSetterServiceImplTest {
         SingleDaySimulation currentSimulationDay = new SingleDaySimulation();
         CalculationData calculationData= CalculationData.builder()
                 .daysFromInfectionToRecovery(14)
-                .counterFromStartOfTheSimulationToMaxValueOfInfectedPeople(8)
-                .shouldSetZeroForNumberRecoveredPeople(true)
+                .counterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation(8)
+                .shouldSetZeroForNumberOfRecoveredPeople(true)
                 .build();
         long iterator= 21;
         //when
@@ -89,7 +88,7 @@ class RecoveredSetterServiceImplTest {
         SingleDaySimulation currentSimulationDay = new SingleDaySimulation();
         CalculationData calculationData = CalculationData.builder()
                 .daysFromInfectionToRecovery(14)
-                .counterFromStartOfTheSimulationToMaxValueOfInfectedPeople(8)
+                .counterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation(8)
                 .mortalityRate(0.05)
                 .build();
         long iterator= 21;
