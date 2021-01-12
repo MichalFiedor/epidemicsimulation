@@ -25,7 +25,7 @@ class HealthyPeopleWhoCanBeInfectedSetterServiceImplTest {
         currentSimulationDay.setNumberOfDeathPeople(50);
         currentSimulationDay.setNumberOfPeopleWhoRecoveredAndGainedImmunity(500);
         CalculationData calculationData = CalculationData.builder()
-                .shouldSetZeroForNumberHealthyPeopleWhoCanBeInfected(true)
+                .shouldSetZeroForNumberOfHealthyPeopleWhoCanBeInfected(true)
                 .build();
         //when
         healthyPeopleWhoCanBeInfectedSetterService.setTotalNumberOfHealthyPeopleWhoCanBeInfectedForSingleSimulationDay(currentSimulationDay, calculationData);
@@ -43,7 +43,7 @@ class HealthyPeopleWhoCanBeInfectedSetterServiceImplTest {
         currentSimulationDay.setNumberOfPeopleWhoRecoveredAndGainedImmunity(500);
         CalculationData calculationData = CalculationData.builder()
                 .setConstantValueOfPeopleWhoCanBeInfected(true)
-                .minValueOfPeopleWhoCanBeInfected(2464)
+                .minValueOfPeopleWhoCanBeInfectedForSimulation(2464)
                 .build();
         //when
         healthyPeopleWhoCanBeInfectedSetterService.setTotalNumberOfHealthyPeopleWhoCanBeInfectedForSingleSimulationDay(currentSimulationDay, calculationData);

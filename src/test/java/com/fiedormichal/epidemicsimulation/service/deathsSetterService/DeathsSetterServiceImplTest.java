@@ -3,10 +3,8 @@ package com.fiedormichal.epidemicsimulation.service.deathsSetterService;
 import com.fiedormichal.epidemicsimulation.model.CalculationData;
 import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
 import com.fiedormichal.epidemicsimulation.repository.SingleDaySimulationRepository;
-import com.fiedormichal.epidemicsimulation.service.deathsCounterService.DeathsCounterService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -48,7 +46,7 @@ class DeathsSetterServiceImplTest {
         SingleDaySimulation currentSimulation = new SingleDaySimulation();
         CalculationData calculationData = CalculationData.builder()
                 .daysFromInfectionToDeath(14)
-                .numberOfDaysWhenAmountOfInfectedPeopleGrows(4)
+                .numberOfDaysWhenAmountOfInfectedPeopleGrowsToExceedNumOfPopulation(4)
                 .build();
         long iterator = 19;
         //when
@@ -64,7 +62,7 @@ class DeathsSetterServiceImplTest {
         SingleDaySimulation currentSimulation = new SingleDaySimulation();
         CalculationData calculationData = CalculationData.builder()
                 .daysFromInfectionToDeath(14)
-                .counterFromStartOfTheSimulationToMaxValueOfInfectedPeople(5)
+                .counterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation(5)
                 .build();
         long iterator = 11;
         //when
@@ -88,10 +86,10 @@ class DeathsSetterServiceImplTest {
         Optional<SingleDaySimulation> singleDaySimulationOpt = Optional.of(singleDaySimulation);
         CalculationData calculationData = CalculationData.builder()
                 .daysFromInfectionToDeath(14)
-                .numberOfDaysWhenAmountOfInfectedPeopleGrows(6)
-                .counterFromStartOfTheSimulationToMaxValueOfInfectedPeople(7)
+                .numberOfDaysWhenAmountOfInfectedPeopleGrowsToExceedNumOfPopulation(6)
+                .counterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation(7)
                 .mortalityRate(0.04)
-                .maxNumberOfDeathPeople(7000)
+                .maxNumberOfDeathPeopleForGivenData(7000)
                 .build();
         long iterator = 19;
         when(singleDaySimulationRepository.findById(2L)).thenReturn(singleDaySimulationOpt);

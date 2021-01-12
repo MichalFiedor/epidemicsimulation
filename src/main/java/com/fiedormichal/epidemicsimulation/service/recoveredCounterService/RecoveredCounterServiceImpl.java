@@ -14,11 +14,11 @@ public class RecoveredCounterServiceImpl implements RecoveredCounterService {
     @Override
     public void countCurrentRecovered(SingleDaySimulation currentSimulationDay,
                                       CalculationData calculationData) throws Exception {
-        long lastRecordId= singleDaySimulationRepository.findFirstByOrderByIdDesc().getId()+1;
+        long currentDayId= singleDaySimulationRepository.findFirstByOrderByIdDesc().getId()+1;
         SingleDaySimulation simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery =
-                singleDaySimulationRepository.findById(lastRecordId - calculationData.getDaysFromInfectionToRecovery() + 1).orElseThrow(()->new Exception("Empty Simulation Day"));
+                singleDaySimulationRepository.findById(currentDayId - calculationData.getDaysFromInfectionToRecovery() + 1).orElseThrow(()->new Exception("Empty Simulation Day"));
         long numberOfInfectedPeople = simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery.getNumberOfInfectedPeople();
-        long totalRecoveredPeople = numberOfInfectedPeople - Math.round(numberOfInfectedPeople * calculationData.getMortalityRate());
-        currentSimulationDay.setNumberOfPeopleWhoRecoveredAndGainedImmunity(totalRecoveredPeople);
+        long totalRecoveredPeopleForCurrentDay = numberOfInfectedPeople - Math.round(numberOfInfectedPeople * calculationData.getMortalityRate());
+        currentSimulationDay.setNumberOfPeopleWhoRecoveredAndGainedImmunity(totalRecoveredPeopleForCurrentDay);
     }
 }

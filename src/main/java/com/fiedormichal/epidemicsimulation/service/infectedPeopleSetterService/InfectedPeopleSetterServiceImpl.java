@@ -15,7 +15,7 @@ public class InfectedPeopleSetterServiceImpl implements InfectedPeopleSetterServ
     public void changeMethodForCountingAsNeededAndSetValue(SingleDaySimulation currentSimulationDay, CalculationData calculationData, long i) {
         if (calculationData.isShouldChangeMethodForCountingNumberOfInfectedPeopleWhenMaxValueOccurs()) {
             infectedPeopleCounterService.countInfectedPeopleWhenParamReachedMaxValueForSimulation(currentSimulationDay, calculationData);
-            if (i > calculationData.getDaysFromInfectionToRecovery() + calculationData.getCounterFromStartOfTheSimulationToMaxValueOfInfectedPeople()) {
+            if (i > calculationData.getDaysFromInfectionToRecovery() + calculationData.getCounterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation()) {
                 currentSimulationDay.setNumberOfInfectedPeople(0);
             }
         } else if (calculationData.isShouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation()) {
@@ -31,7 +31,7 @@ public class InfectedPeopleSetterServiceImpl implements InfectedPeopleSetterServ
 
     @Override
     public void setZero(SingleDaySimulation currentSimulationDay, CalculationData calculationData) {
-        if(currentSimulationDay.getNumberOfInfectedPeople() < 0 || calculationData.isShouldSetZeroForNumberInfectedPeople()){
+        if(currentSimulationDay.getNumberOfInfectedPeople() < 0 || calculationData.isShouldSetZeroForNumberOfInfectedPeople()){
             currentSimulationDay.setNumberOfInfectedPeople(0);
         }
     }

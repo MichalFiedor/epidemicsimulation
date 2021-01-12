@@ -33,8 +33,8 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
         List<SingleDaySimulation> singleDaySimulationsListForInitialData = new ArrayList<>();
         singleDaySimulationsListForInitialData.add(firstDayOfSimulation);
         CalculationData calculationData = calculationDataService.createCalculationDataObject(initialSimulationData);
-        calculationData.setMaxValueOfInfectedPeople(firstDayOfSimulation.getNumberOfInfectedPeople());
-        calculationData.setMinValueOfPeopleWhoCanBeInfected(firstDayOfSimulation.getNumberOfHealthyPeopleWhoCanBeInfected());
+        calculationData.setMaxValueOfInfectedPeopleForAllSimulation(firstDayOfSimulation.getNumberOfInfectedPeople());
+        calculationData.setMinValueOfPeopleWhoCanBeInfectedForSimulation(firstDayOfSimulation.getNumberOfHealthyPeopleWhoCanBeInfected());
 
         for (long i = 2; i <= calculationData.getNumberOfSimulationDays(); i++) {
             SingleDaySimulation currentSimulationDay = new SingleDaySimulation();
@@ -43,16 +43,16 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
 
             recoveredSetterService.setTotalNumberOfRecoveredForSingleSimulationDay(currentSimulationDay, calculationData, i);
 
-            if (currentSimulationDay.getNumberOfPeopleWhoRecoveredAndGainedImmunity() == calculationData.getMaxRecoveredPeopleForGivenData() &&
-                    !calculationData.isShouldSetZeroForNumberRecoveredPeople()&&calculationData.getMortalityRate()!=1.0) {
-                calculationData.setShouldSetZeroForNumberRecoveredPeople(true);
+            if (currentSimulationDay.getNumberOfPeopleWhoRecoveredAndGainedImmunity() == calculationData.getMaxNumberOfRecoveredPeopleForGivenData() &&
+                    !calculationData.isShouldSetZeroForNumberOfRecoveredPeople() && calculationData.getMortalityRate() != 1.0) {
+                calculationData.setShouldSetZeroForNumberOfRecoveredPeople(true);
             }
 
             infectedPeopleSetterService.changeMethodForCountingAsNeededAndSetValue(currentSimulationDay, calculationData, i);
 
             if (currentSimulationDay.getNumberOfInfectedPeople() > calculationData.getPopulation() &&
                     calculationData.isShouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation() == false) {
-                calculationData.setNumberOfDaysWhenAmountOfInfectedPeopleGrows(i - 1);
+                calculationData.setNumberOfDaysWhenAmountOfInfectedPeopleGrowsToExceedNumOfPopulation(i - 1);
                 calculationData.setShouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation(true);
                 currentSimulationDay.setNumberOfInfectedPeople(calculationData.getPopulation());
             }
@@ -62,22 +62,22 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
             infectedPeopleSetterService.setZero(currentSimulationDay, calculationData);
 
             if (currentSimulationDay.getNumberOfInfectedPeople() == 0) {
-                calculationData.setShouldSetZeroForNumberInfectedPeople(true);
+                calculationData.setShouldSetZeroForNumberOfInfectedPeople(true);
             }
 
             healthyPeopleWhoCanBeInfectedSetterService.setTotalNumberOfHealthyPeopleWhoCanBeInfectedForSingleSimulationDay(
                     currentSimulationDay, calculationData);
 
-            if (calculationData.getMinValueOfPeopleWhoCanBeInfected() > currentSimulationDay.getNumberOfHealthyPeopleWhoCanBeInfected()) {
-                calculationData.setMinValueOfPeopleWhoCanBeInfected(currentSimulationDay.getNumberOfHealthyPeopleWhoCanBeInfected());
+            if (calculationData.getMinValueOfPeopleWhoCanBeInfectedForSimulation() > currentSimulationDay.getNumberOfHealthyPeopleWhoCanBeInfected()) {
+                calculationData.setMinValueOfPeopleWhoCanBeInfectedForSimulation(currentSimulationDay.getNumberOfHealthyPeopleWhoCanBeInfected());
             } else {
                 calculationData.setSetConstantValueOfPeopleWhoCanBeInfected(true);
-                currentSimulationDay.setNumberOfHealthyPeopleWhoCanBeInfected(calculationData.getMinValueOfPeopleWhoCanBeInfected());
+                currentSimulationDay.setNumberOfHealthyPeopleWhoCanBeInfected(calculationData.getMinValueOfPeopleWhoCanBeInfectedForSimulation());
             }
 
-            if (calculationData.isShouldSetZeroForNumberRecoveredPeople()) {
-                calculationData.setShouldSetZeroForNumberInfectedPeople(true);
-                calculationData.setShouldSetZeroForNumberHealthyPeopleWhoCanBeInfected(true);
+            if (calculationData.isShouldSetZeroForNumberOfRecoveredPeople()) {
+                calculationData.setShouldSetZeroForNumberOfInfectedPeople(true);
+                calculationData.setShouldSetZeroForNumberOfHealthyPeopleWhoCanBeInfected(true);
             }
 
             singleDaySimulationsListForInitialData.add(currentSimulationDay);
@@ -87,11 +87,11 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
         return singleDaySimulationsListForInitialData;
     }
 
-        private void changeCalculationMethodOfInfectedPeopleIfRequired(SingleDaySimulation currentSimulationDay, CalculationData calculationData){
-        if (currentSimulationDay.getNumberOfInfectedPeople() > calculationData.getMaxValueOfInfectedPeople()) {
-            calculationData.setMaxValueOfInfectedPeople(currentSimulationDay.getNumberOfInfectedPeople());
-            long counter = calculationData.getCounterFromStartOfTheSimulationToMaxValueOfInfectedPeople();
-            calculationData.setCounterFromStartOfTheSimulationToMaxValueOfInfectedPeople(counter+1);
+    private void changeCalculationMethodOfInfectedPeopleIfRequired(SingleDaySimulation currentSimulationDay, CalculationData calculationData) {
+        if (currentSimulationDay.getNumberOfInfectedPeople() > calculationData.getMaxValueOfInfectedPeopleForAllSimulation()) {
+            calculationData.setMaxValueOfInfectedPeopleForAllSimulation(currentSimulationDay.getNumberOfInfectedPeople());
+            long counter = calculationData.getCounterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation();
+            calculationData.setCounterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation(counter + 1);
         } else {
             calculationData.setShouldChangeMethodForCountingNumberOfInfectedPeopleWhenMaxValueOccurs(true);
         }

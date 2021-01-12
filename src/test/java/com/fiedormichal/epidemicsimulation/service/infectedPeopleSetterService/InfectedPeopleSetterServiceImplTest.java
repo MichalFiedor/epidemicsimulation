@@ -42,7 +42,7 @@ class InfectedPeopleSetterServiceImplTest {
         //given
         SingleDaySimulation currentSimulationDay = new SingleDaySimulation();
         CalculationData calculationData = CalculationData.builder()
-                .shouldSetZeroForNumberInfectedPeople(true)
+                .shouldSetZeroForNumberOfInfectedPeople(true)
                 .build();
         //when
         infectedPeopleSetterService.setZero(currentSimulationDay, calculationData);
@@ -59,9 +59,9 @@ class InfectedPeopleSetterServiceImplTest {
         currentSimulationDay.setNumberOfPeopleWhoRecoveredAndGainedImmunity(430);
         CalculationData calculationData = CalculationData.builder()
                 .shouldChangeMethodForCountingNumberOfInfectedPeopleWhenMaxValueOccurs(true)
-                .maxValueOfInfectedPeople(3500)
+                .maxValueOfInfectedPeopleForAllSimulation(3500)
                 .daysFromInfectionToRecovery(14)
-                .counterFromStartOfTheSimulationToMaxValueOfInfectedPeople(9)
+                .counterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation(9)
                 .build();
         long iterator= 14;
         //when
@@ -78,7 +78,7 @@ class InfectedPeopleSetterServiceImplTest {
         CalculationData calculationData = CalculationData.builder()
                 .shouldChangeMethodForCountingNumberOfInfectedPeopleWhenMaxValueOccurs(true)
                 .daysFromInfectionToRecovery(14)
-                .counterFromStartOfTheSimulationToMaxValueOfInfectedPeople(7)
+                .counterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation(7)
                 .build();
         long iterator= 22;
         //when

@@ -14,11 +14,11 @@ public class RecoveredSetterServiceImpl implements RecoveredSetterService {
     @Override
     public void setTotalNumberOfRecoveredForSingleSimulationDay(SingleDaySimulation currentSimulationDay, CalculationData calculationData, long i) {
 
-        if (i < calculationData.getDaysFromInfectionToRecovery() || calculationData.getCounterFromStartOfTheSimulationToMaxValueOfInfectedPeople() +
+        if (i < calculationData.getDaysFromInfectionToRecovery() || calculationData.getCounterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation() +
                 calculationData.getDaysFromInfectionToRecovery() < i) {
             currentSimulationDay.setNumberOfPeopleWhoRecoveredAndGainedImmunity(0);
         } else {
-            if (calculationData.isShouldSetZeroForNumberRecoveredPeople()) {
+            if (calculationData.isShouldSetZeroForNumberOfRecoveredPeople()) {
                 currentSimulationDay.setNumberOfPeopleWhoRecoveredAndGainedImmunity(0);
             } else {
                 try {
