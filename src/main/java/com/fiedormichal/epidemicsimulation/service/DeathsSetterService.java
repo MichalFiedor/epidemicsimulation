@@ -1,4 +1,4 @@
-package com.fiedormichal.epidemicsimulation.service.deathsSetterService;
+package com.fiedormichal.epidemicsimulation.service;
 
 import com.fiedormichal.epidemicsimulation.model.CalculationData;
 import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
@@ -8,10 +8,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class DeathsSetterServiceImpl implements DeathsSetterService {
+public class DeathsSetterService {
     private final DeathsCounterService deathsCounterService;
-
-    @Override
     public void setTotalNumberOfDeathsForSingleSimulationDay(SingleDaySimulation currentSimulationDay, CalculationData calculationData, long i) {
 
         if (i < calculationData.getDaysFromInfectionToDeath() || (i > calculationData.getNumberOfDaysWhenAmountOfInfectedPeopleGrowsToExceedNumOfPopulation() +

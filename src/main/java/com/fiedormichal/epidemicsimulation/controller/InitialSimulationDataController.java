@@ -3,7 +3,7 @@ package com.fiedormichal.epidemicsimulation.controller;
 import com.fiedormichal.epidemicsimulation.dto.InitialSimulationDataDto;
 import com.fiedormichal.epidemicsimulation.dto.InitialSimulationDataDtoMapper;
 import com.fiedormichal.epidemicsimulation.model.InitialSimulationData;
-import com.fiedormichal.epidemicsimulation.service.initialSimulationDataService.InitialSimulationDataService;
+import com.fiedormichal.epidemicsimulation.service.InitialSimulationDataCrudService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class InitialSimulationDataController {
-    private final InitialSimulationDataService initialSimulationDataService;
+    private final InitialSimulationDataCrudService initialSimulationDataService;
 
     @GetMapping("/initialdata")
     public List<InitialSimulationDataDto> getAllInitialSimulationData() {

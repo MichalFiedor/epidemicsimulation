@@ -1,4 +1,4 @@
-package com.fiedormichal.epidemicsimulation.service.healthyPeopleWhoCanBeInfectedService;
+package com.fiedormichal.epidemicsimulation.service.healthyPeopleWhoCanBeInfectedCounterService;
 
 import com.fiedormichal.epidemicsimulation.model.CalculationData;
 import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;

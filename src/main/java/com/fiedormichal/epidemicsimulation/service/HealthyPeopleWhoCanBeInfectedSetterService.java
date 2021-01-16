@@ -1,17 +1,16 @@
-package com.fiedormichal.epidemicsimulation.service.healthyPeopleWhoCanBeInfectedSetterService;
+package com.fiedormichal.epidemicsimulation.service;
 
 import com.fiedormichal.epidemicsimulation.model.CalculationData;
 import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
-import com.fiedormichal.epidemicsimulation.service.healthyPeopleWhoCanBeInfectedService.HealthyPeopleWhoCanBeInfectedCounterService;
+import com.fiedormichal.epidemicsimulation.service.healthyPeopleWhoCanBeInfectedCounterService.HealthyPeopleWhoCanBeInfectedCounterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class HealthyPeopleWhoCanBeInfectedSetterServiceImpl implements HealthyPeopleWhoCanBeInfectedSetterService {
+public class HealthyPeopleWhoCanBeInfectedSetterService{
     private final HealthyPeopleWhoCanBeInfectedCounterService healthyPeopleWhoCanBeInfectedCounterService;
 
-    @Override
     public void setTotalNumberOfHealthyPeopleWhoCanBeInfectedForSingleSimulationDay(SingleDaySimulation currentSimulationDay,
                                                                                     CalculationData calculationData) {
         if (calculationData.isShouldSetZeroForNumberOfHealthyPeopleWhoCanBeInfected()) {

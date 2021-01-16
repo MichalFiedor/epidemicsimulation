@@ -1,4 +1,4 @@
-package com.fiedormichal.epidemicsimulation.service.firstDayOfSimulationService;
+package com.fiedormichal.epidemicsimulation.service;
 
 import com.fiedormichal.epidemicsimulation.model.InitialSimulationData;
 import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
@@ -8,10 +8,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class FirstDayOfSimulationServiceImpl implements FirstDayOfSimulationService{
+public class FirstDayOfSimulationService {
     private final SingleDaySimulationRepository singleDaySimulationRepository;
-
-    @Override
     public SingleDaySimulation createFirstDayOfSimulation(InitialSimulationData initialSimulationData) {
         SingleDaySimulation firstDayOfSimulation = new SingleDaySimulation();
 

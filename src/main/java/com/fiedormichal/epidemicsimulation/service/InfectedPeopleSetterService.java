@@ -1,4 +1,4 @@
-package com.fiedormichal.epidemicsimulation.service.infectedPeopleSetterService;
+package com.fiedormichal.epidemicsimulation.service;
 
 import com.fiedormichal.epidemicsimulation.model.CalculationData;
 import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
@@ -8,10 +8,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class InfectedPeopleSetterServiceImpl implements InfectedPeopleSetterService {
+public class InfectedPeopleSetterService {
     private final InfectedPeopleCounterService infectedPeopleCounterService;
 
-    @Override
     public void changeMethodForCountingAsNeededAndSetValue(SingleDaySimulation currentSimulationDay, CalculationData calculationData, long i) {
         if (calculationData.isShouldChangeMethodForCountingNumberOfInfectedPeopleWhenMaxValueOccurs()) {
             infectedPeopleCounterService.countInfectedPeopleWhenParamReachedMaxValueForSimulation(currentSimulationDay, calculationData);
@@ -29,7 +28,6 @@ public class InfectedPeopleSetterServiceImpl implements InfectedPeopleSetterServ
         }
     }
 
-    @Override
     public void setZero(SingleDaySimulation currentSimulationDay, CalculationData calculationData) {
         if(currentSimulationDay.getNumberOfInfectedPeople() < 0 || calculationData.isShouldSetZeroForNumberOfInfectedPeople()){
             currentSimulationDay.setNumberOfInfectedPeople(0);

@@ -3,6 +3,7 @@ package com.fiedormichal.epidemicsimulation.service.deathsSetterService;
 import com.fiedormichal.epidemicsimulation.model.CalculationData;
 import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
 import com.fiedormichal.epidemicsimulation.repository.SingleDaySimulationRepository;
+import com.fiedormichal.epidemicsimulation.service.DeathsSetterService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

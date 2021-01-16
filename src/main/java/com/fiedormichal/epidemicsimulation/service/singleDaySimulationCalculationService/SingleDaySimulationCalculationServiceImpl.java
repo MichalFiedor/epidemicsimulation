@@ -4,12 +4,12 @@ import com.fiedormichal.epidemicsimulation.model.CalculationData;
 import com.fiedormichal.epidemicsimulation.model.InitialSimulationData;
 import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
 import com.fiedormichal.epidemicsimulation.repository.SingleDaySimulationRepository;
-import com.fiedormichal.epidemicsimulation.service.calculationDataService.CalculationDataService;
-import com.fiedormichal.epidemicsimulation.service.deathsSetterService.DeathsSetterService;
-import com.fiedormichal.epidemicsimulation.service.firstDayOfSimulationService.FirstDayOfSimulationService;
-import com.fiedormichal.epidemicsimulation.service.healthyPeopleWhoCanBeInfectedSetterService.HealthyPeopleWhoCanBeInfectedSetterService;
-import com.fiedormichal.epidemicsimulation.service.infectedPeopleSetterService.InfectedPeopleSetterService;
-import com.fiedormichal.epidemicsimulation.service.recoveredSetterService.RecoveredSetterService;
+import com.fiedormichal.epidemicsimulation.service.CalculationDataService;
+import com.fiedormichal.epidemicsimulation.service.DeathsSetterService;
+import com.fiedormichal.epidemicsimulation.service.FirstDayOfSimulationService;
+import com.fiedormichal.epidemicsimulation.service.HealthyPeopleWhoCanBeInfectedSetterService;
+import com.fiedormichal.epidemicsimulation.service.InfectedPeopleSetterService;
+import com.fiedormichal.epidemicsimulation.service.RecoveredSetterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
