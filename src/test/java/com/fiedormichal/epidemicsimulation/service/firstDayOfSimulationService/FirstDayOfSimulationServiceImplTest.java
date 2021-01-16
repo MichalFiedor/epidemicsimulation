@@ -2,6 +2,7 @@ package com.fiedormichal.epidemicsimulation.service.firstDayOfSimulationService;
 
 import com.fiedormichal.epidemicsimulation.model.InitialSimulationData;
 import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
+import com.fiedormichal.epidemicsimulation.service.FirstDayOfSimulationService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

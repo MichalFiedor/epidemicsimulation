@@ -1,4 +1,4 @@
-package com.fiedormichal.epidemicsimulation.service.recoveredSetterService;
+package com.fiedormichal.epidemicsimulation.service;
 
 import com.fiedormichal.epidemicsimulation.model.CalculationData;
 import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
@@ -8,10 +8,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class RecoveredSetterServiceImpl implements RecoveredSetterService {
+public class RecoveredSetterService {
     private final RecoveredCounterService recoveredCounterService;
 
-    @Override
     public void setTotalNumberOfRecoveredForSingleSimulationDay(SingleDaySimulation currentSimulationDay, CalculationData calculationData, long i) {
 
         if (i < calculationData.getDaysFromInfectionToRecovery() || calculationData.getCounterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation() +

@@ -1,4 +1,4 @@
-package com.fiedormichal.epidemicsimulation.service.initialSimulationDataService;
+package com.fiedormichal.epidemicsimulation.service;
 
 import com.fiedormichal.epidemicsimulation.model.InitialSimulationData;
 import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
@@ -12,27 +12,23 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class InitialSimulationDataServiceImpl implements InitialSimulationDataService{
+public class InitialSimulationDataCrudService {
     private final InitialSimulationDataRepository initialSimulationDataRepository;
     private final SingleDaySimulationRepository singleDaySimulationRepository;
     private final SingleDaySimulationCalculationService singleDaySimulationCalculationService;
 
-    @Override
     public InitialSimulationData findById(long id) {
         return initialSimulationDataRepository.findInitialDataById(id);
     }
 
-    @Override
     public InitialSimulationData save(InitialSimulationData initialSimulationData) {
         return initialSimulationDataRepository.save(initialSimulationData);
     }
 
-    @Override
     public List<InitialSimulationData> findAll() {
         return initialSimulationDataRepository.findAllNotDeleted();
     }
 
-    @Override
     public InitialSimulationData edit(InitialSimulationData initialSimulationData) throws Exception {
         InitialSimulationData initialSimulationDataFromDataBase = initialSimulationDataRepository
                 .findById(initialSimulationData.getId()).orElseThrow(()->new Exception("Empty Initial Simulation Data"));
@@ -44,7 +40,6 @@ public class InitialSimulationDataServiceImpl implements InitialSimulationDataSe
         return initialSimulationDataRepository.save(initialSimulationData);
     }
 
-    @Override
     public void deleteById(long id) {
         InitialSimulationData initialSimulationData = initialSimulationDataRepository.findById(id).orElseThrow();
         initialSimulationData.setDeleted(true);
@@ -53,7 +48,6 @@ public class InitialSimulationDataServiceImpl implements InitialSimulationDataSe
         initialSimulationDataRepository.save(initialSimulationData);
     }
 
-    @Override
     public InitialSimulationData addInitialDataAndGenerateSimulation(InitialSimulationData initialSimulationData) {
         List<SingleDaySimulation> singleDaySimulations = singleDaySimulationCalculationService
                 .calculateEverySimulationDay(initialSimulationData);

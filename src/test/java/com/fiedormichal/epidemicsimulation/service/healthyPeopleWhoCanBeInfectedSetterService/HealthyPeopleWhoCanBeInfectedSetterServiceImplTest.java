@@ -2,6 +2,7 @@ package com.fiedormichal.epidemicsimulation.service.healthyPeopleWhoCanBeInfecte
 
 import com.fiedormichal.epidemicsimulation.model.CalculationData;
 import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
+import com.fiedormichal.epidemicsimulation.service.HealthyPeopleWhoCanBeInfectedSetterService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

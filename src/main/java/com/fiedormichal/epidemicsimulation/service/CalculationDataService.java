@@ -1,12 +1,11 @@
-package com.fiedormichal.epidemicsimulation.service.calculationDataService;
+package com.fiedormichal.epidemicsimulation.service;
 
 import com.fiedormichal.epidemicsimulation.model.CalculationData;
 import com.fiedormichal.epidemicsimulation.model.InitialSimulationData;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CalculationDataServiceImpl implements CalculationDataService{
-    @Override
+public class CalculationDataService {
     public CalculationData createCalculationDataObject(InitialSimulationData initialSimulationData) {
         return CalculationData.builder()
                 .population(initialSimulationData.getPopulationSize())
