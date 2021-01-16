@@ -18,34 +18,33 @@ public class InitialSimulationDataCrudService {
     private final SingleDaySimulationCalculationService singleDaySimulationCalculationService;
 
     public InitialSimulationData findById(long id) {
-        return initialSimulationDataRepository.findInitialDataById(id);
-    }
-
-    public InitialSimulationData save(InitialSimulationData initialSimulationData) {
-        return initialSimulationDataRepository.save(initialSimulationData);
+        try{
+            return initialSimulationDataRepository.findById(id).orElseThrow(()->new Exception("Empty Initial Simulation Data"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new InitialSimulationData();
     }
 
     public List<InitialSimulationData> findAll() {
-        return initialSimulationDataRepository.findAllNotDeleted();
+        return initialSimulationDataRepository.findAll();
     }
 
     public InitialSimulationData edit(InitialSimulationData initialSimulationData) throws Exception {
         InitialSimulationData initialSimulationDataFromDataBase = initialSimulationDataRepository
                 .findById(initialSimulationData.getId()).orElseThrow(()->new Exception("Empty Initial Simulation Data"));
         List<SingleDaySimulation> simulations = initialSimulationDataFromDataBase.getSingleDaySimulations();
-        setSimulationsAsDeleted(simulations);
+        deleteOutOfDateSimulations(simulations);
         List<SingleDaySimulation> simulationsBasedOnNewData = singleDaySimulationCalculationService
                 .calculateEverySimulationDay(initialSimulationData);
+
+        simulationsBasedOnNewData.forEach(singleDaySimulation -> singleDaySimulationRepository.save(singleDaySimulation));
         initialSimulationData.setSingleDaySimulations(simulationsBasedOnNewData);
         return initialSimulationDataRepository.save(initialSimulationData);
     }
 
     public void deleteById(long id) {
-        InitialSimulationData initialSimulationData = initialSimulationDataRepository.findById(id).orElseThrow();
-        initialSimulationData.setDeleted(true);
-        List<SingleDaySimulation> simulations = initialSimulationData.getSingleDaySimulations();
-        setSimulationsAsDeleted(simulations);
-        initialSimulationDataRepository.save(initialSimulationData);
+        initialSimulationDataRepository.deleteById(id);
     }
 
     public InitialSimulationData addInitialDataAndGenerateSimulation(InitialSimulationData initialSimulationData) {
@@ -57,10 +56,9 @@ public class InitialSimulationDataCrudService {
         return initialSimulationDataRepository.save(initialSimulationData);
     }
 
-    private void setSimulationsAsDeleted(List<SingleDaySimulation> simulations){
+    private void deleteOutOfDateSimulations(List<SingleDaySimulation> simulations){
         for(SingleDaySimulation singleDaySimulation : simulations){
-            singleDaySimulation.setDeleted(true);
-            singleDaySimulationRepository.save(singleDaySimulation);
+            singleDaySimulationRepository.delete(singleDaySimulation);
         }
     }
 }

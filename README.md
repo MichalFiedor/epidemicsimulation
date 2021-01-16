@@ -10,3 +10,6 @@ It contains following requests
 * Get Simulations for Initial Data
 * Edit Initial Data and generate updated Simulation
 * Delete Initial Data with Simulation
+
+Postman documentation
+
