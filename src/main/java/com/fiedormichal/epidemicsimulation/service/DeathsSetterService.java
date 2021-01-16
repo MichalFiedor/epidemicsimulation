@@ -10,14 +10,14 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class DeathsSetterService {
     private final DeathsCounterService deathsCounterService;
-    public void setTotalNumberOfDeathsForSingleSimulationDay(SingleDaySimulation currentSimulationDay, CalculationData calculationData, long i) {
+    public void setTotalNumberOfDeathsForSingleSimulationDay(SingleDaySimulation currentSimulationDay, CalculationData calculationData, int iterator) {
 
-        if (i < calculationData.getDaysFromInfectionToDeath() || (i > calculationData.getNumberOfDaysWhenAmountOfInfectedPeopleGrowsToExceedNumOfPopulation() +
+        if (iterator < calculationData.getDaysFromInfectionToDeath() || (iterator > calculationData.getNumberOfDaysWhenAmountOfInfectedPeopleGrowsToExceedNumOfPopulation() +
                 calculationData.getDaysFromInfectionToDeath() && calculationData.getNumberOfDaysWhenAmountOfInfectedPeopleGrowsToExceedNumOfPopulation() != 0) ||
-                calculationData.getCounterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation() + calculationData.getDaysFromInfectionToDeath() < i) {
+                calculationData.getCounterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation() + calculationData.getDaysFromInfectionToDeath() < iterator) {
             currentSimulationDay.setNumberOfDeathPeople(0);
         } else {
-            deathsCounterService.countDeathPeople(currentSimulationDay, calculationData);
+            deathsCounterService.countDeathPeople(currentSimulationDay, calculationData, iterator);
             if (calculationData.getMaxNumberOfDeathPeopleForGivenData() < currentSimulationDay.getNumberOfDeathPeople()) {
                 currentSimulationDay.setNumberOfDeathPeople(0);
             }

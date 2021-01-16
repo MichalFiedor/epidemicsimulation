@@ -9,14 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class RecoveredCounterServiceImpl implements RecoveredCounterService {
-    private final SingleDaySimulationRepository singleDaySimulationRepository;
 
     @Override
     public void countCurrentRecovered(SingleDaySimulation currentSimulationDay,
-                                      CalculationData calculationData) throws Exception {
-        long currentDayId= singleDaySimulationRepository.findFirstByOrderByIdDesc().getId()+1;
+                                      CalculationData calculationData, int iterator) {
         SingleDaySimulation simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery =
-                singleDaySimulationRepository.findById(currentDayId - calculationData.getDaysFromInfectionToRecovery() + 1).orElseThrow(()->new Exception("Empty Simulation Day"));
+                calculationData.getSingleDaySimulationsListForInitialData().get(iterator - calculationData.getDaysFromInfectionToRecovery());
         long numberOfInfectedPeople = simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery.getNumberOfInfectedPeople();
         long totalRecoveredPeopleForCurrentDay = numberOfInfectedPeople - Math.round(numberOfInfectedPeople * calculationData.getMortalityRate());
         currentSimulationDay.setNumberOfPeopleWhoRecoveredAndGainedImmunity(totalRecoveredPeopleForCurrentDay);

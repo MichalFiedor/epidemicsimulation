@@ -19,7 +19,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimulationCalculationService {
-    private final SingleDaySimulationRepository singleDaySimulationRepository;
     private final DeathsSetterService deathsSetterService;
     private final FirstDayOfSimulationService firstDayOfSimulationService;
     private final RecoveredSetterService recoveredSetterService;
@@ -30,13 +29,12 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
     @Override
     public List<SingleDaySimulation> calculateEverySimulationDay(InitialSimulationData initialSimulationData) {
         SingleDaySimulation firstDayOfSimulation = firstDayOfSimulationService.createFirstDayOfSimulation(initialSimulationData);
-        List<SingleDaySimulation> singleDaySimulationsListForInitialData = new ArrayList<>();
-        singleDaySimulationsListForInitialData.add(firstDayOfSimulation);
         CalculationData calculationData = calculationDataService.createCalculationDataObject(initialSimulationData);
         calculationData.setMaxValueOfInfectedPeopleForAllSimulation(firstDayOfSimulation.getNumberOfInfectedPeople());
         calculationData.setMinValueOfPeopleWhoCanBeInfectedForSimulation(firstDayOfSimulation.getNumberOfHealthyPeopleWhoCanBeInfected());
+        calculationData.getSingleDaySimulationsListForInitialData().add(firstDayOfSimulation);
 
-        for (long i = 2; i <= calculationData.getNumberOfSimulationDays(); i++) {
+        for (int i = 1; i <= calculationData.getNumberOfSimulationDays(); i++) {
             SingleDaySimulation currentSimulationDay = new SingleDaySimulation();
 
             deathsSetterService.setTotalNumberOfDeathsForSingleSimulationDay(currentSimulationDay, calculationData, i);
@@ -52,7 +50,7 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
 
             if (currentSimulationDay.getNumberOfInfectedPeople() > calculationData.getPopulation() &&
                     calculationData.isShouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation() == false) {
-                calculationData.setNumberOfDaysWhenAmountOfInfectedPeopleGrowsToExceedNumOfPopulation(i - 1);
+                calculationData.setNumberOfDaysWhenAmountOfInfectedPeopleGrowsToExceedNumOfPopulation(i);
                 calculationData.setShouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation(true);
                 currentSimulationDay.setNumberOfInfectedPeople(calculationData.getPopulation());
             }
@@ -80,11 +78,9 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
                 calculationData.setShouldSetZeroForNumberOfHealthyPeopleWhoCanBeInfected(true);
             }
 
-            singleDaySimulationsListForInitialData.add(currentSimulationDay);
-            singleDaySimulationRepository.save(currentSimulationDay);
-
+            calculationData.getSingleDaySimulationsListForInitialData().add(currentSimulationDay);
         }
-        return singleDaySimulationsListForInitialData;
+        return calculationData.getSingleDaySimulationsListForInitialData();
     }
 
     private void changeCalculationMethodOfInfectedPeopleIfRequired(SingleDaySimulation currentSimulationDay, CalculationData calculationData) {

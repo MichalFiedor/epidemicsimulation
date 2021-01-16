@@ -11,6 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -64,7 +67,7 @@ class InfectedPeopleSetterServiceImplTest {
                 .daysFromInfectionToRecovery(14)
                 .counterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation(9)
                 .build();
-        long iterator= 14;
+        int iterator= 14;
         //when
         infectedPeopleSetterService.changeMethodForCountingAsNeededAndSetValue(currentSimulationDay, calculationData, iterator);
         //then
@@ -81,7 +84,7 @@ class InfectedPeopleSetterServiceImplTest {
                 .daysFromInfectionToRecovery(14)
                 .counterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation(7)
                 .build();
-        long iterator= 22;
+        int iterator= 22;
         //when
         infectedPeopleSetterService.changeMethodForCountingAsNeededAndSetValue(currentSimulationDay, calculationData, iterator);
         //then
@@ -99,7 +102,7 @@ class InfectedPeopleSetterServiceImplTest {
                 .shouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation(true)
                 .population(3500)
                 .build();
-        long iterator= 16;
+        int iterator= 16;
         //when
         infectedPeopleSetterService.changeMethodForCountingAsNeededAndSetValue(currentSimulationDay, calculationData, iterator);
         //then
@@ -113,27 +116,30 @@ class InfectedPeopleSetterServiceImplTest {
         SingleDaySimulation currentSimulationDay = new SingleDaySimulation();
         currentSimulationDay.setNumberOfDeathPeople(0);
         currentSimulationDay.setNumberOfPeopleWhoRecoveredAndGainedImmunity(75);
+        SingleDaySimulation previousSimulationDay = new SingleDaySimulation();
+        previousSimulationDay.setId(19L);
+        previousSimulationDay.setNumberOfInfectedPeople(2150);
+        SingleDaySimulation twoDaysPreviousCurrentDaySimulation = new SingleDaySimulation();
+        twoDaysPreviousCurrentDaySimulation.setId(18L);
+        twoDaysPreviousCurrentDaySimulation.setNumberOfInfectedPeople(1350);
+        SingleDaySimulation simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery = new SingleDaySimulation();
+        simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery.setId(6L);
+        simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery.setNumberOfInfectedPeople(5000);
+        List<SingleDaySimulation> singleDaySimulations = new ArrayList<>();
+        for(int i=0; i< 16; i++){
+            singleDaySimulations.add(new SingleDaySimulation());
+        }
+        singleDaySimulations.add(twoDaysPreviousCurrentDaySimulation);
+        singleDaySimulations.add(previousSimulationDay);
+        singleDaySimulations.add(5, simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery);
         CalculationData calculationData = CalculationData.builder()
                 .peopleInfectedByOnePerson(1.5)
                 .daysFromInfectionToRecovery(14)
                 .mortalityRate(0.03)
+                .singleDaySimulationsListForInitialData(singleDaySimulations)
                 .build();
-        long iterator = 20;
-        SingleDaySimulation singleDaySimulationForLastRecordId = mock(SingleDaySimulation.class);
-        when(singleDaySimulationRepository.findFirstByOrderByIdDesc()).thenReturn(singleDaySimulationForLastRecordId);
-        when(singleDaySimulationForLastRecordId.getId()).thenReturn(19L);
-        SingleDaySimulation previousSimulationDay = new SingleDaySimulation();
-        previousSimulationDay.setId(19L);
-        previousSimulationDay.setNumberOfInfectedPeople(2150);
-        when(singleDaySimulationRepository.findById(19L)).thenReturn(java.util.Optional.of(previousSimulationDay));
-        SingleDaySimulation twoDaysPreviousCurrentDaySimulation = new SingleDaySimulation();
-        twoDaysPreviousCurrentDaySimulation.setId(18L);
-        twoDaysPreviousCurrentDaySimulation.setNumberOfInfectedPeople(1350);
-        when(singleDaySimulationRepository.findById(18L)).thenReturn(java.util.Optional.of(twoDaysPreviousCurrentDaySimulation));
-        SingleDaySimulation simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery = new SingleDaySimulation();
-        simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery.setId(7L);
-        simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery.setNumberOfInfectedPeople(5000);
-        when(singleDaySimulationRepository.findById(7L)).thenReturn(java.util.Optional.of(simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery));
+        int iterator = 19;
+
         //when
         infectedPeopleSetterService.changeMethodForCountingAsNeededAndSetValue(currentSimulationDay, calculationData, iterator);
         //then

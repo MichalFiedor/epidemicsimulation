@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -33,9 +34,9 @@ class DeathsSetterServiceImplTest {
         CalculationData calculationData = CalculationData.builder()
                 .daysFromInfectionToDeath(14)
                 .build();
-        long i = 10;
+        int iterator = 10;
         //when
-        deathsSetterService.setTotalNumberOfDeathsForSingleSimulationDay(currentSimulation, calculationData, i);
+        deathsSetterService.setTotalNumberOfDeathsForSingleSimulationDay(currentSimulation, calculationData, iterator);
         //then
         assertNotNull(currentSimulation);
         assertEquals(0, currentSimulation.getNumberOfDeathPeople());
@@ -49,7 +50,7 @@ class DeathsSetterServiceImplTest {
                 .daysFromInfectionToDeath(14)
                 .numberOfDaysWhenAmountOfInfectedPeopleGrowsToExceedNumOfPopulation(4)
                 .build();
-        long iterator = 19;
+        int iterator = 19;
         //when
         deathsSetterService.setTotalNumberOfDeathsForSingleSimulationDay(currentSimulation, calculationData, iterator);
         //then
@@ -65,7 +66,7 @@ class DeathsSetterServiceImplTest {
                 .daysFromInfectionToDeath(14)
                 .counterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation(5)
                 .build();
-        long iterator = 11;
+        int iterator = 11;
         //when
         deathsSetterService.setTotalNumberOfDeathsForSingleSimulationDay(currentSimulation, calculationData, iterator);
         //then
@@ -78,22 +79,20 @@ class DeathsSetterServiceImplTest {
         //given
         SingleDaySimulation currentSimulation = new SingleDaySimulation();
         currentSimulation.setId(15);
-        SingleDaySimulation singleDaySimulationById = mock(SingleDaySimulation.class);
-        when(singleDaySimulationRepository.findFirstByOrderByIdDesc()).thenReturn(singleDaySimulationById);
-        when(singleDaySimulationById.getId()).thenReturn(14L);
-        SingleDaySimulation singleDaySimulation = new SingleDaySimulation();
-        singleDaySimulation.setId(2L);
-        singleDaySimulation.setNumberOfInfectedPeople(50000);
-        Optional<SingleDaySimulation> singleDaySimulationOpt = Optional.of(singleDaySimulation);
+        SingleDaySimulation singleDaySimulation1 = new SingleDaySimulation();
+        SingleDaySimulation singleDaySimulation2 = new SingleDaySimulation();
+        SingleDaySimulation singleDaySimulation3 = new SingleDaySimulation();
+        singleDaySimulation3.setId(2L);
+        singleDaySimulation3.setNumberOfInfectedPeople(50000);
         CalculationData calculationData = CalculationData.builder()
-                .daysFromInfectionToDeath(14)
+                .daysFromInfectionToDeath(12)
                 .numberOfDaysWhenAmountOfInfectedPeopleGrowsToExceedNumOfPopulation(6)
                 .counterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation(7)
                 .mortalityRate(0.04)
                 .maxNumberOfDeathPeopleForGivenData(7000)
+                .singleDaySimulationsListForInitialData(Arrays.asList(singleDaySimulation1, singleDaySimulation2, singleDaySimulation3))
                 .build();
-        long iterator = 19;
-        when(singleDaySimulationRepository.findById(2L)).thenReturn(singleDaySimulationOpt);
+        int iterator = 14;
         //when
         deathsSetterService.setTotalNumberOfDeathsForSingleSimulationDay(currentSimulation, calculationData, iterator);
         //then

@@ -9,20 +9,13 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class DeathCounterServiceImpl implements DeathsCounterService {
-    private final SingleDaySimulationRepository singleDaySimulationRepository;
 
     @Override
     public void countDeathPeople(SingleDaySimulation currentSimulationDay,
-                                                CalculationData calculationData)  {
-        long currentDayId= singleDaySimulationRepository.findFirstByOrderByIdDesc().getId()+1;
+                                                CalculationData calculationData, int iterator)  {
         SingleDaySimulation simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndDeath =
-                null;
-        try {
-            simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndDeath = singleDaySimulationRepository.findById(currentDayId
-                    - calculationData.getDaysFromInfectionToDeath() + 1).orElseThrow(()->new Exception("Empty Simulation Day"));
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
+                calculationData.getSingleDaySimulationsListForInitialData().
+                        get(iterator - calculationData.getDaysFromInfectionToDeath());
         long numberOfDeathPeopleForCurrentSimulationDay = Math.round(
                 simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndDeath.getNumberOfInfectedPeople() * calculationData.getMortalityRate());
         currentSimulationDay.setNumberOfDeathPeople(numberOfDeathPeopleForCurrentSimulationDay);

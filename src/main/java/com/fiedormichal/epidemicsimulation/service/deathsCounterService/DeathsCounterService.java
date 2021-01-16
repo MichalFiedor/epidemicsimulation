@@ -4,5 +4,5 @@ import com.fiedormichal.epidemicsimulation.model.CalculationData;
 import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
 
 public interface DeathsCounterService {
-    void countDeathPeople(SingleDaySimulation currentSimulationDay, CalculationData calculationData);
+    void countDeathPeople(SingleDaySimulation currentSimulationDay, CalculationData calculationData, int iterator);
 }
