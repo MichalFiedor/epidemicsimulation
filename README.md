@@ -12,4 +12,4 @@ It contains following requests
 * Delete Initial Data with Simulation
 
 Postman documentation
-
+https://documenter.getpostman.com/view/12958143/TVt2d3wb
