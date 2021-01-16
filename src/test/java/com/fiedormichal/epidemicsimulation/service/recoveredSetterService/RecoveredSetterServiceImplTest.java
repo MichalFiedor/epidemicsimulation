@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,7 +36,7 @@ class RecoveredSetterServiceImplTest {
         CalculationData calculationData= CalculationData.builder()
                 .daysFromInfectionToRecovery(14)
                 .build();
-        long iterator= 10;
+        int iterator= 10;
         //when
         recoveredSetterService.setTotalNumberOfRecoveredForSingleSimulationDay(currentSimulationDay, calculationData, iterator);
         //then
@@ -50,7 +52,7 @@ class RecoveredSetterServiceImplTest {
                 .daysFromInfectionToRecovery(14)
                 .counterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation(5)
                 .build();
-        long iterator= 20;
+        int iterator= 20;
         //when
         recoveredSetterService.setTotalNumberOfRecoveredForSingleSimulationDay(currentSimulationDay, calculationData, iterator);
         //then
@@ -67,7 +69,7 @@ class RecoveredSetterServiceImplTest {
                 .counterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation(8)
                 .shouldSetZeroForNumberOfRecoveredPeople(true)
                 .build();
-        long iterator= 21;
+        int iterator= 21;
         //when
         recoveredSetterService.setTotalNumberOfRecoveredForSingleSimulationDay(currentSimulationDay, calculationData, iterator);
         //then
@@ -78,21 +80,22 @@ class RecoveredSetterServiceImplTest {
     @Test
     void should_set_correct_value_of_recovered_people() {
         //given
-        SingleDaySimulation singleDaySimulationForLastRecordId = mock(SingleDaySimulation.class);
-        when(singleDaySimulationRepository.findFirstByOrderByIdDesc()).thenReturn(singleDaySimulationForLastRecordId);
-        when(singleDaySimulationForLastRecordId.getId()).thenReturn(22L);
         SingleDaySimulation simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery = new SingleDaySimulation();
         simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery.setId(10L);
         simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery.setNumberOfInfectedPeople(25000);
-        when(singleDaySimulationRepository.findById(10L)).thenReturn(
-                Optional.of(simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery));
         SingleDaySimulation currentSimulationDay = new SingleDaySimulation();
+        List<SingleDaySimulation> singleDaySimulations = new ArrayList<>();
+        for(int i=0; i<20; i++){
+            singleDaySimulations.add(new SingleDaySimulation());
+        }
+        singleDaySimulations.add(9, simulationDayFromCurrentSimulationDayMinusPeriodBetweenInfectionAndRecovery);
         CalculationData calculationData = CalculationData.builder()
-                .daysFromInfectionToRecovery(14)
-                .counterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation(8)
+                .daysFromInfectionToRecovery(12)
+                .counterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation(10)
                 .mortalityRate(0.05)
+                .singleDaySimulationsListForInitialData(singleDaySimulations)
                 .build();
-        long iterator= 21;
+        int iterator= 21;
 
         //when
         recoveredSetterService.setTotalNumberOfRecoveredForSingleSimulationDay(currentSimulationDay, calculationData, iterator);

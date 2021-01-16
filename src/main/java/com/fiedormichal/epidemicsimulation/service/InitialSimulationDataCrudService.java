@@ -49,8 +49,10 @@ public class InitialSimulationDataCrudService {
     }
 
     public InitialSimulationData addInitialDataAndGenerateSimulation(InitialSimulationData initialSimulationData) {
+        initialSimulationDataRepository.save(initialSimulationData);
         List<SingleDaySimulation> singleDaySimulations = singleDaySimulationCalculationService
                 .calculateEverySimulationDay(initialSimulationData);
+        singleDaySimulations.forEach(singleDaySimulation -> singleDaySimulationRepository.save(singleDaySimulation));
         initialSimulationData.setSingleDaySimulations(singleDaySimulations);
         return initialSimulationDataRepository.save(initialSimulationData);
     }

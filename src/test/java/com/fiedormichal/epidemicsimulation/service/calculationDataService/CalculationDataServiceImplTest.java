@@ -2,12 +2,15 @@ package com.fiedormichal.epidemicsimulation.service.calculationDataService;
 
 import com.fiedormichal.epidemicsimulation.model.CalculationData;
 import com.fiedormichal.epidemicsimulation.model.InitialSimulationData;
+import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
 import com.fiedormichal.epidemicsimulation.service.CalculationDataService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,6 +32,7 @@ class CalculationDataServiceImplTest {
         initialSimulationData.setNumberOfSimulationDays(50);
         //when
         CalculationData result = calculationDataService.createCalculationDataObject(initialSimulationData);
+        result.setSingleDaySimulationsListForInitialData(Arrays.asList(new SingleDaySimulation(), new SingleDaySimulation()));
         //then
         assertNotNull(result);
         assertEquals(14, result.getDaysFromInfectionToRecovery());
@@ -37,6 +41,7 @@ class CalculationDataServiceImplTest {
         assertEquals(200000, result.getPopulation());
         assertEquals(0, result.getNumberOfDaysWhenAmountOfInfectedPeopleGrowsToExceedNumOfPopulation());
         assertEquals(0, result.getCounterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation());
+        assertEquals(2, result.getSingleDaySimulationsListForInitialData().size());
         assertFalse(result.isSetConstantValueOfPeopleWhoCanBeInfected());
         assertFalse(result.isShouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation());
         assertFalse(result.isShouldChangeMethodForCountingNumberOfInfectedPeopleWhenMaxValueOccurs());

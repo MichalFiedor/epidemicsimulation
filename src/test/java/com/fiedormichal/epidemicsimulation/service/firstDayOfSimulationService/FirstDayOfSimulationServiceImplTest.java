@@ -18,7 +18,6 @@ class FirstDayOfSimulationServiceImplTest {
     @Autowired
     private FirstDayOfSimulationService firstDayOfSimulationService;
 
-
     @Test
     void should_return_first_day_simulation_object() {
         //given

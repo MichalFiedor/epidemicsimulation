@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class RecoveredSetterService {
     private final RecoveredCounterService recoveredCounterService;
 
-    public void setTotalNumberOfRecoveredForSingleSimulationDay(SingleDaySimulation currentSimulationDay, CalculationData calculationData, long i) {
+    public void setTotalNumberOfRecoveredForSingleSimulationDay(SingleDaySimulation currentSimulationDay, CalculationData calculationData, int i) {
 
         if (i < calculationData.getDaysFromInfectionToRecovery() || calculationData.getCounterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation() +
                 calculationData.getDaysFromInfectionToRecovery() < i) {
@@ -21,7 +21,7 @@ public class RecoveredSetterService {
                 currentSimulationDay.setNumberOfPeopleWhoRecoveredAndGainedImmunity(0);
             } else {
                 try {
-                    recoveredCounterService.countCurrentRecovered(currentSimulationDay, calculationData);
+                    recoveredCounterService.countCurrentRecovered(currentSimulationDay, calculationData, i);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }

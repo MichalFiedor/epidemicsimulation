@@ -4,6 +4,8 @@ import com.fiedormichal.epidemicsimulation.model.CalculationData;
 import com.fiedormichal.epidemicsimulation.model.InitialSimulationData;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class CalculationDataService {
     public CalculationData createCalculationDataObject(InitialSimulationData initialSimulationData) {
@@ -19,6 +21,7 @@ public class CalculationDataService {
                 .maxNumberOfRecoveredPeopleForGivenData(Math.round(initialSimulationData.getPopulationSize() -
                         initialSimulationData.getPopulationSize() * initialSimulationData.getMortalityRate()))
                 .counterFromStartOfTheSimulationToOccursMaxValueOfInfectedPeopleForSimulation(0)
+                .singleDaySimulationsListForInitialData(new ArrayList<>())
                 .shouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation(false)
                 .shouldChangeMethodForCountingNumberOfInfectedPeopleWhenMaxValueOccurs(false)
                 .shouldSetZeroForNumberOfRecoveredPeople(false)
