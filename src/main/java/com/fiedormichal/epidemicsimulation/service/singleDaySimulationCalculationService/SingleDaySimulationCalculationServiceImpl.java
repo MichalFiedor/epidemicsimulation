@@ -34,7 +34,7 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
         calculationData.setMinValueOfPeopleWhoCanBeInfectedForSimulation(firstDayOfSimulation.getNumberOfHealthyPeopleWhoCanBeInfected());
         calculationData.getSingleDaySimulationsListForInitialData().add(firstDayOfSimulation);
 
-        for (int i = 1; i <= calculationData.getNumberOfSimulationDays(); i++) {
+        for (int i = 1; i < calculationData.getNumberOfSimulationDays(); i++) {
             SingleDaySimulation currentSimulationDay = new SingleDaySimulation();
 
             deathsSetterService.setTotalNumberOfDeathsForSingleSimulationDay(currentSimulationDay, calculationData, i);
@@ -49,7 +49,7 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
             infectedPeopleSetterService.changeMethodForCountingAsNeededAndSetValue(currentSimulationDay, calculationData, i);
 
             if (currentSimulationDay.getNumberOfInfectedPeople() > calculationData.getPopulation() &&
-                    calculationData.isShouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation() == false) {
+                    !calculationData.isShouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation()) {
                 calculationData.setNumberOfDaysWhenAmountOfInfectedPeopleGrowsToExceedNumOfPopulation(i);
                 calculationData.setShouldChangeMethodForCountingNumberOfInfectedPeopleWhenParamExceedNumberOfPopulation(true);
                 currentSimulationDay.setNumberOfInfectedPeople(calculationData.getPopulation());
@@ -77,7 +77,6 @@ public class SingleDaySimulationCalculationServiceImpl implements SingleDaySimul
                 calculationData.setShouldSetZeroForNumberOfInfectedPeople(true);
                 calculationData.setShouldSetZeroForNumberOfHealthyPeopleWhoCanBeInfected(true);
             }
-
             calculationData.getSingleDaySimulationsListForInitialData().add(currentSimulationDay);
         }
         return calculationData.getSingleDaySimulationsListForInitialData();

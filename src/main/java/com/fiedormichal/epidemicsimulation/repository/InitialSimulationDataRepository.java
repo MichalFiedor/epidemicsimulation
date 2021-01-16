@@ -9,9 +9,5 @@ import java.util.List;
 
 @Repository
 public interface InitialSimulationDataRepository extends JpaRepository<InitialSimulationData, Long> {
-    @Query("SELECT i FROM InitialSimulationData i where i.isDeleted=false")
-    List<InitialSimulationData> findAllNotDeleted();
 
-    @Query("SELECT i FROM InitialSimulationData i where i.isDeleted=false and i.id=?1")
-    InitialSimulationData findInitialDataById(long id);
 }

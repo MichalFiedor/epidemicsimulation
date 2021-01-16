@@ -23,8 +23,7 @@ public class InitialSimulationData {
     private int daysFromInfectionToRecovery;
     private int daysFromInfectionToDeath;
     private int numberOfSimulationDays;
-    private boolean isDeleted = false;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "initialSimulationData_id", insertable = false)
     private List<SingleDaySimulation> singleDaySimulations;
 }
