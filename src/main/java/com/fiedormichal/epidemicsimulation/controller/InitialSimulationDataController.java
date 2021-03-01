@@ -6,6 +6,7 @@ import com.fiedormichal.epidemicsimulation.model.InitialSimulationData;
 import com.fiedormichal.epidemicsimulation.service.InitialSimulationDataCrudService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,8 +33,10 @@ public class InitialSimulationDataController {
     }
 
     @PostMapping("/initialdata")
-    public InitialSimulationData addSimulations(@RequestBody InitialSimulationData initialSimulationData) {
-        return initialSimulationDataService.addInitialDataAndGenerateSimulation(initialSimulationData);
+    public ResponseEntity<Object> addSimulations(@RequestBody InitialSimulationData initialSimulationData) {
+        InitialSimulationData initialSimulationDataWithSimulation =
+                initialSimulationDataService.addInitialDataAndGenerateSimulation(initialSimulationData);
+        return ResponseEntity.ok().body(initialSimulationDataWithSimulation);
     }
 
     @PutMapping("/initialdata")
