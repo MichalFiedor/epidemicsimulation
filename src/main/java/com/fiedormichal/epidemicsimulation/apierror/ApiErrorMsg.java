@@ -6,11 +6,11 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum ApiErrorMsg {
-
     VALIDATION_ERRORS("Occurred some validation errors. Please check if JSON contains correct values. "
             + "Check errors list for details."),
     VIOLATION_ERRORS("Occurred some violation errors. Please check if JSON contains correct values. "
-            + "Check errors list for details.");
+            + "Check errors list for details."),
+    INITIAL_DATA_NOT_FOUND("Initial data not found. Check errors list for details.");
 
     private String value;
 }

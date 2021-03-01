@@ -2,6 +2,7 @@ package com.fiedormichal.epidemicsimulation.exception;
 
 import com.fiedormichal.epidemicsimulation.apierror.ApiError;
 import com.fiedormichal.epidemicsimulation.apierror.ApiErrorMsg;
+import javassist.NotFoundException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -38,26 +39,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return buildResponseEntity(getApiError(HttpStatus.BAD_REQUEST, errors, ApiErrorMsg.VALIDATION_ERRORS.getValue()));
     }
 
-    @Override
-    protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return super.handleHttpRequestMethodNotSupported(ex, headers, status, request);
-    }
-
-    @Override
-    protected ResponseEntity<Object> handleMissingPathVariable(MissingPathVariableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return super.handleMissingPathVariable(ex, headers, status, request);
-    }
-
-    @Override
-    protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return super.handleTypeMismatch(ex, headers, status, request);
-    }
-
-    @ExceptionHandler(ConstraintViolationException.class)
-    protected ResponseEntity<Object> handleConstraintViolation(Exception ex){
+    @ExceptionHandler(InitialDataNotFoundException.class)
+    protected ResponseEntity<Object> handleInitialDataNotFound(Exception ex){
         List<String>errors = new ArrayList<>();
         errors.add(ex.getMessage());
-        return buildResponseEntity(getApiError(HttpStatus.BAD_REQUEST, errors, ApiErrorMsg.VIOLATION_ERRORS.getValue()));
+        return buildResponseEntity(getApiError(HttpStatus.NOT_FOUND, errors, ApiErrorMsg.INITIAL_DATA_NOT_FOUND.getValue()));
     }
 
     private ResponseEntity<Object> buildResponseEntity(ApiError apiError){
