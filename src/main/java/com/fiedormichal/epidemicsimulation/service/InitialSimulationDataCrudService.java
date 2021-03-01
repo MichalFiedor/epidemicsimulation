@@ -1,10 +1,12 @@
 package com.fiedormichal.epidemicsimulation.service;
 
+import com.fiedormichal.epidemicsimulation.exception.InitialDataNotFoundException;
 import com.fiedormichal.epidemicsimulation.model.InitialSimulationData;
 import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
 import com.fiedormichal.epidemicsimulation.repository.InitialSimulationDataRepository;
 import com.fiedormichal.epidemicsimulation.repository.SingleDaySimulationRepository;
 import com.fiedormichal.epidemicsimulation.service.singleDaySimulationCalculationService.SingleDaySimulationCalculationService;
+import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,21 +20,19 @@ public class InitialSimulationDataCrudService {
     private final SingleDaySimulationCalculationService singleDaySimulationCalculationService;
 
     public InitialSimulationData findById(long id) {
-        try{
-            return initialSimulationDataRepository.findById(id).orElseThrow(()->new Exception("Empty Initial Simulation Data"));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return new InitialSimulationData();
+        InitialSimulationData initialSimulationData = initialSimulationDataRepository.findById(id).orElseThrow(()->
+                new InitialDataNotFoundException("Initial data with id: " + id + " does not exist."));
+        return initialSimulationData;
     }
 
     public List<InitialSimulationData> findAll() {
         return initialSimulationDataRepository.findAll();
     }
 
-    public InitialSimulationData edit(InitialSimulationData initialSimulationData) throws Exception {
+    public InitialSimulationData edit(InitialSimulationData initialSimulationData) {
         InitialSimulationData initialSimulationDataFromDataBase = initialSimulationDataRepository
-                .findById(initialSimulationData.getId()).orElseThrow(()->new Exception("Empty Initial Simulation Data"));
+                .findById(initialSimulationData.getId()).orElseThrow(()->
+                        new InitialDataNotFoundException("Initial data with id: " + initialSimulationData.getId() + " does not exist."));
         List<SingleDaySimulation> simulations = initialSimulationDataFromDataBase.getSingleDaySimulations();
         deleteOutOfDateSimulations(simulations);
         List<SingleDaySimulation> simulationsBasedOnNewData = singleDaySimulationCalculationService

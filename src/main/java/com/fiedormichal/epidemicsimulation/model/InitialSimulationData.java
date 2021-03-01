@@ -7,6 +7,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -23,10 +25,15 @@ public class InitialSimulationData {
     private long populationSize;
     @Min(value = 1, message = "Initial number of infected people must be at least 1.")
     private long initialNumberOfInfected;
-    private double numberOfPeopleWhoWillBeInfectedByOnePerson;
-    private double mortalityRate;
+    @NotNull(message = "You must enter double value of number of people who will be infected by one person.")
+    private Double numberOfPeopleWhoWillBeInfectedByOnePerson;
+    @NotNull(message = "You must enter double value of mortality rate.")
+    private Double mortalityRate;
+    @Min(value = 1, message = "Number of days from infection to recovery must be greater than 1.")
     private int daysFromInfectionToRecovery;
+    @Min(value = 1, message = "Number of days from infection to death must be greater than 1.")
     private int daysFromInfectionToDeath;
+    @Min(value = 1, message = "Number of simulation days must be at least 1.")
     private int numberOfSimulationDays;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "initialSimulationData_id", insertable = false)
