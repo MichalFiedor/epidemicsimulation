@@ -5,8 +5,10 @@ import com.fiedormichal.epidemicsimulation.dto.InitialSimulationDataDtoMapper;
 import com.fiedormichal.epidemicsimulation.model.InitialSimulationData;
 import com.fiedormichal.epidemicsimulation.service.InitialSimulationDataCrudService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -41,12 +43,12 @@ public class InitialSimulationDataController {
     public ResponseEntity<Object> addSimulations(@Valid @RequestBody InitialSimulationData initialSimulationData) {
         InitialSimulationData initialSimulationDataWithSimulation =
                 initialSimulationDataService.addInitialDataAndGenerateSimulation(initialSimulationData);
-        return ResponseEntity.ok().body(initialSimulationDataWithSimulation);
+        return ResponseEntity.ok().body(initialSimulationDataWithSimulation.getSingleDaySimulations());
     }
 
     @PutMapping("/initialdata")
     public ResponseEntity<InitialSimulationData> editInitialSimulationData(@Valid @RequestBody InitialSimulationData initialSimulationData){
-            return ResponseEntity.ok().body(initialSimulationDataService.edit(initialSimulationData));
+        return ResponseEntity.ok().body(initialSimulationDataService.edit(initialSimulationData));
     }
 
     @DeleteMapping("/initialdata/{id}")

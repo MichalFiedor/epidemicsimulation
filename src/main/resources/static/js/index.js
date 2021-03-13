@@ -2,10 +2,16 @@ let form = document.getElementById("form");
 
 async function submitForm(event, form){
   event.preventDefault();
+
   const data = new FormData(event.target);
   const formJSON = Object.fromEntries(data.entries());
   let response =  performPostHttpRequest('http://localhost:8080/initialdata/', formJSON);
-  window.location.href="http://localhost:8080/charts";
+  console.log(response);
+  response.then((obj)=>{
+    sessionStorage.clear;
+    sessionStorage.setItem("simulations", JSON.stringify(obj));
+  });
+//  window.location.href="/charts";
 }
 
 async function performPostHttpRequest(fetchLink, body){
