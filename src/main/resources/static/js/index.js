@@ -5,7 +5,7 @@ async function submitForm(event, form){
   const data = new FormData(event.target);
   const formJSON = Object.fromEntries(data.entries());
   let response =  performPostHttpRequest('http://localhost:8080/initialdata/', formJSON);
-  console.log(response);
+  window.location.href="http://localhost:8080/charts";
 }
 
 async function performPostHttpRequest(fetchLink, body){
@@ -30,3 +30,4 @@ async function performPostHttpRequest(fetchLink, body){
 }
 
 form.addEventListener('submit', submitForm);
+
