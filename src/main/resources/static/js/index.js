@@ -2,17 +2,19 @@ let form = document.getElementById("form");
 
 async function submitForm(event, form){
   event.preventDefault();
-
   const data = new FormData(event.target);
   const formJSON = Object.fromEntries(data.entries());
   let response =  performPostHttpRequest('http://localhost:8080/initialdata/', formJSON);
-  console.log(response);
   response.then((obj)=>{
-    sessionStorage.clear;
-    sessionStorage.setItem("simulations", JSON.stringify(obj));
+  if(localStorage.length!=0){
+    localStorage.clear
+  }
+    localStorage.setItem("simulations", JSON.stringify(obj));
+window.location.href="/charts"
   });
-//  window.location.href="/charts";
 }
+
+form.addEventListener('submit', submitForm);
 
 async function performPostHttpRequest(fetchLink, body){
   if(!fetchLink || !body){
@@ -35,5 +37,5 @@ async function performPostHttpRequest(fetchLink, body){
   }
 }
 
-form.addEventListener('submit', submitForm);
+
 
