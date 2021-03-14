@@ -1,7 +1,7 @@
-
-
-    let obj = JSON.parse(sessionStorage.getItem("simulations"));
-    console.log(obj);
+if(localStorage.getItem('simulations')== null){
+    console.log("session is empty");
+}else{
+    let obj = JSON.parse(localStorage.getItem("simulations"));
     let infections = jsonInfectionsToSeries(obj);
     renderChart(infections, 'infectionChart', 'Infections');
     let healthyPeople = jsonHealthyPeopleToSeries(obj);
@@ -10,9 +10,7 @@
     renderChart(deaths, 'deathsChart', 'Deaths');
     let recovered = jsonRecoveredToSeries(obj);
     renderChart(recovered, 'recoveredChart', 'Recovered');
-    sessionStorage.removeItem('simulations')
-
-
+}
 
 function renderChart(series, divId, titleLabel) {
     let chart = JSC.Chart(divId, { 
