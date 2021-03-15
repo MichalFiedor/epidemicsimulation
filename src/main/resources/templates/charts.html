@@ -6,11 +6,37 @@
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <title>Document</title>
 </head>
-<body>
-<div id="infectionChart" style="width: 50%; height: 300px; margin: 0 auto;"></div>
-<div id="healthyPeopleChart" style="width: 50%; height: 300px; margin: 0 auto;"></div>
-<div id="deathsChart" style="width: 50%; height: 300px; margin: 0 auto;"></div>
-<div id="recoveredChart" style="width: 50%; height: 300px; margin: 0 auto;"></div>
+<body class="row">
+<section class="column">
+    <p id="hide-show-table">Show Initial Data</p>
+    <div class="centered">
+        <table id="initial-data" style="display: none;" class="initial-data-table">
+            <thead>
+            <tr>
+                <th>Simulation Name</th>
+                <th>Population Size</th>
+                <th>Num. of Infected People</th>
+                <th>Num. of People Who Will Be Infected By One Person</th>
+                <th>Mortality Rate</th>
+                <th>Days From Infection To Recovery</th>
+                <th>Days From Infection To Death</th>
+                <th>Number of Simulation Days</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<section class="column">
+    <div class="chart" id="infectionChart" ></div>
+    <div class="chart" id="healthyPeopleChart"></div>
+    <div class="chart" id="deathsChart"></div>
+    <div class="chart" id="recoveredChart"></div>
+</section>
 
 </body>
 <script src="https://code.jscharting.com/2.9.0/jscharting.js"></script>
