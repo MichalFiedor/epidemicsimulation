@@ -10,11 +10,24 @@ async function submitForm(event, form){
     localStorage.clear
   }
     localStorage.setItem("simulations", JSON.stringify(obj));
-window.location.href="/charts"
+    window.location.href="/charts"
   });
 }
 
 form.addEventListener('submit', submitForm);
+
+let button = document.getElementById("btnSubmit");
+
+button.addEventListener('click', saveAllValuesFromInputsInLocalStorage);
+
+function saveAllValuesFromInputsInLocalStorage(){
+  let dataFromInput = document.getElementsByClassName("border-customized-input");
+  let inputValues = [];
+  for(let i=0; i<dataFromInput.length; i++){
+      inputValues.push(dataFromInput[i].value);
+  }
+  localStorage.setItem('values', inputValues);
+}
 
 async function performPostHttpRequest(fetchLink, body){
   if(!fetchLink || !body){

@@ -12,6 +12,30 @@ if(localStorage.getItem('simulations')== null){
     renderChart(recovered, 'recoveredChart', 'Recovered');
 }
 
+
+
+let inputValues = localStorage.getItem('values').toString().split(',');
+
+let trInTableWithInitialData = document.querySelector('tbody').firstElementChild;
+
+for(let i=0; i<inputValues.length-1; i++){
+    let newDataToTable = document.createElement('td');
+    newDataToTable.innerText=inputValues[i];
+    trInTableWithInitialData.appendChild(newDataToTable);
+}
+
+let hideShowTable = document.getElementById('hide-show-table');
+let initialDataTable = document.getElementById("initial-data");
+hideShowTable.addEventListener("click", function(){
+    if(initialDataTable.style.display==="none"){
+        initialDataTable.style.display="block";
+    } else{
+        initialDataTable.style.display="none";
+    }
+})
+
+
+
 function renderChart(series, divId, titleLabel) {
     let chart = JSC.Chart(divId, { 
       debug: true, 

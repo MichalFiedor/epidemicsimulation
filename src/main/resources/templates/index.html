@@ -26,7 +26,7 @@
     <form method="POST" id="form">
         <h2>Please fill out the form</h2>
         <p class="bold">Simulation Name</p>
-        <input class="border-customized-input rounded-input" type="text" name="simulationName"/>
+        <input class="border-customized-input rounded-input" id="simulationName" type="text" name="simulationName"/>
 
         <p class="bold">Population Size</p>
         <input class="border-customized-input rounded-input" type="number" min="1000" name="populationSize"/>
@@ -47,8 +47,8 @@
         <input class="border-customized-input rounded-input" type="number" step="1" min="1" name="daysFromInfectionToDeath"/>
 
         <p class="bold">Number of Simulation Days</p>
-
         <input class="border-customized-input rounded-input" type="number" step="1" min="1" name="numberOfSimulationDays"/>
+
         <div>
             <button id="btnSubmit" class="border-customized-input"><p>Generate Simulation</button>
         </div>

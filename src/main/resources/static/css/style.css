@@ -29,7 +29,7 @@ ul{
     width: 25%;
 }
 
-.form{
+.formDiv{
     width: 75%;
     float:right;
     margin:0;
@@ -91,6 +91,7 @@ input{
     margin-top: 2px;
     width: 200px;
     left: 50%;
+    border-radius: 5px;
 }
 
 .rounded-input {
@@ -102,7 +103,7 @@ input{
     border: 2px solid black;
 }
 
-#GenerateBtn {
+#btnSubmit {
     background-color: white;
     color:black;
     font-weight: 500;
@@ -113,13 +114,63 @@ input{
     font-weight: bold;
 }
 
-button {
-    transition-duration: 0.4s;
-}
 
-#GenerateBtn:hover{
+#btnSubmit:hover{
     background-color: rgb(187, 95, 138);
     color:white;
+    border-radius: 10px;
 }
 
+.row {
+    display: flex;
+}
 
+.column {
+    flex:50%;
+}
+
+.initial-data-table{
+    border-collapse: collapse;
+    text-align: center;
+    margin: 25px 0;
+    font-size: 0.75em;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 50%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.initial-data-table thead tr{
+    background-color:steelblue;
+    color: #ffffff;
+}
+
+.initial-data-table th,
+.initial-data-table td {
+    padding: 10px 12px;
+    font-weight: bold;
+    vertical-align: middle;
+    border-radius: 10px;
+}
+
+.initial-data-table thead th:last-of-type{
+    border-top-right-radius: 10px;
+
+}
+
+.initial-data-table thead th:first-of-type{
+    border-top-left-radius: 10px;
+
+}
+
+.centered{
+    margin: auto;
+    position: absolute;
+    margin-left: 50px;
+}
+
+.chart{
+    width: 95%;
+    height: 300px;
+    margin: 20px;
+    margin-right: 50px;
+}
