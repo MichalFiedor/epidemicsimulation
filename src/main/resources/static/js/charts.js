@@ -1,18 +1,19 @@
-if(localStorage.getItem('simulations')== null){
+let simulations = localStorage.getItem('simulations');
+let simulationsAsAJson = JSON.parse(simulations);
+
+if(simulations== null){
     console.log("session is empty");
 }else{
-    let obj = JSON.parse(localStorage.getItem("simulations"));
-    let infections = jsonInfectionsToSeries(obj);
+    let obj = JSON.parse(simulations);
+    let infections = jsonInfectionsToSeries(simulationsAsAJson);
     renderChart(infections, 'infectionChart', 'Infections');
-    let healthyPeople = jsonHealthyPeopleToSeries(obj);
+    let healthyPeople = jsonHealthyPeopleToSeries(simulationsAsAJson);
     renderChart(healthyPeople, 'healthyPeopleChart', 'Healthy people who can be infected');
-    let deaths = jsonDeathsToSeries(obj);
+    let deaths = jsonDeathsToSeries(simulationsAsAJson);
     renderChart(deaths, 'deathsChart', 'Deaths');
-    let recovered = jsonRecoveredToSeries(obj);
+    let recovered = jsonRecoveredToSeries(simulationsAsAJson);
     renderChart(recovered, 'recoveredChart', 'Recovered');
 }
-
-
 
 let inputValues = localStorage.getItem('values').toString().split(',');
 
@@ -24,15 +25,59 @@ for(let i=0; i<inputValues.length-1; i++){
     trInTableWithInitialData.appendChild(newDataToTable);
 }
 
-let hideShowTable = document.getElementById('hide-show-table');
+//button for initial data table
+let hideShowInitialTableBtn = document.getElementById('initial-data-btn');
 let initialDataTable = document.getElementById("initial-data");
-hideShowTable.addEventListener("click", function(){
+hideShowInitialTableBtn.addEventListener("click", function(){
     if(initialDataTable.style.display==="none"){
+        hideShowInitialTableBtn.innerHTML="Hide Initial Data";
         initialDataTable.style.display="block";
     } else{
+        hideShowInitialTableBtn.innerHTML="Show Initial Data";
         initialDataTable.style.display="none";
     }
 })
+
+//button for simulations table
+let hideShowSimulationsTableBtn = document.getElementById('simulation-data-btn');
+let simulationsDataTable = document.getElementById("simulation-data");
+hideShowSimulationsTableBtn.addEventListener("click", function(){
+    if(simulationsDataTable.style.display==="none"){
+        hideShowSimulationsTableBtn.innerHTML="Hide Simulation Data";
+        simulationsDataTable.style.display="block";
+    } else{
+        hideShowSimulationsTableBtn.innerHTML="Show Simulation Data";
+        simulationsDataTable.style.display="none";
+    }
+})
+
+let tbodyForSimulations = simulationsDataTable.querySelector("tbody");
+
+    for(let i=0; i<simulationsAsAJson.length; i++){
+        let tr = document.createElement('tr');
+        let simulationDayNumberSelector = document.createElement('td');
+        simulationDayNumberSelector.innerHTML=i+1;
+        tr.appendChild(simulationDayNumberSelector);
+
+        let numOfInfectedPeople = document.createElement('td');
+        numOfInfectedPeople.innerHTML=simulationsAsAJson[i].numberOfInfectedPeople;
+        tr.appendChild(numOfInfectedPeople);
+
+        let numOfHealthyPeople = document.createElement('td');
+        numOfHealthyPeople.innerHTML=simulationsAsAJson[i].numberOfHealthyPeopleWhoCanBeInfected;
+        tr.appendChild(numOfHealthyPeople);
+
+        let numOfDeathPeople = document.createElement('td');
+        numOfDeathPeople.innerHTML=simulationsAsAJson[i].numberOfDeathPeople;
+        tr.appendChild(numOfDeathPeople);
+
+        let numOfPeopleWhoRecoveredAndGainedImmunity = document.createElement('td');
+        numOfPeopleWhoRecoveredAndGainedImmunity.innerHTML=simulationsAsAJson[i].numberOfPeopleWhoRecoveredAndGainedImmunity;
+        tr.appendChild(numOfPeopleWhoRecoveredAndGainedImmunity);
+
+        tbodyForSimulations.appendChild(tr);
+
+}
 
 
 
