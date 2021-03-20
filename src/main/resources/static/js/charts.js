@@ -17,12 +17,14 @@ if(simulations== null){
 
 let inputValues = localStorage.getItem('values').toString().split(',');
 
-let trInTableWithInitialData = document.querySelector('tbody').firstElementChild;
+let tbodyInitialData = document.querySelector('tbody');
+let trForInitialData = document.createElement('tr');
+tbodyInitialData.appendChild(trForInitialData);
 
 for(let i=0; i<inputValues.length-1; i++){
     let newDataToTable = document.createElement('td');
     newDataToTable.innerText=inputValues[i];
-    trInTableWithInitialData.appendChild(newDataToTable);
+    trForInitialData.appendChild(newDataToTable);
 }
 
 //button for initial data table
@@ -79,20 +81,18 @@ let tbodyForSimulations = simulationsDataTable.querySelector("tbody");
 
 }
 
-
-
 function renderChart(series, divId, titleLabel) {
     let chart = JSC.Chart(divId, { 
       debug: true, 
       type: 'line', 
-      title_label_text: titleLabel, 
-      legend_visible: false, 
-      annotations: [ 
-        { 
-          label_text: 'Data Accuracy: +/- 5', 
-          position: 'inside top left', 
-          margin: 5 
-        } 
+      legend_visible: false,
+      xAxis_label_text: "Day",
+      yAxis_label_text: titleLabel,
+      annotations: [
+        {
+          position: 'inside top left',
+          margin: 5
+        }
       ], 
       series: series 
     });

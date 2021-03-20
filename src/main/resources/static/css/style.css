@@ -122,11 +122,12 @@ input{
     font-family: Arial, Helvetica, sans-serif;
     padding:5px;
     border-radius: 5px;
+    margin-left:25px;
+    margin-top: 10px;
 }
 
 .hide-show-table-div {
-    margin-top: 50px;
-    margin-bottom: 5px;
+    margin-right:100%
 }
 
 .btn:hover{
@@ -146,12 +147,13 @@ input{
 .initial-data-table{
     border-collapse: collapse;
     text-align: center;
-    margin: 25px 0;
+    margin: 10px 0;
     font-size: 0.75em;
     font-family: Arial, Helvetica, sans-serif;
     width: 50%;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    margin-left:25px;
 }
+
 
 .initial-data-table thead tr{
     background-color:steelblue;
@@ -163,17 +165,6 @@ input{
     padding: 10px 12px;
     font-weight: bold;
     vertical-align: middle;
-    border-radius: 10px;
-}
-
-.initial-data-table thead th:last-of-type{
-    border-top-right-radius: 10px;
-
-}
-
-.initial-data-table thead th:first-of-type{
-    border-top-left-radius: 10px;
-
 }
 
 .centered{
@@ -189,6 +180,20 @@ input{
     margin-right: 50px;
 }
 
-table{
-    border-radius: 10px;
+.table-left{
+    margin-top: 10;
+    margin-right:80%
+}
+
+td{
+    background-color: rgb(234, 242, 245);
+}
+
+td:last-of-type:
+   border-top-left-radius:10px
+}
+
+.chart{
+    box-shadow: 3px 3px 3px #aaaaaa;
+    margin-bottom:20px;
 }
