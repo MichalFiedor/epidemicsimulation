@@ -21,22 +21,31 @@ ul{
     list-style-type: none;
     margin:0;
     padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+
 }
 
 .left{
     padding: 2px;
     text-align: left;
     margin-bottom: 5px;
+    margin-left: 25px;
 }
-#legend{
+
+#description{
     padding: 10px;
     float: left;
     width: 25%;
-    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(190, 221, 221);
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: 10px;
+    box-shadow: 10px 10px 5px #aaaaaa;
+
 }
 
 .formDiv{
-    width: 75%;
+    width: 70%;
     float:right;
     margin:0;
     padding:0;
@@ -83,8 +92,8 @@ form{
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 20px;
-    margin-right: 86%;
-    margin-left: 13%;
+    margin-right: 90%;
+    margin-left: 10%;
 }
 
 p {
