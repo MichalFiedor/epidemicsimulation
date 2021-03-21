@@ -12,6 +12,11 @@ body, h1, h2, h3, p, ul, li{
     padding:0;
 }
 
+body{
+    background: #F3F3F3;
+}
+
+
 ul{
     list-style-type: none;
     margin:0;
@@ -158,6 +163,16 @@ input{
 .initial-data-table thead tr{
     background-color:steelblue;
     color: #ffffff;
+    border-bottom: darkgrey;
+
+}
+
+table tr{
+   border-bottom:1px solid darkgrey;
+}
+
+table tr:last-of-type{
+   border-bottom:none;
 }
 
 .initial-data-table th,
@@ -196,4 +211,24 @@ td:last-of-type:
 .chart{
     box-shadow: 3px 3px 3px #aaaaaa;
     margin-bottom:20px;
+}
+
+.paging-nav {
+  text-align: right;
+  padding-top: 2px;
+}
+
+.paging-nav a {
+  margin: auto 1px;
+  text-decoration: none;
+  display: inline-block;
+  padding: 1px 7px;
+  background: #91b9e6;
+  color: white;
+  border-radius: 3px;
+}
+
+.paging-nav .selected-page {
+  background: #187ed5;
+  font-weight: bold;
 }
