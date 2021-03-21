@@ -18,7 +18,7 @@ body{
 
 
 ul{
-    list-style-type: none;
+    list-style-type:square;
     margin:0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -211,7 +211,7 @@ td:last-of-type:
 }
 
 tr{
-      border-bottom:1px solid darkgrey;
+      border-bottom: 1px solid darkgrey;
 }
 
 tr:last-of-type{
