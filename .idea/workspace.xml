@@ -19,7 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ddc8aa9-32cc-4e80-8c65-9a852368cfc5" name="Default Changelist" comment="Changes in pom." />
+    <list default="true" id="4ddc8aa9-32cc-4e80-8c65-9a852368cfc5" name="Default Changelist" comment="Changes.">
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -231,7 +233,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616345285117</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Changes.">
+      <created>1616346194104</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1616346194104</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -258,7 +267,8 @@
     <MESSAGE value="Table for simulations added." />
     <MESSAGE value="Changes in tables." />
     <MESSAGE value="Changes in pom." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes in pom." />
+    <MESSAGE value="Changes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes." />
   </component>
   <component name="WindowStateProjectService">
     <state x="647" y="139" key="#EpidemicSimulationApplication" timestamp="1611607602577">
