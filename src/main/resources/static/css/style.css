@@ -200,6 +200,15 @@ td:last-of-type:
    border-top-left-radius:10px
 }
 
+tr{
+      border-bottom:1px solid darkgrey;
+}
+
+tr:last-of-type{
+  border-bottom:none;
+}
+
+
 .chart{
     box-shadow: 3px 3px 3px #aaaaaa;
     margin-bottom:20px;
