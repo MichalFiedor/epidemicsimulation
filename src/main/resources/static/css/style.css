@@ -167,14 +167,6 @@ input{
 
 }
 
-table tr{
-   border-bottom:1px solid darkgrey;
-}
-
-table tr:last-of-type{
-   border-bottom:none;
-}
-
 .initial-data-table th,
 .initial-data-table td {
     padding: 10px 12px;
