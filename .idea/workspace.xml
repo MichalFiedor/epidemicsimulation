@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ddc8aa9-32cc-4e80-8c65-9a852368cfc5" name="Default Changelist" comment="Changes in gitignore.">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-    </list>
+    <list default="true" id="4ddc8aa9-32cc-4e80-8c65-9a852368cfc5" name="Default Changelist" comment="Changes." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -303,7 +301,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616356073904</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Changes.">
+      <created>1616358212804</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1616358212804</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -330,10 +335,10 @@
     <MESSAGE value="Table for simulations added." />
     <MESSAGE value="Changes in tables." />
     <MESSAGE value="Changes in pom." />
-    <MESSAGE value="Changes." />
     <MESSAGE value="Changes in index.html." />
     <MESSAGE value="Changes in gitignore." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes in gitignore." />
+    <MESSAGE value="Changes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes." />
   </component>
   <component name="WindowStateProjectService">
     <state x="647" y="139" key="#EpidemicSimulationApplication" timestamp="1611607602577">
