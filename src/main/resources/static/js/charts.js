@@ -15,6 +15,27 @@ if(simulations== null){
     renderChart(recovered, 'recoveredChart', 'Recovered');
 }
 
+
+//tableWithSimulation
+
+buildTable();
+
+function buildTable(){
+    var counter = localStorage.getItem('dayCounter');
+    var tbody = $('#simulation-data tbody');
+    for(var i=0; i<simulationsAsAJson.length;i++){
+        var row = `<tr>
+                  <td>${i+1}</td>
+                  <td>${simulationsAsAJson[i].numberOfInfectedPeople}</td>
+                  <td>${simulationsAsAJson[i].numberOfHealthyPeopleWhoCanBeInfected}</td>
+                  <td>${simulationsAsAJson[i].numberOfDeathPeople}</td>
+                  <td>${simulationsAsAJson[i].numberOfPeopleWhoRecoveredAndGainedImmunity}</td>
+                  `
+                  tbody.append(row);
+    }
+}
+
+
 let inputValues = localStorage.getItem('values').toString().split(',');
 
 let tbodyInitialData = document.querySelector('tbody');
@@ -53,33 +74,36 @@ hideShowSimulationsTableBtn.addEventListener("click", function(){
     }
 })
 
-let tbodyForSimulations = simulationsDataTable.querySelector("tbody");
+//let tbodyForSimulations = simulationsDataTable.querySelector("tbody");
+//
+//    for(let i=0; i<simulationsAsAJson.length; i++){
+//        let tr = document.createElement('tr');
+//        let simulationDayNumberSelector = document.createElement('td');
+//        simulationDayNumberSelector.innerHTML=i+1;
+//        tr.appendChild(simulationDayNumberSelector);
+//
+//        let numOfInfectedPeople = document.createElement('td');
+//        numOfInfectedPeople.innerHTML=simulationsAsAJson[i].numberOfInfectedPeople;
+//        tr.appendChild(numOfInfectedPeople);
+//
+//        let numOfHealthyPeople = document.createElement('td');
+//        numOfHealthyPeople.innerHTML=simulationsAsAJson[i].numberOfHealthyPeopleWhoCanBeInfected;
+//        tr.appendChild(numOfHealthyPeople);
+//
+//        let numOfDeathPeople = document.createElement('td');
+//        numOfDeathPeople.innerHTML=simulationsAsAJson[i].numberOfDeathPeople;
+//        tr.appendChild(numOfDeathPeople);
+//
+//        let numOfPeopleWhoRecoveredAndGainedImmunity = document.createElement('td');
+//        numOfPeopleWhoRecoveredAndGainedImmunity.innerHTML=simulationsAsAJson[i].numberOfPeopleWhoRecoveredAndGainedImmunity;
+//        tr.appendChild(numOfPeopleWhoRecoveredAndGainedImmunity);
+//
+//        tbodyForSimulations.appendChild(tr);
+//
+//}
 
-    for(let i=0; i<simulationsAsAJson.length; i++){
-        let tr = document.createElement('tr');
-        let simulationDayNumberSelector = document.createElement('td');
-        simulationDayNumberSelector.innerHTML=i+1;
-        tr.appendChild(simulationDayNumberSelector);
 
-        let numOfInfectedPeople = document.createElement('td');
-        numOfInfectedPeople.innerHTML=simulationsAsAJson[i].numberOfInfectedPeople;
-        tr.appendChild(numOfInfectedPeople);
 
-        let numOfHealthyPeople = document.createElement('td');
-        numOfHealthyPeople.innerHTML=simulationsAsAJson[i].numberOfHealthyPeopleWhoCanBeInfected;
-        tr.appendChild(numOfHealthyPeople);
-
-        let numOfDeathPeople = document.createElement('td');
-        numOfDeathPeople.innerHTML=simulationsAsAJson[i].numberOfDeathPeople;
-        tr.appendChild(numOfDeathPeople);
-
-        let numOfPeopleWhoRecoveredAndGainedImmunity = document.createElement('td');
-        numOfPeopleWhoRecoveredAndGainedImmunity.innerHTML=simulationsAsAJson[i].numberOfPeopleWhoRecoveredAndGainedImmunity;
-        tr.appendChild(numOfPeopleWhoRecoveredAndGainedImmunity);
-
-        tbodyForSimulations.appendChild(tr);
-
-}
 
 function renderChart(series, divId, titleLabel) {
     let chart = JSC.Chart(divId, { 
@@ -140,3 +164,4 @@ function jsonRecoveredToSeries(jsonObject){
     }
     return [{name: 'Recovered', points: recovered}];
 }
+
