@@ -1,0 +1,91 @@
+Index: src/main/java/com/fiedormichal/epidemicsimulation/model/InitialSimulationData.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.fiedormichal.epidemicsimulation.model;\r\n\r\nimport lombok.EqualsAndHashCode;\r\nimport lombok.Getter;\r\nimport lombok.Setter;\r\n\r\nimport javax.persistence.*;\r\nimport javax.validation.constraints.Min;\r\nimport javax.validation.constraints.NotBlank;\r\nimport javax.validation.constraints.NotEmpty;\r\nimport javax.validation.constraints.NotNull;\r\nimport java.util.List;\r\n\r\n@Entity\r\n@Getter\r\n@Setter\r\n@EqualsAndHashCode\r\npublic class InitialSimulationData {\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private long id;\r\n    @NotBlank(message = \"You must enter the simulation name.\")\r\n    private String simulationName;\r\n    @Min(value = 1000, message = \"The population must be equal or greater than 1000.\")\r\n    private long populationSize;\r\n    @Min(value = 1, message = \"Initial number of infected people must be at least 1.\")\r\n    private long initialNumberOfInfected;\r\n    @NotNull(message = \"You must enter double value of number of people who will be infected by one person.\")\r\n    private Double numberOfPeopleWhoWillBeInfectedByOnePerson;\r\n    @NotNull(message = \"You must enter double value of mortality rate.\")\r\n    private Double mortalityRate;\r\n    @Min(value = 1, message = \"Number of days from infection to recovery must be greater than 1.\")\r\n    private int daysFromInfectionToRecovery;\r\n    @Min(value = 1, message = \"Number of days from infection to death must be greater than 1.\")\r\n    private int daysFromInfectionToDeath;\r\n    @Min(value = 1, message = \"Number of simulation days must be at least 1.\")\r\n    private int numberOfSimulationDays;\r\n    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)\r\n    @JoinColumn(name = \"initialSimulationData_id\", insertable = false)\r\n    private List<SingleDaySimulation> singleDaySimulations;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/fiedormichal/epidemicsimulation/model/InitialSimulationData.java	(revision aab45b819e7e5862a7c29bc7c96bec762fd0f2fa)
++++ src/main/java/com/fiedormichal/epidemicsimulation/model/InitialSimulationData.java	(date 1615396324708)
+@@ -29,9 +29,9 @@
+     private Double numberOfPeopleWhoWillBeInfectedByOnePerson;
+     @NotNull(message = "You must enter double value of mortality rate.")
+     private Double mortalityRate;
+-    @Min(value = 1, message = "Number of days from infection to recovery must be greater than 1.")
++    @Min(value = 1, message = "Number of days from infection to recovery must be at least 1.")
+     private int daysFromInfectionToRecovery;
+-    @Min(value = 1, message = "Number of days from infection to death must be greater than 1.")
++    @Min(value = 1, message = "Number of days from infection to death must be at least 1.")
+     private int daysFromInfectionToDeath;
+     @Min(value = 1, message = "Number of simulation days must be at least 1.")
+     private int numberOfSimulationDays;
+Index: src/main/java/com/fiedormichal/epidemicsimulation/controller/SingleDaySimulationController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.fiedormichal.epidemicsimulation.controller;\r\n\r\nimport com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;\r\nimport com.fiedormichal.epidemicsimulation.repository.SingleDaySimulationRepository;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.web.bind.annotation.GetMapping;\r\nimport org.springframework.web.bind.annotation.PathVariable;\r\nimport org.springframework.web.bind.annotation.RestController;\r\n\r\nimport java.util.List;\r\n\r\n@RestController\r\n@RequiredArgsConstructor\r\npublic class SingleDaySimulationController {\r\n    private final SingleDaySimulationRepository singleDaySimulationRepository;\r\n\r\n    @GetMapping(\"/initialdata/{id}/simulations\")\r\n    public List<SingleDaySimulation> getSimulationsForInitialSimulationData(@PathVariable long id) {\r\n        return singleDaySimulationRepository.findAllSimulationsForInitialData(id);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/fiedormichal/epidemicsimulation/controller/SingleDaySimulationController.java	(revision aab45b819e7e5862a7c29bc7c96bec762fd0f2fa)
++++ src/main/java/com/fiedormichal/epidemicsimulation/controller/SingleDaySimulationController.java	(date 1615228897909)
+@@ -3,12 +3,14 @@
+ import com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;
+ import com.fiedormichal.epidemicsimulation.repository.SingleDaySimulationRepository;
+ import lombok.RequiredArgsConstructor;
++import org.springframework.web.bind.annotation.CrossOrigin;
+ import org.springframework.web.bind.annotation.GetMapping;
+ import org.springframework.web.bind.annotation.PathVariable;
+ import org.springframework.web.bind.annotation.RestController;
+ 
+ import java.util.List;
+ 
++@CrossOrigin("*")
+ @RestController
+ @RequiredArgsConstructor
+ public class SingleDaySimulationController {
+Index: src/main/java/com/fiedormichal/epidemicsimulation/controller/InitialSimulationDataController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.fiedormichal.epidemicsimulation.controller;\r\n\r\nimport com.fiedormichal.epidemicsimulation.dto.InitialSimulationDataDto;\r\nimport com.fiedormichal.epidemicsimulation.dto.InitialSimulationDataDtoMapper;\r\nimport com.fiedormichal.epidemicsimulation.model.InitialSimulationData;\r\nimport com.fiedormichal.epidemicsimulation.service.InitialSimulationDataCrudService;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.http.HttpStatus;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.web.bind.annotation.*;\r\n\r\nimport javax.validation.Valid;\r\nimport java.util.List;\r\n\r\n\r\n@RestController\r\n@RequiredArgsConstructor\r\npublic class InitialSimulationDataController {\r\n    private final InitialSimulationDataCrudService initialSimulationDataService;\r\n\r\n    @GetMapping(\"/initialdata\")\r\n    public ResponseEntity<List<InitialSimulationDataDto>> getAllInitialSimulationData() {\r\n        List<InitialSimulationDataDto>listOfInitialSimulationData =\r\n                InitialSimulationDataDtoMapper.mapToInitialSimulationDataDtos(initialSimulationDataService.findAll());\r\n        return ResponseEntity.ok().body(listOfInitialSimulationData);\r\n    }\r\n\r\n    @GetMapping(\"/initialdata/simulations\")\r\n    public ResponseEntity<List<InitialSimulationData>> getAllInitialSimulationDataWithSimulations(){\r\n        return ResponseEntity.ok().body(initialSimulationDataService.findAll());\r\n    }\r\n\r\n    @GetMapping(\"/initialdata/{id}\")\r\n    public ResponseEntity<InitialSimulationDataDto> getInitialSimulationDataById(@PathVariable long id) {\r\n        InitialSimulationDataDto initialSimulationDataDto = InitialSimulationDataDtoMapper\r\n                .mapToInitialSimulationDataDto(initialSimulationDataService.findById(id));\r\n        return ResponseEntity.ok().body(initialSimulationDataDto);\r\n    }\r\n\r\n    @PostMapping(\"/initialdata\")\r\n    public ResponseEntity<Object> addSimulations(@Valid @RequestBody InitialSimulationData initialSimulationData) {\r\n        InitialSimulationData initialSimulationDataWithSimulation =\r\n                initialSimulationDataService.addInitialDataAndGenerateSimulation(initialSimulationData);\r\n        return ResponseEntity.ok().body(initialSimulationDataWithSimulation);\r\n    }\r\n\r\n    @PutMapping(\"/initialdata\")\r\n    public ResponseEntity<InitialSimulationData> editInitialSimulationData(@Valid @RequestBody InitialSimulationData initialSimulationData){\r\n            return ResponseEntity.ok().body(initialSimulationDataService.edit(initialSimulationData));\r\n    }\r\n\r\n    @DeleteMapping(\"/initialdata/{id}\")\r\n    @ResponseStatus(value = HttpStatus.NO_CONTENT)\r\n    public void deleteInitialData(@PathVariable long id){\r\n        initialSimulationDataService.deleteById(id);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/fiedormichal/epidemicsimulation/controller/InitialSimulationDataController.java	(revision aab45b819e7e5862a7c29bc7c96bec762fd0f2fa)
++++ src/main/java/com/fiedormichal/epidemicsimulation/controller/InitialSimulationDataController.java	(date 1615228732987)
+@@ -12,7 +12,7 @@
+ import javax.validation.Valid;
+ import java.util.List;
+ 
+-
++@CrossOrigin("*")
+ @RestController
+ @RequiredArgsConstructor
+ public class InitialSimulationDataController {
+Index: src/main/java/com/fiedormichal/epidemicsimulation/service/InitialSimulationDataCrudService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.fiedormichal.epidemicsimulation.service;\r\n\r\nimport com.fiedormichal.epidemicsimulation.exception.InitialDataNotFoundException;\r\nimport com.fiedormichal.epidemicsimulation.model.InitialSimulationData;\r\nimport com.fiedormichal.epidemicsimulation.model.SingleDaySimulation;\r\nimport com.fiedormichal.epidemicsimulation.repository.InitialSimulationDataRepository;\r\nimport com.fiedormichal.epidemicsimulation.repository.SingleDaySimulationRepository;\r\nimport com.fiedormichal.epidemicsimulation.service.singleDaySimulationCalculationService.SingleDaySimulationCalculationService;\r\nimport javassist.NotFoundException;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.stereotype.Service;\r\n\r\nimport java.util.List;\r\n\r\n@RequiredArgsConstructor\r\n@Service\r\npublic class InitialSimulationDataCrudService {\r\n    private final InitialSimulationDataRepository initialSimulationDataRepository;\r\n    private final SingleDaySimulationRepository singleDaySimulationRepository;\r\n    private final SingleDaySimulationCalculationService singleDaySimulationCalculationService;\r\n\r\n    public InitialSimulationData findById(long id) {\r\n        InitialSimulationData initialSimulationData = initialSimulationDataRepository.findById(id).orElseThrow(()->\r\n                new InitialDataNotFoundException(\"Initial data with id: \" + id + \" does not exist.\"));\r\n        return initialSimulationData;\r\n    }\r\n\r\n    public List<InitialSimulationData> findAll() {\r\n        return initialSimulationDataRepository.findAll();\r\n    }\r\n\r\n    public InitialSimulationData edit(InitialSimulationData initialSimulationData) {\r\n        InitialSimulationData initialSimulationDataFromDataBase = initialSimulationDataRepository\r\n                .findById(initialSimulationData.getId()).orElseThrow(()->\r\n                        new InitialDataNotFoundException(\"Initial data with id: \" + initialSimulationData.getId() + \" does not exist.\"));\r\n        List<SingleDaySimulation> simulations = initialSimulationDataFromDataBase.getSingleDaySimulations();\r\n        deleteOutOfDateSimulations(simulations);\r\n        List<SingleDaySimulation> simulationsBasedOnNewData = singleDaySimulationCalculationService\r\n                .calculateEverySimulationDay(initialSimulationData);\r\n\r\n        simulationsBasedOnNewData.forEach(singleDaySimulation -> singleDaySimulationRepository.save(singleDaySimulation));\r\n        initialSimulationData.setSingleDaySimulations(simulationsBasedOnNewData);\r\n        return initialSimulationDataRepository.save(initialSimulationData);\r\n    }\r\n\r\n    public void deleteById(long id) {\r\n        initialSimulationDataRepository.deleteById(id);\r\n    }\r\n\r\n    public InitialSimulationData addInitialDataAndGenerateSimulation(InitialSimulationData initialSimulationData) {\r\n        initialSimulationDataRepository.save(initialSimulationData);\r\n        List<SingleDaySimulation> singleDaySimulations = singleDaySimulationCalculationService\r\n                .calculateEverySimulationDay(initialSimulationData);\r\n        singleDaySimulations.forEach(singleDaySimulation -> singleDaySimulationRepository.save(singleDaySimulation));\r\n        initialSimulationData.setSingleDaySimulations(singleDaySimulations);\r\n        return initialSimulationDataRepository.save(initialSimulationData);\r\n    }\r\n\r\n    private void deleteOutOfDateSimulations(List<SingleDaySimulation> simulations){\r\n        for(SingleDaySimulation singleDaySimulation : simulations){\r\n            singleDaySimulationRepository.delete(singleDaySimulation);\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/fiedormichal/epidemicsimulation/service/InitialSimulationDataCrudService.java	(revision aab45b819e7e5862a7c29bc7c96bec762fd0f2fa)
++++ src/main/java/com/fiedormichal/epidemicsimulation/service/InitialSimulationDataCrudService.java	(date 1615228561074)
+@@ -9,9 +9,9 @@
+ import javassist.NotFoundException;
+ import lombok.RequiredArgsConstructor;
+ import org.springframework.stereotype.Service;
++import org.springframework.web.bind.annotation.CrossOrigin;
+ 
+ import java.util.List;
+-
+ @RequiredArgsConstructor
+ @Service
+ public class InitialSimulationDataCrudService {
+@@ -19,6 +19,7 @@
+     private final SingleDaySimulationRepository singleDaySimulationRepository;
+     private final SingleDaySimulationCalculationService singleDaySimulationCalculationService;
+ 
++
+     public InitialSimulationData findById(long id) {
+         InitialSimulationData initialSimulationData = initialSimulationDataRepository.findById(id).orElseThrow(()->
+                 new InitialDataNotFoundException("Initial data with id: " + id + " does not exist."));

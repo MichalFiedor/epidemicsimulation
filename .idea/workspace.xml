@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4ddc8aa9-32cc-4e80-8c65-9a852368cfc5" name="Default Changelist" comment="Changes in pom." />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="develop" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="2" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1616344281" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="develop" />
+                    <option name="lastUsedInstant" value="1616344274" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="front_end_layer" />
+                    <option name="lastUsedInstant" value="1615629041" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="apierrors" />
+                    <option name="lastUsedInstant" value="1615628950" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$PROJECT_DIR$/../../../../Program Files/Apache/apache-maven-3.6.3" />
+        <option name="userSettingsFile" value="C:\Program Files\Apache\apache-maven-3.6.3\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1nZo58JUv6W6gjWqOGoOd3bpqRB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../post-rest-api" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\F\IdeaProjects\epidemicsimulation\src\main\resources\static\css" />
+      <recent name="C:\Users\F\IdeaProjects\epidemicsimulation\src\main\resources\static" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\F\IdeaProjects\epidemicsimulation\src\main\resources\static\js" />
+      <recent name="C:\Users\F\IdeaProjects\epidemicsimulation\src\main\resources\templates" />
+      <recent name="C:\Users\F\IdeaProjects\epidemicsimulation\src\main\resources\static" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="EpidemicSimulationApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="15" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.fiedormichal.epidemicsimulation.EpidemicSimulationApplication" />
+      <module name="epidemicsimulation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.fiedormichal.epidemicsimulation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.EpidemicSimulationApplication" />
+        <item itemvalue="Application.EpidemicSimulationApplication" />
+        <item itemvalue="Application.EpidemicSimulationApplication" />
+        <item itemvalue="Application.EpidemicSimulationApplication" />
+        <item itemvalue="Application.EpidemicSimulationApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4ddc8aa9-32cc-4e80-8c65-9a852368cfc5" name="Default Changelist" comment="" />
+      <created>1611606787766</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1611606787766</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Exception handler for validations and violations has been added.">
+      <created>1614622955594</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1614622955594</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Changes in InitialSimulationData controller.">
+      <created>1614629712300</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1614629712300</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Exception handlers done.">
+      <created>1615063923946</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1615063923946</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Form with javascript added.">
+      <created>1615646833340</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1615646833340</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Charts for data added.">
+      <created>1615653288177</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1615653288177</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Changes in front end layer">
+      <created>1615674888401</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1615674888401</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Changes in js files.">
+      <created>1615726046298</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1615726046298</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Table with initial data on page has been added.">
+      <created>1615841696339</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1615841696339</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Table for simulations added.">
+      <created>1616013781473</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1616013781474</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Changes in tables.">
+      <created>1616275912364</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1616275912365</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Changes in tables.">
+      <created>1616339986325</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1616339986325</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Changes in pom.">
+      <created>1616345285117</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1616345285117</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Exception handler for validations and violations has been added." />
+    <MESSAGE value="Changes in InitialSimulationData controller." />
+    <MESSAGE value="Exception handlers done." />
+    <MESSAGE value="Form with javascript added." />
+    <MESSAGE value="Charts for data added." />
+    <MESSAGE value="Changes in front end layer" />
+    <MESSAGE value="Changes in js files." />
+    <MESSAGE value="Table with initial data on page has been added." />
+    <MESSAGE value="Table for simulations added." />
+    <MESSAGE value="Changes in tables." />
+    <MESSAGE value="Changes in pom." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes in pom." />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="647" y="139" key="#EpidemicSimulationApplication" timestamp="1611607602577">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="647" y="139" key="#EpidemicSimulationApplication/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1611607602577" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1611607636940">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1611607636940" />
+    <state x="765" y="226" width="532" height="587" key="#com.intellij.ide.util.MemberChooser" timestamp="1615061191585">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="226" width="532" height="587" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1615061191585" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1615920246437">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1615920246437" />
+    <state width="1877" height="221" key="GridCell.Tab.0.bottom" timestamp="1616345257352">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1493" height="113" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1615726135639" />
+    <state width="1493" height="152" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1616328519686" />
+    <state width="1877" height="221" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1616345257352" />
+    <state width="1877" height="221" key="GridCell.Tab.0.center" timestamp="1616345257351">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1493" height="113" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1615726135639" />
+    <state width="1493" height="152" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1616328519686" />
+    <state width="1877" height="221" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1616345257351" />
+    <state width="1877" height="221" key="GridCell.Tab.0.left" timestamp="1616345257351">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1493" height="113" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1615726135639" />
+    <state width="1493" height="152" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1616328519686" />
+    <state width="1877" height="221" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1616345257351" />
+    <state width="1877" height="221" key="GridCell.Tab.0.right" timestamp="1616345257351">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1493" height="113" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1615726135639" />
+    <state width="1493" height="152" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1616328519686" />
+    <state width="1877" height="221" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1616345257351" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1611607888124">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1611607888124" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1611607888124">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1611607888124" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1611607888124">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1611607888124" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1611607888124">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1611607888124" />
+    <state x="540" y="255" key="IDE.errors.dialog" timestamp="1611606910215">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="540" y="255" key="IDE.errors.dialog/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1611606910215" />
+    <state x="147" y="65" key="MergeDialog" timestamp="1615628934135">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="147" y="65" key="MergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1615628934135" />
+    <state x="598" y="281" key="MultipleFileMergeDialog" timestamp="1616342683787">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="598" y="281" key="MultipleFileMergeDialog/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1616342683787" />
+    <state x="841" y="189" key="SettingsEditor" timestamp="1616344841635">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="841" y="189" key="SettingsEditor/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1616344841635" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1616345292978">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="442" y="200" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1615726108222" />
+    <state x="-1478" y="200" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1616275936373" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1616345292978" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1616344363024">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1616344363024" />
+    <state x="537" y="125" key="git4idea.branch.GitSmartOperationDialog" timestamp="1615628899375">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="537" y="125" key="git4idea.branch.GitSmartOperationDialog/0.0.1536.824@0.0.1536.824" timestamp="1615628899375" />
+    <state x="689" y="401" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1616344531859">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="689" y="401" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1616344531859" />
+    <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1615828336254">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1615828336254" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/epidemicsimulation$EpidemicSimulationApplication.ic" NAME="EpidemicSimulationApplication Coverage Results" MODIFIED="1611607841745" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.fiedormichal.epidemicsimulation.*</FILTER>
+    </SUITE>
+  </component>
+</project>
