@@ -9,17 +9,36 @@
 
 <body>
 
-<!-- <header>
-    <h1>Epidemic Simulation</h1>
-</header> -->
-
-<div id="legend">
-    <h2 class="left">Legend:</h2>
+<div id="description">
+    <h2 class="left">Description:</h2>
+    <p class="left">Application allows you to generate epidemic simulation, based on initial data:</p>
     <ul class="left">
-        <li>
-            Simulation Name - name of the simulation
-        </li>
+        <li>Simulation name</li>
+        <li>Population size (<strong>P</strong>)</li>
+        <li>Number of infected people - number of people who are infected at the beginning of simulation</li>
+        <li>Number of people who will be infected by one person (<strong>R</strong>)</li>
+        <li>Mortality rate - describes how many of the infected people will die (<strong>M</strong>)</li>
+        <li>Days from infection to recovery (<strong>Ti</strong>)</li>
+        <li>Days from infection to death (<strong>Tm</strong>)</li>
+        <li>Number of simulation days (<strong>Ts</strong>)</li>
     </ul>
+    <p class="left">After calculations  you will get data for every simulation day, which contains:</p>
+    <ul class="left">
+        <li>Number of infected people (<strong>Pi</strong>)</li>
+        <li>Number of healthy people who can be infected (<strong>Pv</strong>)</li>
+        <li>Number of deaths (<strong>Pm</strong>)</li>
+        <li>Number of people who will be infected by one person (<strong>Pr</strong>)</li>
+        <li>Number of people who recovered</li>
+    </ul>
+    <h2 class="left">Main assumptions:</h2>
+    <ul class="left">
+        <li><strong>"M"</strong> infected people, who infected <strong>"Tm"</strong> days before, moves form infected people to death people</li>
+        <li>All infected people <strong>"Ti"</strong> days before (and who is alive) moves from infected people to people who recovered</li>
+        <li>Every infected person infects <strong>"R"</strong> healthy people who can be infected</li>
+    </ul>
+    <p class="left">As a result for <strong>Ts</strong> simulation days you will get <strong>Ts</strong> simulations where
+        <strong>Pi</strong> + <strong>Pv</strong> + <strong>Pm</strong> + <strong>Pr</strong> = <strong>P</strong>
+    </p>
 </div>
 
 <div class="formDiv">
