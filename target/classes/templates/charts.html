@@ -1,0 +1,72 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css?version=51" rel="stylesheet" type="text/css">
+
+    <title>Document</title>
+</head>
+<body class="row">
+<section class="column">
+    <div class="table-left">
+        <div class="hide-show-table-div ">
+            <button class="hide-show-table-btn" id="initial-data-btn">Show Initial Data</button>
+        </div>
+        <table id="initial-data" style="display: none;" class="initial-data-table">
+            <thead>
+            <tr>
+                <th>Simulation Name</th>
+                <th>Population Size</th>
+                <th>Num. of Infected People</th>
+                <th>Num. of People Who Will Be Infected By One Person</th>
+                <th>Mortality Rate</th>
+                <th>Days From Infection To Recovery</th>
+                <th>Days From Infection To Death</th>
+                <th>Number of Simulation Days</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="table-left">
+        <div class="hide-show-table-div ">
+            <button class="hide-show-table-btn" id="simulation-data-btn">Show Simulation Data</button>
+        </div>
+        <table style="display: none;" class="initial-data-table" id="simulation-data">
+            <thead>
+            <tr>
+                <th>Simulation Day</th>
+                <th>Number Of Infected People</th>
+                <th>Number Of Healthy People</th>
+                <th>Number of Deaths</th>
+                <th>Number Of People Who Recovered</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="column">
+    <div class="chart" id="infectionChart" ></div>
+    <div class="chart" id="healthyPeopleChart"></div>
+    <div class="chart" id="deathsChart"></div>
+    <div class="chart" id="recoveredChart"></div>
+</section>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jscharting.com/2.9.0/jscharting.js"></script>
+<script src="js/charts.js"></script>
+</body>
+
+</html>

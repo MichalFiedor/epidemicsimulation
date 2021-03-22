@@ -19,12 +19,18 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ddc8aa9-32cc-4e80-8c65-9a852368cfc5" name="Default Changelist" comment="changes in form.">
+    <list default="true" id="4ddc8aa9-32cc-4e80-8c65-9a852368cfc5" name="Default Changelist" comment="Form validation added">
+      <change afterPath="$PROJECT_DIR$/target/classes/META-INF/epidemicsimulation.kotlin_module" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/static/js/charts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/static/js/paging.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/templates/charts.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/fiedormichal/epidemicsimulation/model/InitialSimulationData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fiedormichal/epidemicsimulation/model/InitialSimulationData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +104,6 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../cvbuilder" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
@@ -434,7 +439,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616441403836</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Form validation added">
+      <created>1616450015526</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1616450015526</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -466,7 +478,8 @@
     <MESSAGE value="Changes." />
     <MESSAGE value="changes in properties." />
     <MESSAGE value="changes in form." />
-    <option name="LAST_COMMIT_MESSAGE" value="changes in form." />
+    <MESSAGE value="Form validation added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Form validation added" />
   </component>
   <component name="WindowStateProjectService">
     <state x="647" y="139" key="#EpidemicSimulationApplication" timestamp="1611607602577">
@@ -489,30 +502,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1616449564818" />
-    <state width="1877" height="405" key="GridCell.Tab.0.bottom" timestamp="1616449697105">
+    <state width="1877" height="405" key="GridCell.Tab.0.bottom" timestamp="1616450119535">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="113" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1615726135639" />
     <state width="1493" height="152" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1616328519686" />
-    <state width="1877" height="405" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1616449697105" />
-    <state width="1877" height="405" key="GridCell.Tab.0.center" timestamp="1616449697105">
+    <state width="1877" height="405" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1616450119535" />
+    <state width="1877" height="405" key="GridCell.Tab.0.center" timestamp="1616450119535">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="113" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1615726135639" />
     <state width="1493" height="152" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1616328519686" />
-    <state width="1877" height="405" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1616449697105" />
-    <state width="1877" height="405" key="GridCell.Tab.0.left" timestamp="1616449697105">
+    <state width="1877" height="405" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1616450119535" />
+    <state width="1877" height="405" key="GridCell.Tab.0.left" timestamp="1616450119534">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="113" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1615726135639" />
     <state width="1493" height="152" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1616328519686" />
-    <state width="1877" height="405" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1616449697105" />
-    <state width="1877" height="405" key="GridCell.Tab.0.right" timestamp="1616449697105">
+    <state width="1877" height="405" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1616450119534" />
+    <state width="1877" height="405" key="GridCell.Tab.0.right" timestamp="1616450119535">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="113" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1615726135639" />
     <state width="1493" height="152" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1616328519686" />
-    <state width="1877" height="405" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1616449697105" />
+    <state width="1877" height="405" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1616450119535" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1611607888124">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -551,10 +564,10 @@
     <state x="442" y="200" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1615726108222" />
     <state x="-1478" y="200" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.0.1536.824@-1920.0.1536.824" timestamp="1616275936373" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1616358201490" />
-    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1616359177223">
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1616451594459">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1616359177223" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1040/-1920.0.1536.824@0.0.1920.1040" timestamp="1616451594459" />
     <state x="537" y="125" key="git4idea.branch.GitSmartOperationDialog" timestamp="1615628899375">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

@@ -32,6 +32,7 @@ public class InitialSimulationData {
     private int daysFromInfectionToDeath;
     @Min(value = 1, message = "Number of simulation days must be at least 1.")
     private int numberOfSimulationDays;
+    @Max(value = 1000)
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "initialSimulationData_id", insertable = false)
     private List<SingleDaySimulation> singleDaySimulations;

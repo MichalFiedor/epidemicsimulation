@@ -103,10 +103,26 @@ p {
 
 input{
     padding: 3px;
-    margin-top: 2px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
     width: 200px;
     left: 50%;
     border-radius: 5px;
+}
+
+.border-customized-input{
+    border: 2px solid black;
+}
+
+.input-error{
+    border-color: #e74c3c;
+}
+
+small{
+    visibility: hidden;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .rounded-input {
@@ -114,8 +130,10 @@ input{
     border-radius: 5px;
 }
 
-.border-customized-input{
-    border: 2px solid black;
+.error{
+    visibility: visible;
+    color: #e74c3c;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .btn {

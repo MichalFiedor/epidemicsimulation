@@ -42,31 +42,57 @@
 </div>
 
 <div class="formDiv">
-    <form method="POST" id="form">
+    <form method="POST" id="form" novalidate>
         <h2>Please fill out the form</h2>
-        <p class="bold">Simulation Name</p>
-        <input class="border-customized-input rounded-input" id="simulationName" type="text" name="simulationName"/>
 
-        <p class="bold">Population Size</p>
-        <input class="border-customized-input rounded-input" type="number" min="1000" name="populationSize"/>
+        <div>
+            <p class="bold">Simulation Name</p>
+            <input class="border-customized-input rounded-input" type="text" name="simulationName" id="simulationName"/>
+            <small>Error message</small>
+        </div>
 
-        <p class="bold">Initial Number of Infected People</p>
-        <input class="border-customized-input rounded-input" type="number" min="1" name="initialNumberOfInfected"/>
+        <div>
+            <p class="bold">Population Size</p>
+            <input class="border-customized-input rounded-input" min="1000" type="number" name="populationSize" id="populationSize"/>
+            <small>Error message</small>
+        </div>
 
-        <p class="bold">Number of People Who Will Be Infected By One Person</p>
-        <input class="border-customized-input rounded-input" type="number" step="0.01" name="numberOfPeopleWhoWillBeInfectedByOnePerson"/>
+        <div>
+            <p class="bold">Initial Number Of Infected People</p>
+            <input class="border-customized-input rounded-input" type="number" min="1" name="initialNumberOfInfected" id="initialNumberOfInfected"/>
+            <small>Error message</small>
+        </div>
 
-        <p class="bold">Mortality Rate</p>
-        <input class="border-customized-input rounded-input" type="number" step="0.01" name="mortalityRate"/>
+        <div>
+            <p class="bold">Number Of People Who Will Be Infected By One Person</p>
+            <input class="border-customized-input rounded-input" type="number" step="0.1" min="0.1"
+                   name="numberOfPeopleWhoWillBeInfectedByOnePerson" id="numberOfPeopleWhoWillBeInfectedByOnePerson"/>
+            <small>Error message</small>
+        </div>
 
-        <p class="bold">Days From Infection To Recovery</p>
-        <input class="border-customized-input rounded-input" type="number" step="1" min="1" name="daysFromInfectionToRecovery"/>
+        <div>
+            <p class="bold">Mortality Rate</p>
+            <input class="border-customized-input rounded-input" type="number" step="0.01" min="0.01" name="mortalityRate" id="mortalityRate"/>
+            <small>Error message</small>
+        </div>
 
-        <p class="bold">Days From Infection To Death</p>
-        <input class="border-customized-input rounded-input" type="number" step="1" min="1" name="daysFromInfectionToDeath"/>
+        <div>
+            <p class="bold">Days From Infection To Recovery</p>
+            <input class="border-customized-input rounded-input" type="number" step="1" min="1" name="daysFromInfectionToRecovery" id="daysFromInfectionToRecovery"/>
+            <small>Error message</small>
+        </div>
 
-        <p class="bold">Number of Simulation Days</p>
-        <input class="border-customized-input rounded-input" type="number" step="1" min="1" name="numberOfSimulationDays"/>
+        <div>
+            <p class="bold">Days From Infection To Death</p>
+            <input class="border-customized-input rounded-input" type="number" step="1" min="1" name="daysFromInfectionToDeath" id="daysFromInfectionToDeath"/>
+            <small>Error message</small>
+        </div>
+
+        <div>
+            <p class="bold">Number Of Simulation Days</p>
+            <input class="border-customized-input rounded-input" type="number" step="1" min="1" name="numberOfSimulationDays" id="numberOfSimulationDays"/>
+            <small>Error message</small>
+        </div>
 
         <div>
             <button id="btnSubmit" class="border-customized-input btn"><p>Generate Simulation</button>
