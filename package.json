@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/MichalFiedor/epidemicsimulation/issues"
   },
-  "homepage": "https://github.com/MichalFiedor/epidemicsimulation#readme"
+  "homepage": "https://github.com/MichalFiedor/epidemicsimulation#readme",
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:8080"
+    }
+  }
 }
