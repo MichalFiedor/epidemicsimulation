@@ -4,7 +4,7 @@ async function submitForm(event, form){
   event.preventDefault();
   const data = new FormData(event.target);
   const formJSON = Object.fromEntries(data.entries());
-  let response =  performPostHttpRequest('http://localhost:8080/initialdata/', formJSON);
+  let response =  performPostHttpRequest('https://epidemicsimulationapp.herokuapp.com/initialdata/', formJSON);
   response.then((obj)=>{
   if(localStorage.length!=0){
     localStorage.clear
