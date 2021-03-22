@@ -16,6 +16,13 @@ body{
     background: #F3F3F3;
 }
 
+tr{
+      border-bottom: 1px solid darkgrey;
+}
+
+tr:last-of-type{
+  border-bottom:none;
+}
 
 ul{
     list-style-type:square;
@@ -226,14 +233,6 @@ td{
 
 td:last-of-type:
    border-top-left-radius:10px
-}
-
-tr{
-      border-bottom: 1px solid darkgrey;
-}
-
-tr:last-of-type{
-  border-bottom:none;
 }
 
 
