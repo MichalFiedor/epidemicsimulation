@@ -140,12 +140,13 @@ function checkInputs(){
     setErrorFor(numberOfSimulationDays, 'Number Of Simulation Days cannot be blank');
   }else if(numberOfSimulationDaysValue<1){
     setErrorFor(numberOfSimulationDays, 'Number Of Simulation Days must be at least 1')
+  }else if(numberOfSimulationDaysValue>100){
+    setErrorFor(numberOfSimulationDays, 'You can run a simulation for up to 100 days')
   }else if(!isInt(numberOfSimulationDaysValue)){
     setErrorFor(numberOfSimulationDays, 'Number Of Simulation Days must be an integer')
   }else{
     setSuccessFor(numberOfSimulationDays);
   }
-  return true;
 }
 
 

@@ -31,8 +31,8 @@ public class InitialSimulationData {
     @Min(value = 1, message = "Number of days from infection to death must be greater than 1.")
     private int daysFromInfectionToDeath;
     @Min(value = 1, message = "Number of simulation days must be at least 1.")
-    private int numberOfSimulationDays;
     @Max(value = 100, message = "You can run a simulation for up to 100 days")
+    private int numberOfSimulationDays;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "initialSimulationData_id", insertable = false)
     private List<SingleDaySimulation> singleDaySimulations;

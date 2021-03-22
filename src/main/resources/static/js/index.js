@@ -9,7 +9,7 @@ async function submitForm(event, form){
   }else{
     const data = new FormData(event.target);
     const formJSON = Object.fromEntries(data.entries());
-    let response =  performPostHttpRequest('https://epidemicsimulationapp.herokuapp.com/initialdata/', formJSON);
+    let response =  performPostHttpRequest('http://localhost:8080/initialdata/', formJSON);
     response.then((obj)=>{
     if(localStorage.length!=0){
       localStorage.clear
@@ -140,12 +140,13 @@ function checkInputs(){
     setErrorFor(numberOfSimulationDays, 'Number Of Simulation Days cannot be blank');
   }else if(numberOfSimulationDaysValue<1){
     setErrorFor(numberOfSimulationDays, 'Number Of Simulation Days must be at least 1')
+  }else if(numberOfSimulationDaysValue>100){
+    setErrorFor(numberOfSimulationDays, 'You can run a simulation for up to 100 days')
   }else if(!isInt(numberOfSimulationDaysValue)){
     setErrorFor(numberOfSimulationDays, 'Number Of Simulation Days must be an integer')
   }else{
     setSuccessFor(numberOfSimulationDays);
   }
-  return true;
 }
 
 
