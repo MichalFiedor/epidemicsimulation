@@ -15,7 +15,9 @@ async function submitForm(event, form){
     if(localStorage.length!=0){
       localStorage.clear
     }
-      localStorage.setItem("simulations", JSON.stringify(obj));
+      localStorage.setItem("simulations", JSON.stringify(obj))
+      let storeDataTime = new Date();
+      localStorage.setItem("time", storeDataTime.toTimeString());
       window.location.href="/charts"
     });
   }
