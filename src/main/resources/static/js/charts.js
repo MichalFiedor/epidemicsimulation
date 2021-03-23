@@ -6,9 +6,12 @@ let hourFromStorage = localStorage.getItem('hour');
 let minuteFromStorage = localStorage.getItem('minute');
 if(actualDate.getHours()-hourFromStorage!=0){
     localStorage.clear();
+    location.reload();
 }else{
     if(Math.abs(actualDate.getMinutes()-minuteFromStorage)>10){
         localStorage.clear();
+        location.reload();
+
     }
 }
 
