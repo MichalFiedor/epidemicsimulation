@@ -19,11 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ddc8aa9-32cc-4e80-8c65-9a852368cfc5" name="Default Changelist" comment="Changes in validation">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/charts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/charts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/paging.js" beforeDir="false" />
-    </list>
+    <list default="true" id="4ddc8aa9-32cc-4e80-8c65-9a852368cfc5" name="Default Changelist" comment="Changes in form" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -466,7 +462,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616455035850</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Changes in form">
+      <created>1616502607981</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1616502607981</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -500,7 +503,8 @@
     <MESSAGE value="changes in form." />
     <MESSAGE value="Form validation added" />
     <MESSAGE value="Changes in validation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes in validation" />
+    <MESSAGE value="Changes in form" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes in form" />
   </component>
   <component name="WindowStateProjectService">
     <state x="647" y="139" key="#EpidemicSimulationApplication" timestamp="1611607602577">
