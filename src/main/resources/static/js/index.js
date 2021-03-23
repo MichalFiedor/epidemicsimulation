@@ -1,9 +1,10 @@
 let form = document.getElementById("form");
+localStorage.removeItem('values');
+localStorage.removeItem('simulations');
 
 async function submitForm(event, form){
   event.preventDefault();
-  localStorage.removeItem('values');
-  localStorage.removeItem('simulations');
+
   checkInputs();
   let smalls = getAllSmallsArray();
   if(smalls.some((small)=>small.classList.contains('error'))){
