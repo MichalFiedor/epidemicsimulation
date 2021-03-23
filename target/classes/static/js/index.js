@@ -10,12 +10,16 @@ async function submitForm(event, form){
     saveAllValuesFromInputsInLocalStorage();
     const data = new FormData(event.target);
     const formJSON = Object.fromEntries(data.entries());
-    let response =  performPostHttpRequest('https://epidemicsimulationapp.herokuapp.com/initialdata/', formJSON);
+//    let response =  performPostHttpRequest('https://epidemicsimulationapp.herokuapp.com/initialdata/', formJSON);
+    let response =  performPostHttpRequest('http://localhost:8080/initialdata/', formJSON);
     response.then((obj)=>{
     if(localStorage.length!=0){
       localStorage.clear
     }
-      localStorage.setItem("simulations", JSON.stringify(obj));
+      localStorage.setItem("simulations", JSON.stringify(obj))
+      let storeDataTime = new Date();
+      localStorage.setItem("hour", storeDataTime.getHours());
+      localStorage.setItem("minute", storeDataTime.getMinutes());
       window.location.href="/charts"
     });
   }

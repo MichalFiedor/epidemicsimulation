@@ -1,16 +1,16 @@
 let simulations = localStorage.getItem('simulations');
 let simulationsAsAJson = JSON.parse(simulations);
 
-let putDataInLocalStorageTime = localStorage.getItem('time');
 let actualDate = new Date();
-console.log(putDataInLocalStorageTime);
-//if(actualDate.getHours()-putDataInLocalStorageTime.getHours()!=0){
-//    localStorage.clear();
-//}else{
-//    if(Math.abs(actualDate.getMinutes()-putDataInLocalStorageTime.getMinutes())>10){
-//        localStorage.clear();
-//    }
-//}
+let hourFromStorage = localStorage.getItem('hour');
+let minuteFromStorage = localStorage.getItem('minute');
+if(actualDate.getHours()-hourFromStorage!=0){
+    localStorage.clear();
+}else{
+    if(Math.abs(actualDate.getMinutes()-minuteFromStorage)>10){
+        localStorage.clear();
+    }
+}
 
 
 if(simulations== null){

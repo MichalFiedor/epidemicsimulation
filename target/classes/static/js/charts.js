@@ -1,6 +1,18 @@
 let simulations = localStorage.getItem('simulations');
 let simulationsAsAJson = JSON.parse(simulations);
 
+let actualDate = new Date();
+let hourFromStorage = localStorage.getItem('hour');
+let minuteFromStorage = localStorage.getItem('minute');
+if(actualDate.getHours()-hourFromStorage!=0){
+    localStorage.clear();
+}else{
+    if(Math.abs(actualDate.getMinutes()-minuteFromStorage)>10){
+        localStorage.clear();
+    }
+}
+
+
 if(simulations== null){
     console.log("session is empty");
 }else{
