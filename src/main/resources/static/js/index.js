@@ -7,6 +7,7 @@ async function submitForm(event, form){
   if(smalls.some((small)=>small.classList.contains('error'))){
     checkInputs();
   }else{
+    saveAllValuesFromInputsInLocalStorage();
     const data = new FormData(event.target);
     const formJSON = Object.fromEntries(data.entries());
     let response =  performPostHttpRequest('https://epidemicsimulationapp.herokuapp.com/initialdata/', formJSON);
@@ -21,10 +22,6 @@ async function submitForm(event, form){
 }
 
 form.addEventListener('submit', submitForm);
-
-let button = document.getElementById("btnSubmit");
-
-button.addEventListener('click', saveAllValuesFromInputsInLocalStorage);
 
 function saveAllValuesFromInputsInLocalStorage(){
   let dataFromInput = document.getElementsByClassName("border-customized-input");

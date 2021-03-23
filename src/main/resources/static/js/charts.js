@@ -4,7 +4,6 @@ let simulationsAsAJson = JSON.parse(simulations);
 if(simulations== null){
     console.log("session is empty");
 }else{
-    let obj = JSON.parse(simulations);
     let infections = jsonInfectionsToSeries(simulationsAsAJson);
     renderChart(infections, 'infectionChart', 'Infections');
     let healthyPeople = jsonHealthyPeopleToSeries(simulationsAsAJson);
@@ -14,9 +13,6 @@ if(simulations== null){
     let recovered = jsonRecoveredToSeries(simulationsAsAJson);
     renderChart(recovered, 'recoveredChart', 'Recovered');
 }
-
-
-//tableWithSimulation
 
 buildTable();
 
@@ -48,7 +44,7 @@ for(let i=0; i<inputValues.length-1; i++){
     trForInitialData.appendChild(newDataToTable);
 }
 
-//button for initial data table
+
 let hideShowInitialTableBtn = document.getElementById('initial-data-btn');
 let initialDataTable = document.getElementById("initial-data");
 hideShowInitialTableBtn.addEventListener("click", function(){
@@ -61,7 +57,7 @@ hideShowInitialTableBtn.addEventListener("click", function(){
     }
 })
 
-//button for simulations table
+
 let hideShowSimulationsTableBtn = document.getElementById('simulation-data-btn');
 let simulationsDataTable = document.getElementById("simulation-data");
 hideShowSimulationsTableBtn.addEventListener("click", function(){
@@ -73,37 +69,6 @@ hideShowSimulationsTableBtn.addEventListener("click", function(){
         simulationsDataTable.style.display="none";
     }
 })
-
-//let tbodyForSimulations = simulationsDataTable.querySelector("tbody");
-//
-//    for(let i=0; i<simulationsAsAJson.length; i++){
-//        let tr = document.createElement('tr');
-//        let simulationDayNumberSelector = document.createElement('td');
-//        simulationDayNumberSelector.innerHTML=i+1;
-//        tr.appendChild(simulationDayNumberSelector);
-//
-//        let numOfInfectedPeople = document.createElement('td');
-//        numOfInfectedPeople.innerHTML=simulationsAsAJson[i].numberOfInfectedPeople;
-//        tr.appendChild(numOfInfectedPeople);
-//
-//        let numOfHealthyPeople = document.createElement('td');
-//        numOfHealthyPeople.innerHTML=simulationsAsAJson[i].numberOfHealthyPeopleWhoCanBeInfected;
-//        tr.appendChild(numOfHealthyPeople);
-//
-//        let numOfDeathPeople = document.createElement('td');
-//        numOfDeathPeople.innerHTML=simulationsAsAJson[i].numberOfDeathPeople;
-//        tr.appendChild(numOfDeathPeople);
-//
-//        let numOfPeopleWhoRecoveredAndGainedImmunity = document.createElement('td');
-//        numOfPeopleWhoRecoveredAndGainedImmunity.innerHTML=simulationsAsAJson[i].numberOfPeopleWhoRecoveredAndGainedImmunity;
-//        tr.appendChild(numOfPeopleWhoRecoveredAndGainedImmunity);
-//
-//        tbodyForSimulations.appendChild(tr);
-//
-//}
-
-
-
 
 function renderChart(series, divId, titleLabel) {
     let chart = JSC.Chart(divId, { 
