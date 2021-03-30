@@ -16,6 +16,7 @@ public class InitialSimulationData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Size(max = 255)
     @NotBlank(message = "You must enter the simulation name.")
     private String simulationName;
     @Min(value = 1000, message = "The population must be equal or greater than 1000.")

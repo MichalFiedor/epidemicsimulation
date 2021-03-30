@@ -76,6 +76,8 @@ function checkInputs(){
 
   if(simulationNameValue===''){
     setErrorFor(simulationName, 'Simulation name cannot be blank', validData);
+  }else if(simulationNameValue.length>255){
+    setErrorFor(simulationName, 'Simulation name cannot exceed 255 charts.')
   }else{
     setSuccessFor(simulationName, validData);
   }
